@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pbs
+  resources :projects
   resources :products
   resources :components
   get 'welcome/index'
