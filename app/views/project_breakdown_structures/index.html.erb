@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Project Breakdown Structures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_breakdown_structures.each do |project_breakdown_structure| %>
+      <tr>
+        <td><%= project_breakdown_structure.title %></td>
+        <td><%= link_to 'Show', project_breakdown_structure %></td>
+        <td><%= link_to 'Edit', edit_project_breakdown_structure_path(project_breakdown_structure) %></td>
+        <td><%= link_to 'Destroy', project_breakdown_structure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project breakdown structure', new_project_breakdown_structure_path %>

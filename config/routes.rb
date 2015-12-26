@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :pbs
+  resources :project_breakdown_structures
   resources :projects
   resources :products
   resources :components
