@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pbstable/index'
+
   resources :project_breakdown_structures
   resources :projects
   resources :products
