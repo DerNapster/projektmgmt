@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Nodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Level</th>
+      <th>Duration</th>
+      <th>Startdate</th>
+      <th>Enddate</th>
+      <th>Milestone</th>
+      <th>PBS</th>
+      <th>Parent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nodes.each do |node| %>
+      <tr>
+        <td><%= node.name %></td>
+        <td><%= node.description %></td>
+        <td><%= node.level %></td>
+        <td><%= node.duration %></td>
+        <td><%= node.startdate %></td>
+        <td><%= node.enddate %></td>
+        <td><%= node.milestone %></td>
+        <td><%= node.pbstable_id %></td>
+        <td><%= node.parent %></td>
+        <td><%= link_to 'Show', node %></td>
+        <td><%= link_to 'Edit', edit_node_path(node) %></td>
+        <td><%= link_to 'Destroy', node, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Node', new_node_path %>

@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @node.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @node.description %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @node.level %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @node.duration %>
+</p>
+
+<p>
+  <strong>Startdate:</strong>
+  <%= @node.startdate %>
+</p>
+
+<p>
+  <strong>Enddate:</strong>
+  <%= @node.enddate %>
+</p>
+
+<p>
+  <strong>Milestone:</strong>
+  <%= @node.milestone %>
+</p>
+
+<p>
+  <strong>PBS:</strong>
+  <%= @node.pbstable_id %>
+</p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @node.parent %>
+</p>
+<%= link_to 'Edit', edit_node_path(@node) %> |
+<%= link_to 'Back', nodes_path %>

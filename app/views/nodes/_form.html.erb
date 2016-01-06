@@ -1,0 +1,53 @@
+<%= form_for(@node) do |f| %>
+  <% if @node.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@node.errors.count, "error") %> prohibited this node from being saved:</h2>
+
+      <ul>
+      <% @node.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :level %><br>
+    <%= f.number_field :level %>
+  </div>
+  <div class="field">
+    <%= f.label :duration %><br>
+    <%= f.number_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :startdate %><br>
+    <%= f.date_select :startdate %>
+  </div>
+  <div class="field">
+    <%= f.label :enddate %><br>
+    <%= f.date_select :enddate %>
+  </div>
+  <div class="field">
+    <%= f.label :milestone %><br>
+    <%= f.check_box :milestone %>
+  </div>
+  <div class="field">
+    <%= f.label :pbstable_id %><br>
+    <%= f.collection_select :pbstable_id, Pbstable.all, :id, :name, {multiple: false} %>
+  </div>
+  <div class="field">
+      <%= f.label :parent %><br>
+      <%= f.collection_select :parent, Node.all, :id, :name, {multiple: false} %>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

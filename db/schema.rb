@@ -11,37 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224113254) do
+ActiveRecord::Schema.define(version: 20160106144647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "components", force: :cascade do |t|
-    t.string   "title"
+  create_table "nodes", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
     t.integer  "level"
-    t.integer  "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "components_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  create_table "project_breakdown_structures", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "projects", force: :cascade do |t|
-    t.string   "title"
-    t.string   "description"
+    t.integer  "duration"
+    t.date     "startdate"
+    t.date     "enddate"
+    t.boolean  "milestone"
+    t.integer  "pbstable_id"
+    t.integer  "node_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "nodes", ["node_id"], name: "index_nodes_on_node_id", using: :btree
+  add_index "nodes", ["pbstable_id"], name: "index_nodes_on_pbstable_id", using: :btree
+
+  create_table "pbstables", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pbstables", ["project_id"], name: "index_pbstables_on_project_id", using: :btree
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_foreign_key "nodes", "nodes"
+  add_foreign_key "nodes", "pbstables"
+  add_foreign_key "pbstables", "projects"
 end
