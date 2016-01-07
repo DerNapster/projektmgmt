@@ -9,7 +9,7 @@ class CreateNodes < ActiveRecord::Migration
       t.date :enddate
       t.boolean :milestone
       t.references :pbstable, index: true, foreign_key: true
-      t.references :node, index: true, foreign_key: true
+      t.references :parent, index: true
       t.timestamps null: false
     end
   end

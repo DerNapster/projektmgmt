@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 20160106144647) do
     t.date     "enddate"
     t.boolean  "milestone"
     t.integer  "pbstable_id"
-    t.integer  "node_id"
+    t.integer  "parent_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "nodes", ["node_id"], name: "index_nodes_on_node_id", using: :btree
+  add_index "nodes", ["parent_id"], name: "index_nodes_on_parent_id", using: :btree
   add_index "nodes", ["pbstable_id"], name: "index_nodes_on_pbstable_id", using: :btree
 
   create_table "pbstables", force: :cascade do |t|
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20160106144647) do
     t.datetime "updated_at",  null: false
   end
 
-  add_foreign_key "nodes", "nodes"
   add_foreign_key "nodes", "pbstables"
   add_foreign_key "pbstables", "projects"
 end

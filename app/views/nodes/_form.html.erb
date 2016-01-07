@@ -45,7 +45,7 @@
   </div>
   <div class="field">
       <%= f.label :parent %><br>
-      <%= f.collection_select :parent, Node.all, :id, :name, {multiple: false} %>
+      <%= f.collection_select :parent_id, Node.all, :id, :name, {multiple: false} %>
     </div>
   <div class="actions">
     <%= f.submit %>

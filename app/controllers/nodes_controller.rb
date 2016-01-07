@@ -69,6 +69,6 @@ class NodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def node_params
-      params.require(:node).permit(:name, :description, :level, :duration, :startdate, :enddate, :milestone, :pbstable_id, :parent)
+      params.require(:node).permit(:name, :description, :level, :duration, :startdate, :enddate, :milestone, :pbstable_id, :parent_id)
     end
 end
