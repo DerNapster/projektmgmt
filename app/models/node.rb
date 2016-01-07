@@ -10,8 +10,8 @@ class Node < ActiveRecord::Base
   validates :level, presence: true
   validates :duration, presence: true
   validates :milestone, presence: true
-  validates :enddate_must_be_greater_than_startdate
-  validates :startdate_plus_duration_must_be_enddate
+  validate :enddate_must_be_greater_than_startdate
+  validate :startdate_plus_duration_must_be_enddate
 
 
   def enddate_must_be_greater_than_startdate
