@@ -1,81 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:name) ? yield(:name) : "Projektmgmt" %></title>
-    <%= csrf_meta_tags %>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:name) ? yield(:name) : "Projektmgmt" %></title>
 
-    <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= csrf_meta_tags %>
 
-    <!-- For third-generation iPad with high-resolution Retina display: -->
-    <!-- Size should be 144 x 144 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
 
-    <!-- For iPhone with high-resolution Retina display: -->
-    <!-- Size should be 114 x 114 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
 
-    <!-- For first- and second-generation iPad: -->
-    <!-- Size should be 72 x 72 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
-
-    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
-
-    <!-- For all other devices -->
-    <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
     <%= javascript_include_tag "application" %>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
-    <![endif]-->
-  </head>
-  <body>
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
+  <![endif]-->
+  <style type="text/css">
+  /**
+  * Hide when Angular is not yet loaded and initialized
+  */
+  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+  }
+  </style>
+</head>
+<body ng-app="projektManagement" layout="row" ng-controller="NodeController as bs" ng-cloak >
 
-    <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Projektmgmt</a>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Projects", projects_path  %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"  md-component-id="left"  md-is-locked-open="$mdMedia('gt-sm')">
+    <md-toolbar class="md-whiteframe-z1">
+      <h1>Navigation</h1>
+    </md-toolbar>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-9">
-          <%= bootstrap_flash %>
-          <%= yield %>
-        </div>
-        <div class="col-lg-3">
-          <div class="well sidebar-nav">
-            <h3>Sidebar</h3>
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "PBS", pbstables_path %></li>
-              <li><%= link_to "Nodes", nodes_path %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-      </div><!--/row-->
+    <md-list>
+      <md-list-item ng-repeat="k in bs.breakdownStructurs">
+        <md-button ng-click="bs.selectBreakdownStructur(k)" ng-class="{'selected' : k === bs.selected }">
+          <md-icon icon="list"></md-icon>
+          {{k.name}}
+        </md-button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
 
-      <footer>
-        <p>&copy; Company 2015</p>
-      </footer>
+  <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
 
-    </div> <!-- /container -->
+    <md-toolbar layout="row" class="md-whiteframe-z1">
+      <md-button class="menu" hide-gt-sm ng-click="bs.toggleList()" aria-label="Breakdown Structur">
+        <md-icon md-svg-icon="action:chrome_reader_mode" ></md-icon>
+      </md-button>
+      <h1>Projektmanagement</h1>
+    </md-toolbar>
 
-  </body>
+    <md-content flex id="content">
+      <h2>{{bs.selected.name}}</h2> <input ng-model="bs.selected.name"></input>
+      <p>{{bs.selected.description}}</p>
+
+      			<script type="text/ng-template"  id="tree_item_renderer.html">
+      				<md-subheader class="md-no-sticky">Komponente</md-subheader>
+      				<md-list-item class="md-3-line">
+      				<div class="md-list-item-text" layout="column">
+      					<h3>{{ data.id }}</h3>
+      					<md-input-container>
+      					<label>Beschreibung</label>
+      					<input ng-model="data.desc"></input>
+      					</md-input-container>
+      					<p>{{ data.notes }}</p>
+      				</div>
+      				</md-list-item>
+      				<md-list-item class="md-3-line" ng-repeat="data in data.component">
+      				<div class="md-list-item-text" layout="column">
+              <h3>{{ data.id }}</h3>
+              <md-input-container>
+              <label>Beschreibung</label>
+              <input ng-model="data.desc"></input>
+              </md-input-container>
+              <p>{{ data.notes }}</p>
+      					<md-divider></md-divider>
+      				</script>
+      				<md-list ng-repeat="data in bs.selected.component" ng-include="'tree_item_renderer.html'"></md-list>
+      				<!--	<table>
+      					<tr ng-repeat="x in bs.selected.component">
+      						<td>{{ x.id }}. </td>
+      						<td>{{ x.desc }}</td>
+      						<td> <input type="text" ng-model="x.desc" placeholder="{{ x.desc }}"> </td>
+      						<td ng-repeat="x in bs.selected.component">
+      						</tr>
+      					</table> -->
+
+      					<md-button class="contact" md-no-ink ng-click="bs.showEditOptions($event)" aria-label="Edit Breakdown structur">
+      					<md-tooltip>Edit {{ bs.selected.name }}</md-tooltip>
+      					<md-icon md-svg-icon="editor:ic_border_color_24px"></md-icon>
+      					</md-button>
+      					</md-content>
+
+  </div>
+</div>
+
+  <script src="/assets/nodes/nodes.js"></script>
+  <script src="/assets/nodes/nodeController.js"></script>
+  <script src="/assets/nodes/nodeService.js"></script>
+
+<script type="text/javascript">
+
+  angular
+  .module('projektManagement', ['ngMaterial', 'ui.router', 'nodes'])
+  .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider){
+      $mdIconProvider
+        .iconSet('action', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg', 24)
+        .iconSet('alert', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-alert.svg', 24)
+        .iconSet('av', './bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-av.svg', 24)
+        .iconSet('communication', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-communication.svg', 24)
+        .iconSet('content', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-content.svg', 24)
+        .iconSet('device', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-device.svg', 24)
+        .iconSet('editor', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-editor.svg', 24)
+        .iconSet('file', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-file.svg', 24)
+        .iconSet('hardware', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-hardware.svg', 24)
+        .iconSet('icons', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-icons.svg', 24)
+        .iconSet('image', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-image.svg', 24)
+        .iconSet('maps', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-maps.svg', 24)
+        .iconSet('navigation', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-navigation.svg', 24)
+        .iconSet('notification', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-notification.svg', 24)
+        .iconSet('social', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg', 24)
+        .iconSet('toggle', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-toggle.svg', 24);
+
+      $mdThemingProvider.theme('default')
+        .primaryPalette('deep-orange')
+        .accentPalette('grey');
+
+      $stateProvider
+        .state('home', {
+          url: '/home',
+          templateUrl: '/assets/nodes/_home.html',
+          controller: '/assets/nodes/nodeController'
+        });
+
+      $urlRouterProvider.otherwise('home');
+
+  });
+
+</script>
+
+</body>
 </html>

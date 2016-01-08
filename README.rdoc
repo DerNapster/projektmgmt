@@ -8,3 +8,7 @@ Verwendete Versionen:
 
 * PostgreSQL 9.4
 
+
+# Mac bug
+nv ARCHFLAGS="-arch x86_64" gem install pg -- --with-pg-config=/usr/local/Cellar/postgresql/9.5.0/bin/pg_config
+Building native extensions with: '--with-pg-config=/usr/local/Cellar/postgresql/9.5.0/bin/pg_config'
