@@ -28,6 +28,7 @@ gem 'therubyracer'
 gem 'less-rails', :git => 'https://github.com/suzan2go/less-rails.git', :branch => 'fix-nomethoderror-for-sprockets3'
 gem 'twitter-bootstrap-rails'
 
+gem 'angular-rails-templates'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -50,5 +51,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
-
