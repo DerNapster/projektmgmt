@@ -1,90 +1,56 @@
-(function(){
+	'use strict';
 
-	angular
-	.module('nodes')
-	.controller('NodeController', [
-		'nodeService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
-		NodeController
-		]);
+	angular.module('nodes')
+		.controller('NodeController', ['NodeService', '$mdSidenav', '$log', '$q', NodeController]);
 
-/**
- *    * Main Controller for the Angular Material Starter App
- *       * @param $scope
- *          * @param $mdSidenav
- *             * @param avatarsService
- *                * @constructor
- *                   */
-function NodeController( breakdownStructurService, $mdSidenav, $mdBottomSheet, $log, $q) {
-	var self = this;
+	/**
+	* Main Controller for the Angular Material Starter App
+	* @param $scope
+	* @param $mdSidenav
+	* @param avatarsService
+	* @constructor
+	*/
+	function NodeController( NodeService, $mdSidenav, $log, $q) {
+		var self = this;
 
-	self.selected     = null;
-	self.breakdownStructurs        = [ ];
-	self.selectBreakdownStructur   = selectBreakdownStructur;
-	self.toggleList   = toggleBreakdownStructurList;
-	self.showEditOptions  = showEditOptions;
+		self.name = "Product Breakdown Strcutur";
+		self.description = "Product breakdown structure (PBS) is a tool for analysing, documenting and communicating the outcomes of a project, and forms part of the product based planning technique."
 
-	// Load all structurs
+		self.breakdownStructurs        = [ ];
+		self.toggleList   = toggleNavigation;
 
-	breakdownStructurService
-		.loadlAllBreakdownStructurs()
-		.then( function ( breakdownStructurs ) {
-			self.breakdownStructurs = [].concat(breakdownStructurs);
-			self.selected = breakdownStructurs[0];
-		});
-
-		//
-		// Internal methods
-		//
-
-		/**
-		 * Hide edit menu if visible, then hide or show sideNav area
-		 */
-		function toggleBreakdownStructurList () {
-			var pending = $mdBottomSheet.hide() || $q.when(true);
-
-			pending.then(function() {
-				$mdSidenav('left').toggle();
-			});
-		}
-
-		/**
-		 * Select the current breakdownStructur
-		 */
-		function selectBreakdownStructur( breakdownStructur ) {
-			self.selected = angular.isNumber(breakdownStructur) ? $scope.breakdownStructurs[breakdownStructur] : breakdownStructur;
-			self.toggleList();
-		}
-
-
-		/**
-		 * Show the edit menu
-		 */
-		function showEditOptions($event) {
-			var breakdownStructur = self.selected;
-
-			return $mdBottomSheet.show({
-				parent: angular.element(document.getElementById('edit')),
-			       templateUrl: './src/breakdownStructurs/view/editMenu.html',
-			       controller: ['$mdBottomSheet', EditPanelController],
-				controllerAs: "ep",
-			       bindToController: true,
-			       targetEvent: $event
-			}).then(function(clickedItem){
-				clickedItem && log.debug(clickedItem.name + ' clicked!');
+		// Load all structurs
+		NodeService
+			.getData()
+			.then( function ( breakdownStructurs ) {
+				self.breakdownStructurs = [].concat(breakdownStructurs);
+				console.log(self.breakdownStructurs);
 			});
 
+			//
+			// Internal methods
+			//
 			/**
-			 * Bottom Sheet controller for edit actions
+			 * Hide or show sideNav area
 			 */
-			function EditPanelController ( $mdBottomSheet ) {
-				this.breakdownStructur = breakdownStructur;
-				this.actions = [
-				{ name: 'Umbenennen', icon: 'label' }
-				];
-				this.submitEdit = function ( action ) {
-					$mdBottomSheet.hide(action);
-				};
+			function toggleNavigation () {
+				var pending = $q.when(true);
+
+				pending.then(function() {
+					$mdSidenav('left').toggle();
+				});
 			}
-		}
+
+			function getPbs() {
+
+			}
+
+			function getWbs() {
+
+			}
+
+			function getRam() {
+
+			}
+
 	}
-})();

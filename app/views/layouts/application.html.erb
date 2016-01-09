@@ -26,7 +26,7 @@
   }
   </style>
 </head>
-<body ng-app="projektManagement" layout="row" ng-controller="NodeController as bs" ng-cloak >
+<body ng-app="projektManagement" layout="row" ng-controller="NodeController as nc" ng-cloak >
 
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"  md-component-id="left"  md-is-locked-open="$mdMedia('gt-sm')">
     <md-toolbar class="md-whiteframe-z1">
@@ -34,10 +34,28 @@
     </md-toolbar>
 
     <md-list>
-      <md-list-item ng-repeat="k in bs.breakdownStructurs">
-        <md-button ng-click="bs.selectBreakdownStructur(k)" ng-class="{'selected' : k === bs.selected }">
+      <md-list-item>
+        <md-button ng-click="nc.getProducts()">
           <md-icon icon="list"></md-icon>
-          {{k.name}}
+            products
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button ng-click="nc.getPbs()">
+          <md-icon icon="list"></md-icon>
+            product breakdown structure
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button ng-click="nc.getWbs()">
+          <md-icon icon="list"></md-icon>
+            work breakdown structure
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button ng-click="nc.getRam()">
+          <md-icon icon="list"></md-icon>
+            resource allocation matrix
         </md-button>
       </md-list-item>
     </md-list>
@@ -46,100 +64,41 @@
   <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
 
     <md-toolbar layout="row" class="md-whiteframe-z1">
-      <md-button class="menu" hide-gt-sm ng-click="bs.toggleList()" aria-label="Breakdown Structur">
+      <md-button class="menu" hide-gt-sm ng-click="nc.toggleList()" aria-label="Toggle Menu">
         <md-icon md-svg-icon="action:chrome_reader_mode" ></md-icon>
       </md-button>
       <h1>Projektmanagement</h1>
     </md-toolbar>
 
     <md-content flex id="content">
-      <h2>{{bs.selected.name}}</h2> <input ng-model="bs.selected.name"></input>
-      <p>{{bs.selected.description}}</p>
+      <h2>{{nc.name}}</h2>
+      <p>{{nc.description}}</p>
+          <pre class="container"> {{nc.breakdownStructurs}} </pre>
 
-      			<script type="text/ng-template"  id="tree_item_renderer.html">
-      				<md-subheader class="md-no-sticky">Komponente</md-subheader>
-      				<md-list-item class="md-3-line">
-      				<div class="md-list-item-text" layout="column">
-      					<h3>{{ data.id }}</h3>
-      					<md-input-container>
-      					<label>Beschreibung</label>
-      					<input ng-model="data.desc"></input>
-      					</md-input-container>
-      					<p>{{ data.notes }}</p>
-      				</div>
-      				</md-list-item>
-      				<md-list-item class="md-3-line" ng-repeat="data in data.component">
-      				<div class="md-list-item-text" layout="column">
-              <h3>{{ data.id }}</h3>
+      <md-list ng-repeat="data in nc.breakdownStructurs">
+            <md-list-item class="md-3-line">
+            <div class="md-list-item-text" layout="column">
               <md-input-container>
-              <label>Beschreibung</label>
-              <input ng-model="data.desc"></input>
+                <label>Beschreibung</label>
+                <input ng-model="data.name"></input>
               </md-input-container>
-              <p>{{ data.notes }}</p>
-      					<md-divider></md-divider>
-      				</script>
-      				<md-list ng-repeat="data in bs.selected.component" ng-include="'tree_item_renderer.html'"></md-list>
-      				<!--	<table>
-      					<tr ng-repeat="x in bs.selected.component">
-      						<td>{{ x.id }}. </td>
-      						<td>{{ x.desc }}</td>
-      						<td> <input type="text" ng-model="x.desc" placeholder="{{ x.desc }}"> </td>
-      						<td ng-repeat="x in bs.selected.component">
-      						</tr>
-      					</table> -->
+            </div>
+            </md-list-item>
 
-      					<md-button class="contact" md-no-ink ng-click="bs.showEditOptions($event)" aria-label="Edit Breakdown structur">
-      					<md-tooltip>Edit {{ bs.selected.name }}</md-tooltip>
-      					<md-icon md-svg-icon="editor:ic_border_color_24px"></md-icon>
-      					</md-button>
-      					</md-content>
+      </md-list>
+
+		</md-content>
 
   </div>
 </div>
 
+  <script src="/assets/app.js"></script>
   <script src="/assets/nodes/nodes.js"></script>
-  <script src="/assets/nodes/nodeController.js"></script>
   <script src="/assets/nodes/nodeService.js"></script>
+  <script src="/assets/nodes/nodeController.js"></script>
 
-<script type="text/javascript">
 
-  angular
-  .module('projektManagement', ['ngMaterial', 'ui.router', 'nodes'])
-  .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider){
-      $mdIconProvider
-        .iconSet('action', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg', 24)
-        .iconSet('alert', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-alert.svg', 24)
-        .iconSet('av', './bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-av.svg', 24)
-        .iconSet('communication', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-communication.svg', 24)
-        .iconSet('content', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-content.svg', 24)
-        .iconSet('device', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-device.svg', 24)
-        .iconSet('editor', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-editor.svg', 24)
-        .iconSet('file', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-file.svg', 24)
-        .iconSet('hardware', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-hardware.svg', 24)
-        .iconSet('icons', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-icons.svg', 24)
-        .iconSet('image', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-image.svg', 24)
-        .iconSet('maps', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-maps.svg', 24)
-        .iconSet('navigation', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-navigation.svg', 24)
-        .iconSet('notification', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-notification.svg', 24)
-        .iconSet('social', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg', 24)
-        .iconSet('toggle', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-toggle.svg', 24);
 
-      $mdThemingProvider.theme('default')
-        .primaryPalette('deep-orange')
-        .accentPalette('grey');
-
-      $stateProvider
-        .state('home', {
-          url: '/home',
-          templateUrl: '/assets/nodes/_home.html',
-          controller: '/assets/nodes/nodeController'
-        });
-
-      $urlRouterProvider.otherwise('home');
-
-  });
-
-</script>
 
 </body>
 </html>
