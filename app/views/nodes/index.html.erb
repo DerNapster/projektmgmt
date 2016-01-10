@@ -1,5 +1,70 @@
 <p id="notice"><%= notice %></p>
 
+
+  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"  md-component-id="left"  md-is-locked-open="$mdMedia('gt-sm')">
+    <md-toolbar class="md-whiteframe-z1">
+      <h1>Navigation</h1>
+    </md-toolbar>
+
+    <md-list>
+      <md-list-item>
+        <md-button ng-click="nc.getProducts()">
+          <md-icon icon="list"></md-icon>
+            products
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button ng-click="nc.getPbs()">
+          <md-icon icon="list"></md-icon>
+            product breakdown structure
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button ng-click="nc.getWbs()">
+          <md-icon icon="list"></md-icon>
+            work breakdown structure
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button ng-click="nc.getRam()">
+          <md-icon icon="list"></md-icon>
+            resource allocation matrix
+        </md-button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+
+  <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+
+    <md-toolbar layout="row" class="md-whiteframe-z1">
+      <md-button class="menu" hide-gt-sm ng-click="nc.toggleList()" aria-label="Toggle Menu">
+        <md-icon md-svg-icon="action:chrome_reader_mode" ></md-icon>
+      </md-button>
+      <h1>Projektmanagement</h1>
+    </md-toolbar>
+
+    <md-content flex id="content">
+      <h2>{{nc.name}}</h2>
+      <p>{{nc.description}}</p>
+          <pre class="container"> {{nc.breakdownStructurs}} </pre>
+
+      <md-list ng-repeat="data in nc.breakdownStructurs">
+            <md-list-item class="md-3-line">
+            <div class="md-list-item-text" layout="column">
+              <md-input-container>
+                <label>Beschreibung</label>
+                <input ng-model="data.name"></input>
+              </md-input-container>
+            </div>
+            </md-list-item>
+
+      </md-list>
+
+		</md-content>
+
+  </div>
+</div>
+
 <h1>Listing Nodes</h1>
 
 <table>
