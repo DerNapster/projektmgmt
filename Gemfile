@@ -29,6 +29,7 @@ gem 'less-rails', :git => 'https://github.com/suzan2go/less-rails.git', :branch 
 gem 'twitter-bootstrap-rails'
 
 gem 'angular-rails-templates'
+gem 'google-webfonts-rails', '~> 0.0.4'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

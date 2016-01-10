@@ -10,8 +10,10 @@
 
   <%= stylesheet_link_tag "application", :media => "all" %>
 
+  <%= javascript_include_tag "application" %>
 
-    <%= javascript_include_tag "application" %>
+  <%= google_webfonts_init({  google: ['Roboto']  })  %>
+
 
   <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
   <!--[if lt IE 9]>
@@ -27,15 +29,13 @@
   </style>
 </head>
 <body ng-app="projektManagement" layout="row" ng-controller="NodeController as nc" ng-cloak >
+
   <%= yield %>
 
   <script src="/assets/app.js"></script>
   <script src="/assets/nodes/nodes.js"></script>
   <script src="/assets/nodes/nodeService.js"></script>
   <script src="/assets/nodes/nodeController.js"></script>
-
-
-
 
 </body>
 </html>

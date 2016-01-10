@@ -1,108 +1,120 @@
 <p id="notice"><%= notice %></p>
 
 
-  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"  md-component-id="left"  md-is-locked-open="$mdMedia('gt-sm')">
-    <md-toolbar class="md-whiteframe-z1">
-      <h1>Navigation</h1>
-    </md-toolbar>
+<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"  md-component-id="left"  md-is-locked-open="$mdMedia('gt-sm')">
+  <md-toolbar class="md-whiteframe-z1">
+    <h1>Navigation</h1>
+  </md-toolbar>
 
-    <md-list>
-      <md-list-item>
-        <md-button ng-click="nc.getProducts()">
-          <md-icon icon="list"></md-icon>
-            products
-        </md-button>
-      </md-list-item>
-      <md-list-item>
-        <md-button ng-click="nc.getPbs()">
-          <md-icon icon="list"></md-icon>
-            product breakdown structure
-        </md-button>
-      </md-list-item>
-      <md-list-item>
-        <md-button ng-click="nc.getWbs()">
-          <md-icon icon="list"></md-icon>
-            work breakdown structure
-        </md-button>
-      </md-list-item>
-      <md-list-item>
-        <md-button ng-click="nc.getRam()">
-          <md-icon icon="list"></md-icon>
-            resource allocation matrix
-        </md-button>
-      </md-list-item>
-    </md-list>
-  </md-sidenav>
+  <md-list>
+    <md-list-item class="md-3-line" ng-click="nc.showProducts()">
+        <md-icon icon="list"></md-icon>
+        <md-button> products </md-button>
+    </md-list-item>
 
-  <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+    <md-list-item class="md-3-line" ng-click="nc.showPbs()">
+        <md-icon icon="list"></md-icon>
+        <md-button>  product breakdown structure </md-button>
+    </md-list-item>
 
-    <md-toolbar layout="row" class="md-whiteframe-z1">
-      <md-button class="menu" hide-gt-sm ng-click="nc.toggleList()" aria-label="Toggle Menu">
-        <md-icon md-svg-icon="action:chrome_reader_mode" ></md-icon>
-      </md-button>
-      <h1>Projektmanagement</h1>
-    </md-toolbar>
+    <md-list-item class="md-3-line" ng-click="nc.showWbs()">
+        <md-icon icon="list"></md-icon>
+        <md-button>  work breakdown structure </md-button>
+    </md-list-item>
 
-    <md-content flex id="content">
-      <h2>{{nc.name}}</h2>
+    <md-list-item class="md-3-line" ng-click="nc.showRam()">
+        <md-icon icon="list"></md-icon>
+        <md-button>  resource allocation matrix </md-button>
+    </md-list-item>
+
+  </md-list>
+</md-sidenav>
+
+<div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+
+  <md-toolbar layout="row" class="md-whiteframe-z1 md-tall" class="md-theme-light">
+    <md-button class="menu" hide-gt-sm ng-click="nc.toggleList()" aria-label="Toggle Menu">
+      Menu
+      <md-icon md-svg-icon="action:menu" ></md-icon>
+    </md-button>
+    <h1>Projektmanagement</h1>
+  </md-toolbar>
+
+  <md-toolbar>
+
+    <div class="md-toolbar-tools">
+      <h3>{{nc.name}}</h3>
       <p>{{nc.description}}</p>
-          <pre class="container"> {{nc.breakdownStructurs}} </pre>
+     </div>
 
-      <md-list ng-repeat="data in nc.breakdownStructurs">
-            <md-list-item class="md-3-line">
-            <div class="md-list-item-text" layout="column">
-              <md-input-container>
-                <label>Beschreibung</label>
-                <input ng-model="data.name"></input>
-              </md-input-container>
-            </div>
-            </md-list-item>
+     <md-fab-toolbar md-open="nc.isOpen" count="nc.count" md-direction="{{nc.selectedDirection}}">
+       <md-fab-trigger class="align-with-text">
+         <md-button aria-label="menu" class="md-fab md-primary">
+           <md-icon md-svg-src="ction:menu"></md-icon>
+         </md-button>
+       </md-fab-trigger>
+       <md-toolbar>
+         <md-fab-actions class="md-toolbar-tools">
+           <md-switch ng-model="nc.showError">Errors {{nc.showError ? "On" : "Off"}}</md-switch>
+         </md-fab-actions>
+       </md-toolbar>
+     </md-fab-toolbar>
 
-      </md-list>
+   </md-toolbar>
 
-		</md-content>
+
+   <md-content layout-padding>
+
+      <md-list>
+
+      <form name="breakdownStructurForm">
+        <div layout-gt-xs="row" ng-repeat="data in nc.breakdownStructurs">
+
+          <md-list-item class="md-3-line">
+
+            <md-input-container class="md-block" flex-gt-xs="5">
+              <label>Nr</label>
+              <input ng-model="data.id" disaled>
+            </md-input-container>
+
+            <input ng-model="data.id" hidden></input>
+
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Name</label>
+              <input ng-model="data.name">
+              <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
+              <div ng-messages="breakdownStructurForm.name.$error" ng-if="nc.showError">
+                <div ng-message="required">Name wird benötigt</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-xs="10">
+              <label>Dauer</label>
+              <input ng-model="data.duration" type="number" step="1">
+              <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
+              <div ng-messages="breakdownStructurForm.duration.$error" ng-if="nc.showError#">
+                <div ng-message="required">Dauer wird benötigt</div>
+              </div>
+            </md-input-container>
+
+            <md-datepicker ng-model="data.startdate" data-date-format="yyyy-mm-tt" md-placeholder="{{data.startdate ? data.startdate : 'Start Datum'}}" flex-gt-sm>
+            </md-datepicker>
+
+            <md-datepicker ng-model="data.enddate" data-date-format="yyyy-mm-tt" md-placeholder="{{data.startdate ? data.startdate : 'End Datum'}}" flex-gt-sm>
+            </md-datepicker>
+
+
+          </md-list-item>
+          <md-checkbox class="md-secondary" ng-model="data.milestone" aria-label="Meilenstein">
+
+        </div>
+      </form>
+
+      <md-subheader>
+        <pre class="container"> {{nc.breakdownStructurs}} </pre>
+      </md-subheader>
+    </md-list>
+  </md-content>
 
   </div>
 </div>
-
-<h1>Listing Nodes</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Level</th>
-      <th>Duration</th>
-      <th>Startdate</th>
-      <th>Enddate</th>
-      <th>Milestone</th>
-      <th>PBS</th>
-      <th>Parent</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @nodes.each do |node| %>
-      <tr>
-        <td><%= node.name %></td>
-        <td><%= node.description %></td>
-        <td><%= node.level %></td>
-        <td><%= node.duration %></td>
-        <td><%= node.startdate %></td>
-        <td><%= node.enddate %></td>
-        <td><%= node.milestone %></td>
-        <td><%= node.pbstable_id %></td>
-        <td><%= node.parent %></td>
-        <td><%= link_to 'Show', node %></td>
-        <td><%= link_to 'Edit', edit_node_path(node) %></td>
-        <td><%= link_to 'Destroy', node, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Node', new_node_path %>

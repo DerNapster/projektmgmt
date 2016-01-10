@@ -13,6 +13,16 @@
 	function NodeController( NodeService, $mdSidenav, $log, $q) {
 		var self = this;
 
+		self.isOpen = false;
+
+		self.showError = false;
+
+		self.demo = {
+			 isOpen: false,
+			 count: 0,
+			 selectedDirection: 'left'
+		 };
+
 		self.name = "Product Breakdown Strcutur";
 		self.description = "Product breakdown structure (PBS) is a tool for analysing, documenting and communicating the outcomes of a project, and forms part of the product based planning technique."
 

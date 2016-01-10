@@ -2,9 +2,10 @@ angular
   .module('projektManagement', ['ngMaterial', 'ui.router', 'nodes'])
   .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider){
       $mdIconProvider
+        .defaultFontSet( 'fontawesome' )
         .iconSet('action', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg', 24)
         .iconSet('alert', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-alert.svg', 24)
-        .iconSet('av', './bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-av.svg', 24)
+        .iconSet('av', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-av.svg', 24)
         .iconSet('communication', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-communication.svg', 24)
         .iconSet('content', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-content.svg', 24)
         .iconSet('device', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-device.svg', 24)
