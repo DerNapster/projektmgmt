@@ -37,6 +37,9 @@ gem 'rails_12factor', group: :production
 # https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
 gem 'puma'
 
+# https://devcenter.heroku.com/articles/ruby-support#injected-plugins
+gem 'rails_serve_static_assets'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
