@@ -37,6 +37,9 @@ gem 'rails_12factor', group: :production
 # https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
 gem 'puma'
 
+#https://github.com/stve/bower
+gem 'bower'
+
 # https://devcenter.heroku.com/articles/ruby-support#injected-plugins
 # gem 'rails_serve_static_assets'
 
