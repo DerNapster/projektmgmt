@@ -92,7 +92,7 @@
               <label>Dauer</label>
               <input ng-model="data.duration" type="number" step="1">
               <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
-              <div ng-messages="breakdownStructurForm.duration.$error" ng-if="nc.showError#">
+              <div ng-messages="breakdownStructurForm.duration.$error" ng-if="nc.showError">
                 <div ng-message="required">Dauer wird benötigt</div>
               </div>
             </md-input-container>
@@ -108,7 +108,50 @@
           <md-checkbox class="md-secondary" ng-model="data.milestone" aria-label="Meilenstein">
 
         </div>
-      </form>
+    </form>
+    <form ng-submit="nc.addNode()">
+        <div layout-gt-xs="row">
+
+          <md-list-item class="md-3-line">
+
+            <md-input-container class="md-block" flex-gt-xs="5">
+              <label>Nr</label>
+              <input  disaled>
+            </md-input-container>
+
+            <input ng-model="id" hidden></input>
+
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Name</label>
+              <input ng-model="nc.newName">
+              <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
+              <div ng-messages="breakdownStructurForm.name.$error" ng-if="nc.showError">
+                <div ng-message="required">Name wird benötigt</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-xs="10">
+              <label>Dauer</label>
+              <input ng-model="nc.newDuration" type="number" step="1">
+              <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
+              <div ng-messages="breakdownStructurForm.duration.$error" ng-if="nc.showError">
+                <div ng-message="required">Dauer wird benötigt</div>
+              </div>
+            </md-input-container>
+
+            <md-datepicker ng-model="nc.newStartdate" data-date-format="yyyy-mm-tt" md-placeholder="{{data.startdate ? data.startdate : 'Start Datum'}}" flex-gt-sm>
+            </md-datepicker>
+
+            <md-datepicker ng-model="nc.newEnddate" data-date-format="yyyy-mm-tt" md-placeholder="{{data.startdate ? data.startdate : 'End Datum'}}" flex-gt-sm>
+            </md-datepicker>
+
+
+          </md-list-item>
+          <md-checkbox class="md-secondary" ng-model="nc.newMilestone" aria-label="Meilenstein">
+        </div>
+
+        <md-button type="submit" value="add"> Hinzufügen </md-button>
+
 
       <md-subheader>
         <pre class="container"> {{nc.breakdownStructurs}} </pre>

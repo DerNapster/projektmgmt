@@ -28,7 +28,7 @@ gem 'therubyracer'
 gem 'less-rails', :git => 'https://github.com/suzan2go/less-rails.git', :branch => 'fix-nomethoderror-for-sprockets3'
 gem 'twitter-bootstrap-rails'
 
-gem 'angular-rails-templates'
+gem 'angular-rails-templates',  '~> 0.1.2'
 gem 'google-webfonts-rails', '~> 0.0.4'
 
 #https://devcenter.heroku.com/articles/getting-started-with-rails5
@@ -39,6 +39,18 @@ gem 'puma'
 
 #https://github.com/stve/bower
 gem 'bower'
+
+# http://stackoverflow.com/questions/29709334/angular-rails-templates-just-not-working
+gem 'sprockets', '2.12.3'
+
+# https://rails-assets.org/
+gem 'bundler', '>= 1.8.4'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-angular'
+  gem 'rails-assets-leaflet'
+end
 
 # https://devcenter.heroku.com/articles/ruby-support#injected-plugins
 # gem 'rails_serve_static_assets'

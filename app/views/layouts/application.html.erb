@@ -12,6 +12,9 @@
 
   <%= javascript_include_tag "application" %>
 
+  <%= javascript_include_tag "nodes-module" %>
+  <%= javascript_include_tag "app" %>
+
   <%= google_webfonts_init({  google: ['Roboto']  })  %>
 
 
@@ -28,14 +31,9 @@
   }
   </style>
 </head>
-<body ng-app="projektManagement" layout="row" ng-controller="NodeController as nc" ng-cloak >
+<body layout="row" ng-app="app" ng-cloak >
 
   <%= yield %>
-
-  <script src="/assets/app.js"></script>
-  <script src="/assets/nodes/nodes.js"></script>
-  <script src="/assets/nodes/nodeService.js"></script>
-  <script src="/assets/nodes/nodeController.js"></script>
 
 </body>
 </html>
