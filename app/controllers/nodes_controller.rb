@@ -5,6 +5,33 @@ class NodesController < ApplicationController
   # GET /nodes.json
   def index
     @nodes = Node.all
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'ID' )
+    data_table.new_column('string', 'Parent')
+    data_table.new_column('string', 'ToolTip')
+
+    # Im Moment Nodes.all später aber nur noch die notes zu einer PBSTable, dann muss bei dem Aufruf eine PBSTable-ID mitgegeben werden
+    @nodes.each do |nodeItem|
+      puts "iiii"
+      nodeId = nodeItem.id.to_s
+      nodeName = nodeItem.name
+      nodeDescription = nodeItem.description
+      nodeParent = nodeItem.parent
+      nodeParentId = ''
+      if nodeParent != nil
+        nodeParentId = nodeParent.id.to_s
+      end
+      if nodeDescription == nil
+        nodeDescription = ''
+      end
+
+      data_table.add_row([{v: nodeId, f: nodeName}, nodeParentId, nodeDescription])
+
+    end
+
+    option = { width: 400, height: 400, title: 'Product Breakdown Structure', version: '1.1', allowHtml: true, size: 'large' }
+    @pbsChart = GoogleVisualr::Interactive::OrgChart.new(data_table, option)
   end
 
   # GET /nodes/1

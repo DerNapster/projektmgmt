@@ -40,6 +40,9 @@ class Node < ActiveRecord::Base
       unless ((parent.level + 1) == level)
         errors.add(:parent, "Parent level must be one smaller than child level")
       end
+      unless (parent.pbstable.id == pbstable.id)
+        errors.add(:parent, "Parent PBSTable must be the same as child PBSTable")
+      end
     end
   end
 end

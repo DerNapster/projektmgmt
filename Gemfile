@@ -46,6 +46,9 @@ gem 'sprockets', '2.12.3'
 # https://rails-assets.org/
 gem 'bundler', '>= 1.8.4'
 
+# Gem for Google Visualr    http://googlevisualr.herokuapp.com/
+gem "google_visualr", "~> 2.5.1"
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-angular'
