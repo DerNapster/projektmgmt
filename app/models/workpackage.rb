@@ -44,8 +44,8 @@ class Workpackage < ActiveRecord::Base
       unless ((parent.level + 1) == level)
         errors.add(:parent, "Parent level must be one smaller than child level")
       end
-      unless (parent.pbstable.id == pbstable.id)
-        errors.add(:parent, "Parent PBSTable must be the same as child PBSTable")
+      unless (parent.wbstable.id == wbstable.id)
+        errors.add(:parent, "Parent WBSTable must be the same as child WBSTable")
       end
     end
   end

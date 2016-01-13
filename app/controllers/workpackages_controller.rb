@@ -5,6 +5,30 @@ class WorkpackagesController < ApplicationController
   # GET /workpackages.json
   def index
     @workpackages = Workpackage.all
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'ID' )
+    data_table.new_column('string', 'Parent')
+    data_table.new_column('string', 'ToolTip')
+
+    # Im Moment Workpackage.all später aber nur noch die workpackages zu einer WBSTable, dann muss bei dem Aufruf eine WBSTable-ID mitgegeben werden
+    @workpackages.each do |workpackage|
+      workpackageId = workpackage.id.to_s
+      workpackageName = workpackage.name
+      workpackageDescription = workpackage.description
+      workpackageParent = workpackage.parent
+      workpackageParentId = ''
+      if workpackageParent != nil
+        workpackageParentId = workpackageParent.id.to_s
+      end
+      if workpackageDescription == nil
+        workpackageDescription = ''
+      end
+
+      data_table.add_row([{v: workpackageId, f: workpackageName}, workpackageParentId, workpackageDescription])
+
+    end
+    @wbsChart = generate_organisation_graph data_table
   end
 
   # GET /workpackages/1

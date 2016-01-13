@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Workpackages</h1>
-
+<div>
 <table>
   <thead>
     <tr>
@@ -51,7 +51,12 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
-
+<p></p>
+<p></p>
+<p></p><p></p>
+<div id='wbsChart'></div>
+<%= render_chart @wbsChart, 'wbsChart' %>
+<p></p><p></p>
 <%= link_to 'New Workpackage', new_workpackage_path %>

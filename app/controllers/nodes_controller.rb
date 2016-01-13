@@ -1,6 +1,8 @@
 class NodesController < ApplicationController
   before_action :set_node, only: [:show, :edit, :update, :destroy]
 
+
+
   # GET /nodes
   # GET /nodes.json
   def index
@@ -28,9 +30,8 @@ class NodesController < ApplicationController
       data_table.add_row([{v: nodeId, f: nodeName}, nodeParentId, nodeDescription])
 
     end
+    @pbsChart = generate_organisation_graph data_table
 
-    option = { width: 400, height: 400, title: 'Product Breakdown Structure', version: '1.1', allowHtml: true, size: 'large' }
-    @pbsChart = GoogleVisualr::Interactive::OrgChart.new(data_table, option)
   end
 
   # GET /nodes/1

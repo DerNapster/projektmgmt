@@ -202,4 +202,30 @@ wbs1 = Wbstable.create(name: 'Aufgabe Webshow',
 wbs2 = Wbstable.create(name: 'Aufgabe Brücke',
                        project: project2)
 
+wp1 = Workpackage.create(name: 'WebShop Gesamtaufgabe',
+                    description: 'Dies ist eine Aufgabe für den Webshop',
+                    level: 0,
+                    result: 'Ein fertiger Webshop',
+                    interfaces: 'Schnittstellen für den Webshop',
+                    purchaser: 'Kunde',
+                    duration: 200,
+                    startdate: Date.new(2016,1,7),
+                    enddate: Date.new(2016,7,25),
+                    costs: 20000.00,
+                    work: 200,
+                    wbstable: wbs1)
+wp2 = Workpackage.create(name: 'Geschäftsplan und Architektur Aufgabe',
+                    description: '',
+                    level: 1,
+                    duration: 30,
+                    result: 'Der Geschäftsplan',
+                    interfaces: 'Schnittstellen für den Geschäftsplan',
+                    purchaser: 'Kunde',
+                    startdate: Date.new(2016,1,7),
+                    enddate: Date.new(2016,2,6),
+                    costs: 2000.00,
+                    work: 20,
+                    wbstable: wbs1,
+                    parent: wp1)
+
 
