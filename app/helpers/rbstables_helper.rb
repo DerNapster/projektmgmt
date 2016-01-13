@@ -1,0 +1,2 @@
+module RbstablesHelper
+end

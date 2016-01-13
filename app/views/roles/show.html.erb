@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @role.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @role.description %>
+</p>
+
+<p>
+  <strong>Qualification:</strong>
+  <%= @role.qualification %>
+</p>
+
+<p>
+  <strong>Experience:</strong>
+  <%= @role.experience %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @role.quantity %>
+</p>
+
+<p>
+  <strong>Rbstable:</strong>
+  <%= @role.rbstable %>
+</p>
+
+<%= link_to 'Edit', edit_role_path(@role) %> |
+<%= link_to 'Back', roles_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113131449) do
+ActiveRecord::Schema.define(version: 20160113174950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,30 @@ ActiveRecord::Schema.define(version: 20160113131449) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "rbstables", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "rbstables", ["project_id"], name: "index_rbstables_on_project_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "qualification"
+    t.text     "experience"
+    t.integer  "quantity"
+    t.integer  "rbstable_id"
+    t.integer  "parent_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "roles", ["parent_id"], name: "index_roles_on_parent_id", using: :btree
+  add_index "roles", ["rbstable_id"], name: "index_roles_on_rbstable_id", using: :btree
+
   create_table "wbstables", force: :cascade do |t|
     t.string   "name"
     t.integer  "project_id"
@@ -84,6 +108,8 @@ ActiveRecord::Schema.define(version: 20160113131449) do
 
   add_foreign_key "nodes", "pbstables"
   add_foreign_key "pbstables", "projects"
+  add_foreign_key "rbstables", "projects"
+  add_foreign_key "roles", "rbstables"
   add_foreign_key "wbstables", "projects"
   add_foreign_key "workpackages", "wbstables"
 end
