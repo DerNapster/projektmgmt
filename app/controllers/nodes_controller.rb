@@ -13,7 +13,6 @@ class NodesController < ApplicationController
 
     # Im Moment Nodes.all später aber nur noch die notes zu einer PBSTable, dann muss bei dem Aufruf eine PBSTable-ID mitgegeben werden
     @nodes.each do |nodeItem|
-      puts "iiii"
       nodeId = nodeItem.id.to_s
       nodeName = nodeItem.name
       nodeDescription = nodeItem.description

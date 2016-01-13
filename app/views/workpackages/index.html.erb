@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Workpackages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Result</th>
+      <th>Interfaces</th>
+      <th>Purchaser</th>
+      <th>Level</th>
+      <th>Duration</th>
+      <th>Startdate</th>
+      <th>Enddate</th>
+      <th>Activities</th>
+      <th>Requirements</th>
+      <th>Costs</th>
+      <th>Work</th>
+      <th>Workperformed</th>
+      <th>Wbstable</th>
+      <th>Parent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workpackages.each do |workpackage| %>
+      <tr>
+        <td><%= workpackage.name %></td>
+        <td><%= workpackage.description %></td>
+        <td><%= workpackage.result %></td>
+        <td><%= workpackage.interfaces %></td>
+        <td><%= workpackage.purchaser %></td>
+        <td><%= workpackage.level %></td>
+        <td><%= workpackage.duration %></td>
+        <td><%= workpackage.startdate %></td>
+        <td><%= workpackage.enddate %></td>
+        <td><%= workpackage.activities %></td>
+        <td><%= workpackage.requirements %></td>
+        <td><%= workpackage.costs %></td>
+        <td><%= workpackage.work %></td>
+        <td><%= workpackage.workPerformed %></td>
+        <td><%= workpackage.wbstable %></td>
+        <td><%= workpackage.parent %></td>
+        <td><%= link_to 'Show', workpackage %></td>
+        <td><%= link_to 'Edit', edit_workpackage_path(workpackage) %></td>
+        <td><%= link_to 'Destroy', workpackage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Workpackage', new_workpackage_path %>

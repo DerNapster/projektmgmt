@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :workpackages
   resources :wbstables
   resources :pbstables
   resources :nodes

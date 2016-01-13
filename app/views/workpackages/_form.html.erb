@@ -1,0 +1,81 @@
+<%= form_for(@workpackage) do |f| %>
+  <% if @workpackage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workpackage.errors.count, "error") %> prohibited this workpackage from being saved:</h2>
+
+      <ul>
+      <% @workpackage.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :result %><br>
+    <%= f.text_area :result %>
+  </div>
+  <div class="field">
+    <%= f.label :interfaces %><br>
+    <%= f.text_area :interfaces %>
+  </div>
+  <div class="field">
+    <%= f.label :purchaser %><br>
+    <%= f.text_field :purchaser %>
+  </div>
+  <div class="field">
+    <%= f.label :level %><br>
+    <%= f.number_field :level %>
+  </div>
+  <div class="field">
+    <%= f.label :duration %><br>
+    <%= f.number_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :startdate %><br>
+    <%= f.date_select :startdate %>
+  </div>
+  <div class="field">
+    <%= f.label :enddate %><br>
+    <%= f.date_select :enddate %>
+  </div>
+  <div class="field">
+    <%= f.label :activities %><br>
+    <%= f.text_area :activities %>
+  </div>
+  <div class="field">
+    <%= f.label :requirements %><br>
+    <%= f.text_area :requirements %>
+  </div>
+  <div class="field">
+    <%= f.label :costs %><br>
+    <%= f.text_field :costs %>
+  </div>
+  <div class="field">
+    <%= f.label :work %><br>
+    <%= f.number_field :work %>
+  </div>
+  <div class="field">
+    <%= f.label :workPerformed %><br>
+    <%= f.text_field :workPerformed %>
+  </div>
+  <div class="field">
+    <%= f.label :wbstable_id %><br>
+    <%= f.text_field :wbstable_id %>
+  </div>
+  <div class="field">
+    <%= f.label :parent %><br>
+    <%= f.collection_select :parent_id, Workpackage.all, :id, :name, {multiple: false} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

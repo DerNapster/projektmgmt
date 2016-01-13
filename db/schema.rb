@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113122031) do
+ActiveRecord::Schema.define(version: 20160113131449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,32 @@ ActiveRecord::Schema.define(version: 20160113122031) do
 
   add_index "wbstables", ["project_id"], name: "index_wbstables_on_project_id", using: :btree
 
+  create_table "workpackages", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "result"
+    t.text     "interfaces"
+    t.string   "purchaser"
+    t.integer  "level"
+    t.integer  "duration"
+    t.date     "startdate"
+    t.date     "enddate"
+    t.text     "activities"
+    t.text     "requirements"
+    t.decimal  "costs"
+    t.integer  "work"
+    t.decimal  "workPerformed", default: 0.0
+    t.integer  "wbstable_id"
+    t.integer  "parent_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "workpackages", ["parent_id"], name: "index_workpackages_on_parent_id", using: :btree
+  add_index "workpackages", ["wbstable_id"], name: "index_workpackages_on_wbstable_id", using: :btree
+
   add_foreign_key "nodes", "pbstables"
   add_foreign_key "pbstables", "projects"
   add_foreign_key "wbstables", "projects"
+  add_foreign_key "workpackages", "wbstables"
 end

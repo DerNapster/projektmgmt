@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @workpackage.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @workpackage.description %>
+</p>
+
+<p>
+  <strong>Result:</strong>
+  <%= @workpackage.result %>
+</p>
+
+<p>
+  <strong>Interfaces:</strong>
+  <%= @workpackage.interfaces %>
+</p>
+
+<p>
+  <strong>Purchaser:</strong>
+  <%= @workpackage.purchaser %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @workpackage.level %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @workpackage.duration %>
+</p>
+
+<p>
+  <strong>Startdate:</strong>
+  <%= @workpackage.startdate %>
+</p>
+
+<p>
+  <strong>Enddate:</strong>
+  <%= @workpackage.enddate %>
+</p>
+
+<p>
+  <strong>Activities:</strong>
+  <%= @workpackage.activities %>
+</p>
+
+<p>
+  <strong>Requirements:</strong>
+  <%= @workpackage.requirements %>
+</p>
+
+<p>
+  <strong>Costs:</strong>
+  <%= @workpackage.costs %>
+</p>
+
+<p>
+  <strong>Work:</strong>
+  <%= @workpackage.work %>
+</p>
+
+<p>
+  <strong>Workperformed:</strong>
+  <%= @workpackage.workPerformed %>
+</p>
+
+<p>
+  <strong>Wbstable:</strong>
+  <%= @workpackage.wbstable %>
+</p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @workpackage.parent %>
+</p>
+
+<%= link_to 'Edit', edit_workpackage_path(@workpackage) %> |
+<%= link_to 'Back', workpackages_path %>
