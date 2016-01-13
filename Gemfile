@@ -28,7 +28,7 @@ gem 'therubyracer'
 gem 'less-rails', :git => 'https://github.com/suzan2go/less-rails.git', :branch => 'fix-nomethoderror-for-sprockets3'
 gem 'twitter-bootstrap-rails'
 
-gem 'angular-rails-templates',  '~> 0.1.2'
+gem 'angular-rails-templates'
 gem 'google-webfonts-rails', '~> 0.0.4'
 
 #https://devcenter.heroku.com/articles/getting-started-with-rails5
@@ -53,6 +53,13 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-angular'
   gem 'rails-assets-leaflet'
+end
+
+gem "foreman"
+group :production, :staging do
+  gem "rails_12factor"
+  gem "rails_stdout_logging"
+  gem "rails_serve_static_assets"
 end
 
 # https://devcenter.heroku.com/articles/ruby-support#injected-plugins

@@ -1,0 +1,166 @@
+
+<p id="notice"><%= notice %></p>
+
+
+<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"  md-component-id="left"  md-is-locked-open="$mdMedia('gt-sm')">
+  <md-toolbar class="md-whiteframe-z1">
+    <h1>Navigation</h1>
+  </md-toolbar>
+
+  <md-list>
+    <md-list-item class="md-3-line" ng-click="nc.showProducts()">
+        <md-icon icon="list"></md-icon>
+        <md-button> products </md-button>
+    </md-list-item>
+
+    <md-list-item class="md-3-line" ng-click="nc.showPbs()">
+        <md-icon icon="list"></md-icon>
+        <md-button>  product breakdown structure </md-button>
+    </md-list-item>
+
+    <md-list-item class="md-3-line" ng-click="nc.showWbs()">
+        <md-icon icon="list"></md-icon>
+        <md-button>  work breakdown structure </md-button>
+    </md-list-item>
+
+    <md-list-item class="md-3-line" ng-click="nc.showRam()">
+        <md-icon icon="list"></md-icon>
+        <md-button>  resource allocation matrix </md-button>
+    </md-list-item>
+
+  </md-list>
+</md-sidenav>
+
+<div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+
+  <md-toolbar layout="row" class="md-whiteframe-z1 md-tall" class="md-theme-light">
+    <md-button class="menu" hide-gt-sm ng-click="nc.toggleList()" aria-label="Toggle Menu">
+      Menu
+      <md-icon md-svg-icon="action:menu" ></md-icon>
+    </md-button>
+    <h1>Projektmanagement</h1>
+  </md-toolbar>
+
+  <md-toolbar>
+
+    <div class="md-toolbar-tools">
+      <h3>{{nc.name}}</h3>
+      <p>{{nc.description}}</p>
+     </div>
+
+     <md-fab-toolbar md-open="nc.isOpen" count="nc.count" md-direction="{{nc.selectedDirection}}">
+       <md-fab-trigger class="align-with-text">
+         <md-button aria-label="menu" class="md-fab md-primary">
+           <md-icon md-svg-src="ction:menu"></md-icon>
+         </md-button>
+       </md-fab-trigger>
+       <md-toolbar>
+         <md-fab-actions class="md-toolbar-tools">
+           <md-switch ng-model="nc.showError">Errors {{nc.showError ? "On" : "Off"}}</md-switch>
+         </md-fab-actions>
+       </md-toolbar>
+     </md-fab-toolbar>
+
+   </md-toolbar>
+
+
+   <md-content layout-padding>
+
+      <md-list>
+
+      <form name="breakdownStructurForm">
+        <div layout-gt-xs="row" ng-repeat="data in nc.breakdownStructurs">
+
+          <md-list-item class="md-3-line">
+
+            <md-input-container class="md-block" flex-gt-xs="5">
+              <label>Nr</label>
+              <input ng-model="data.id" disaled>
+            </md-input-container>
+
+            <input ng-model="data.id" hidden></input>
+
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Name</label>
+              <input ng-model="data.name">
+              <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
+              <div ng-messages="breakdownStructurForm.name.$error" ng-if="nc.showError">
+                <div ng-message="required">Name wird benötigt</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-xs="10">
+              <label>Dauer</label>
+              <input ng-model="data.duration" type="number" step="1">
+              <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
+              <div ng-messages="breakdownStructurForm.duration.$error" ng-if="nc.showError">
+                <div ng-message="required">Dauer wird benötigt</div>
+              </div>
+            </md-input-container>
+
+            <md-datepicker ng-model="data.startdate" data-date-format="yyyy-mm-tt" md-placeholder="{{data.startdate ? data.startdate : 'Start Datum'}}" flex-gt-sm>
+            </md-datepicker>
+
+            <md-datepicker ng-model="data.enddate" data-date-format="yyyy-mm-tt" md-placeholder="{{data.startdate ? data.startdate : 'End Datum'}}" flex-gt-sm>
+            </md-datepicker>
+
+
+          </md-list-item>
+          <md-checkbox class="md-secondary" ng-model="data.milestone" aria-label="Meilenstein">
+
+        </div>
+    </form>
+    <form ng-submit="nc.addNode()">
+        <div layout-gt-xs="row">
+
+          <md-list-item class="md-3-line">
+
+            <md-input-container class="md-block" flex-gt-xs="5">
+              <label>Nr</label>
+              <input  disaled>
+            </md-input-container>
+
+            <input ng-model="id" hidden></input>
+
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Name</label>
+              <input ng-model="nc.newName">
+              <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
+              <div ng-messages="breakdownStructurForm.name.$error" ng-if="nc.showError">
+                <div ng-message="required">Name wird benötigt</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-xs="10">
+              <label>Dauer</label>
+              <input ng-model="nc.newDuration" type="number" step="1">
+              <!-- <div class="hint" ng-if="showHints">Wie ist der Name des Produkt Elements</div> -->
+              <div ng-messages="breakdownStructurForm.duration.$error" ng-if="nc.showError">
+                <div ng-message="required">Dauer wird benötigt</div>
+              </div>
+            </md-input-container>
+
+            <md-datepicker ng-model="nc.newStartdate" data-date-format="yyyy-mm-tt" md-placeholder="{{data.startdate ? data.startdate : 'Start Datum'}}" flex-gt-sm>
+            </md-datepicker>
+
+            <md-datepicker ng-model="nc.newEnddate" data-date-format="yyyy-mm-tt" md-placeholder="{{data.startdate ? data.startdate : 'End Datum'}}" flex-gt-sm>
+            </md-datepicker>
+
+
+          </md-list-item>
+          <md-checkbox class="md-secondary" ng-model="nc.newMilestone" aria-label="Meilenstein">
+        </div>
+
+        <md-button type="submit" value="add"> Hinzufügen </md-button>
+
+
+      <md-subheader>
+        <pre class="container"> {{nc.breakdownStructurs}} </pre>
+      </md-subheader>
+    </md-list>
+     <div id='pbsChart'></div>
+     <%= render_chart @pbsChart, 'pbsChart' %>
+  </md-content>
+
+  </div>
+</div>

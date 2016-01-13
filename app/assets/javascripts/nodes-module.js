@@ -4,9 +4,11 @@
 
   var nodes = angular.module('app.nodes', ['ngResource'] );
 
-  nodes.config( function () {
-
+  nodes.config( function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] =
+      $('meta[name=csrf-token]').attr('content');
   });
+
 
   nodes.run ( function ($nodes, $log){
     $log.debug($nodes.getNodes());
@@ -20,7 +22,11 @@
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  nodes.controller ('nodesController', function ($scope, $nodes) {
+  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog) {
+
+    $scope.pbstable = function () {
+      $scope.pbstable = $scope.nodes[0].pbstable_id;
+    };
 
     /*
     * GET /nodes.json
@@ -81,8 +87,8 @@
      * DELETE /nodes/{id}.json
      * @param id of node
      */
-    $scope.deletNodeById = function ( id ) {
-      $nodes.deleteUser ( { node_id:id }, function ( data ) {
+    $scope.deleteNodeById = function ( id ) {
+      $nodes.deleteNode ( { node_id:id }, function ( data ) {
         $log.debug ( data );
         // refresh nodes
         $scope.nodes = $nodes.getNodes();
@@ -93,13 +99,45 @@
      * DELETE /nodes/{id}.json
      * @param node
      */
-    $scope.deletNode = function ( user ) {
-      $nodes.$remove ( function ( data ) {
+    $scope.deleteNode = function ( node ) {
+      $nodes.remove ( function ( data ) {
         $log.debug ( data );
         // refresh nodes
         $scope.nodes = $nodes.getNodes();
       });
     };
+
+    $scope.addNodeDialog = function(ev, node) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+              .title('Would you like to delete your debt?')
+              .textContent('All of the banks have agreed to forgive you your debts.')
+              .ariaLabel('Lucky day')
+              .targetEvent(ev)
+              .ok('Please do it!')
+              .cancel('Sounds like a scam');
+        $mdDialog.show(confirm).then(function() {
+          $scope.status = 'You decided to get rid of your debt.';
+        }, function() {
+          $scope.status = 'You decided to keep your debt.';
+        });
+      };
+
+    $scope.deleteNodeDialog = function(ev, node) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+              .title('Wollen Sie wirklich den Knoten ' + node.name + ' löschen?')
+              .textContent('Es werden alle Kind Elemente des Knoten gelöscht')
+              .targetEvent(ev)
+              .ok('Löschen')
+              .cancel('Abbrechen')
+        $mdDialog.show(confirm).then(function( ) {
+          $scope.deleteNodeById( node.id );
+          $scope.message = 'Knoten gelöscht';
+        }, function() {
+          $scope.message = 'Knoten behalten';
+        });
+      };
 
   });
 
