@@ -22,7 +22,7 @@
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog) {
+  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdToast, $mdDialog, $mdMedia) {
 
     $scope.pbstable = function () {
       $scope.pbstable = $scope.nodes[0].pbstable_id;
@@ -63,6 +63,7 @@
         }, function ( data )
         {
           $log.debug ( data );
+          toasterControllerProvider.showSimpleToast ( data.name + 'erstellt!');
           // refresh nodes
           $scope.nodes = $nodes.getNodes();
         }
@@ -108,20 +109,26 @@
     };
 
     $scope.addNodeDialog = function(ev, node) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        var confirm = $mdDialog.confirm()
-              .title('Would you like to delete your debt?')
-              .textContent('All of the banks have agreed to forgive you your debts.')
-              .ariaLabel('Lucky day')
-              .targetEvent(ev)
-              .ok('Please do it!')
-              .cancel('Sounds like a scam');
-        $mdDialog.show(confirm).then(function() {
-          $scope.status = 'You decided to get rid of your debt.';
-        }, function() {
-          $scope.status = 'You decided to keep your debt.';
-        });
-      };
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: 'newNode.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: useFullScreen
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+      $scope.$watch(function() {
+        return $mdMedia('xs') || $mdMedia('sm');
+      }, function(wantsFullScreen) {
+        $scope.customFullscreen = (wantsFullScreen === true);
+      });
+    };
 
     $scope.deleteNodeDialog = function(ev, node) {
         // Appending dialog to document.body to cover sidenav in docs app
@@ -170,5 +177,24 @@
         );
       }
   });
+
+  function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+    $scope.answer = function( node ) {
+
+      newNode( node );
+
+      toasterControllerProvider.showSimpleToast ( node.name + 'erstellt!');
+
+
+      $mdDialog.hide(answer);
+    };
+  }
+
 
 })();

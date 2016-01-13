@@ -1,0 +1,73 @@
+
+
+<md-dialog aria-label="Neuer Eintrag" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Neuer Eintrag</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          Exit
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>Eintrag hinzufügen</h2>
+
+        <form name="nodeForm">
+
+         <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Name </label>
+            <input ng-model="newNode.name" aria-label="Name des Knoten" md-maxlength="30"</input>
+            <div class="hint">Wie ist der Name des Knoten</div>
+            <div ng-messages="nodeForm.name.$error" ng-hide="showHints">
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Beschreibung*</label>
+            <input ng-model="newNode.descritption" aria-label="Name des Knoten"></input>
+            <div class="hint" >Optional: Geben Sie eine Beschreibung des Knoten ein.</div>
+            <div ng-messages="nodeForm.descritpion.$error" ng-hide="showHints">
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-datepicker ng-model="newNode.startdate" aria-label="Startdatum" md-placeholder="Start Datum">
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Dauer</label>
+            <input ng-model="newNode.duration" aria-label="Dauer des Knoten"></input>
+            <div class="hint" >Dauer des Knoten</div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-datepicker ng-model="newNode.enddate" aria-label="Enddatum" md-placeholder="End Datum" flex="600">
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-checkbox aria-label="Meilenstein" ng-model="newMilestone" aria-label="Meilenstein"> <label> Meilenstein </label>
+        </div>
+
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer( newNode )">
+        Hinzufügen
+      </md-button>
+      <md-button ng-click="cancel()" style="margin-right:20px;">
+        Abbrechen
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
