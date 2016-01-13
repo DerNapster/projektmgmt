@@ -197,3 +197,9 @@ node20 = Node.create(name: 'Rechnungs- und Zahlungsverwwaltung',
                      parent: node17)
 
 
+wbs1 = Wbstable.create(name: 'Aufgabe Webshow',
+                       project: project1)
+wbs2 = Wbstable.create(name: 'Aufgabe Brücke',
+                       project: project2)
+
+
