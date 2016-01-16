@@ -19,6 +19,7 @@
   <%= javascript_include_tag "toast-module" %>
   <%= javascript_include_tag "controle-module" %>
   <%= javascript_include_tag "nodes-module" %>
+  <%= javascript_include_tag "projects-module" %>
   <%= javascript_include_tag "app" %>
 
   <%= google_webfonts_init({  google: ['Roboto']  })  %>
@@ -39,7 +40,63 @@
 </head>
 <body layout="row" ng-app="app" ng-cloak >
 
-  <%= yield %>
+  <div ng-app="app">
+    <section layout="row" flex ng-controller="controleController">
+
+      <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+
+        <md-toolbar class="md-theme-indigo" layout="row">
+          <h1 class="md-toolbar-tools">Navigation</h1>
+          <span flex>
+          <md-menu>
+          </md-menu>
+        </md-toolbar>
+
+        <md-content class="md-padding" ng-controller="projectsController">
+          <md-list>
+            <md-list-item  ng-repeat="project in projects" href="{{project.id}}">
+              <p>{{project.name}}</p>
+          </md-list-item>
+            <md-button ng-click="close()" class="md-primary md-raised" hide-gt-md>
+              Close
+            </md-button>
+          </md-list>
+        </md-content>
+
+      </md-sidenav>
+
+        <md-content flex class="md-whiteframe-z2">
+          <div layout="column" layout-fill layout-align="center center" class="view-container">
+            <md-toolbar layout="row" class="md-whiteframe-z1 md-tall" class="md-theme-light">
+
+            <md-button class="menu" ng-click="toggleLeft()" aria-label="Toggle Menu"  >
+              Menu
+              <md-icon md-svg-icon="action:menu" ></md-icon>
+            </md-button>
+
+            <h1>Projektmanagement</h1>
+
+             <md-fab-toolbar md-open="$scope.isOpen" count="count" md-direction="{{$scope.selectedDirection}}">
+               <md-fab-trigger class="align-with-text">
+                 <md-button aria-label="menu" class="md-fab md-primary">
+                   <md-icon md-svg-src="ction:menu"></md-icon>
+                 </md-button>
+               </md-fab-trigger>
+               <md-toolbar>
+                 <md-fab-actions class="md-toolbar-tools">
+                   <md-switch ng-model="$scope.showError">Errors {{$scope.showError ? "On" : "Off"}}</md-switch>
+                 </md-fab-actions>
+               </md-toolbar>
+             </md-fab-toolbar>
+
+            </md-toolbar>
+
+            <div ng-view class="view-frame animate-view"></div>
+          </div>
+        </md-content>
+
+    </section>
+  </div>
 
 </body>
 </html>

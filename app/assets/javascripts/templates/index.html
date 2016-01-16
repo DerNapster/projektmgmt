@@ -1,79 +1,26 @@
-<md-toolbar layout="row" class="md-whiteframe-z1 md-tall" class="md-theme-light">
-
-<md-button class="menu" ng-click="toggleLeft()" aria-label="Toggle Menu"  >
-  Menu
-  <md-icon md-svg-icon="action:menu" ></md-icon>
-</md-button>
-
-<h1>Projektmanagement</h1>
-
- <md-fab-toolbar md-open="nc.isOpen" count="nc.count" md-direction="{{nc.selectedDirection}}">
-   <md-fab-trigger class="align-with-text">
-     <md-button aria-label="menu" class="md-fab md-primary">
-       <md-icon md-svg-src="ction:menu"></md-icon>
-     </md-button>
-   </md-fab-trigger>
-   <md-toolbar>
-     <md-fab-actions class="md-toolbar-tools">
-       <md-switch ng-model="nc.showError">Errors {{nc.showError ? "On" : "Off"}}</md-switch>
-     </md-fab-actions>
-   </md-toolbar>
- </md-fab-toolbar>
-
-</md-toolbar>
 
 <div class="container">
- <pre>{{nodes}}</pre>
-</div>
-<div class="table-responsive">
-<table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Start</th>
-      <th>Dauer</th>
-      <th>Ende</th>
-      <th>Meilenstein</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody >
-    <tr ng-repeat="node in nodes" id="{{node.id}}">
-      <th></th>
-      <td>
-        <md-input-container class="tableinput">
-          <input ng-model="node.name" aria-label="Name des Knoten" ng-blur="updateNode(node)"></input>
-        </md-input-container>
-      </td>
-      <td>
-        <md-datepicker ng-model="node.startdate" aria-label="Startdatum des Knoten" md-placeholder="{{node.startdate ? node.startdate : 'Start Datum'}}">
-      </td>
-      <td>
-        <md-input-container class="tableinput">
-          <input ng-model="node.duration" aria-label="Dauer des Knoten"></input>
-        </md-input-container>
-      </td>
-      <td>
-        <md-datepicker type="date" ng-model="node.enddate" aria-label="Enddatum des Knoten" md-placeholder="{{node.enddate ? node.enddate : 'End Datum'}}">
-      </td>
-      <td>
-        <md-checkbMW)2#MS!
-         ng-model="data.milestone" aria-label="Meilenstein" ng-click="updateNode(node)">
-        <!-- <md-checkbox aria-label="Meilenstein" ng-model="data.milestone" ng-click="updateNode(node)" aria-label="Meilenstein"> -->
-      </td>
-      <td>
-        <md-button class="md-raised" aria-label="Knoten hinzufügen" ng-click="addNodeDialog($event, node, null)" flex-gt-md="auto">
-          Add
-         </md-button>
-         <md-button class="md-warn" aria-label="Knoten löschen" ng-click="deleteNodeDialog($event, node)" flex-gt-md="auto">
-           Delete
-          </md-button>
-      </td>
-    </tr>
+  <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="column">
+    <div flex="50" flex-xs="100" layout="column" ng-repeat="project in projects">
+      <md-card>
+        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{project.name}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            {{project.description}}
+          </p>
+        </md-card-content>
 
-  </tbody>
-  </table>
-
-  <md-button class="md-warn" aria-label="Knoten löschen" ng-click="addNodeDialog($event, null, nodes)" flex-gt-md="auto">Add</md-button>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button class="md-primary" href="#/{{project.id}}/nodes">Product Breakdown Structur</md-button>
+          <md-button class="md-primary">Work Breakdown Structur</md-button>
+          <md-button class="md-primary">Resource Breakdown Structur</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
 </div>

@@ -2,20 +2,20 @@
 
 (function(){
 
-  var nodes = angular.module('app.nodes', ['ngResource'] );
+  var nodes = angular.module('app.nodes', ['ngResource', 'ngRoute'] );
 
-  nodes.config( function($httpProvider) {
-    $httpProvider.defaults.headers.common['X-CSRF-Token'] =
-      $('meta[name=csrf-token]').attr('content');
+  nodes.config( function($routeProvider, $httpProvider, $nodesProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
   });
 
 
-  nodes.run ( function ($nodes, $log){
-    $log.debug($nodes.getNodes());
+  nodes.run ( function ($nodes, $log, $routeParams){
 
+    $log.debug($nodes.getNodes());
 
     $log.debug($nodes.getNode({node_id:1}));
 
+    $log.debug($routeParams);
   });
 
 
@@ -23,10 +23,11 @@
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog, $mdMedia) {
-
+  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog, $mdMedia, $routeParams) {
 
     $scope.parent;
+
+    var project_id = $routeParams.project_id;
 
     $scope.pbstable = function () {
       $scope.pbstable = $scope.nodes[0].pbstable_id;
@@ -36,7 +37,7 @@
     * GET /nodes.json
     * @return Nodes List
     */
-    $scope.nodes = $nodes.getNodes();
+    $scope.nodes = $nodes.getNodes( { project_id:project_id } ) ;
 
     /*
      * GET /nodes/{id}.json
@@ -51,18 +52,15 @@
      * @param name, description, level, duration, startdate, enddate, milestone, pbstable_id, parent_id
      * @return created Node
      */
-    $scope.newNode = function ( name, description, level, duration, startdate, enddate, milestone, pbstable_id, parent_id ) {
+    $scope.newNode = function ( name, description, level, milestone, parent_id ) {
       // $nodes.save(
       $nodes.createNode(
         {
           name: name,
           description: description,
           level: level,
-          duration: duration,
-          startdate: startdate,
-          enddate: enddate,
           milestone: milestone,
-          pbstable_id: pbstable_id,
+          project_id: project_id,
           parent_id: parent_id
         }, function ( data )
         {
@@ -184,7 +182,7 @@
   /// Provides GET, POST, DELETE, PUT Methods
   /// use getNode, getNodes, createNode, deleteNode, updateNode
   ///
-  nodes.provider('$nodes', function () {
+  nodes.provider('$nodes', function (  ) {
       var endpoint = '/nodes';
 
       this.setEndpoint = function ( url ) {
@@ -194,9 +192,10 @@
       this.$get = function ( $resource ) {
 
         return $resource (
-          endpoint + "/:node_id" + ".json",
+          "/:project_id" + endpoint + "/:node_id" + ".json",
           {
-            node_id:'@id'
+            node_id:'@id',
+            project_id:'@sub_id'
           },
           {
            'getNode': {method:'GET'},
