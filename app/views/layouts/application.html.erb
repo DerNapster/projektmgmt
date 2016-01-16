@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src='http://www.google.com/jsapi'></script>;
+  <script src='http://www.google.com/jsapi'></script>
 
   <title><%= content_for?(:name) ? yield(:name) : "Projektmgmt" %></title>
 
@@ -15,6 +15,9 @@
 
   <%= javascript_include_tag "application" %>
 
+  <%= javascript_include_tag "dialog-module" %>
+  <%= javascript_include_tag "toast-module" %>
+  <%= javascript_include_tag "controle-module" %>
   <%= javascript_include_tag "nodes-module" %>
   <%= javascript_include_tag "app" %>
 

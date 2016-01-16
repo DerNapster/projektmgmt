@@ -2,12 +2,12 @@
 
 (function () {
 
-  var app = angular.module('app', ['app.nodes', 'ngMaterial', 'ui.router']);
+  var app = angular.module('app', ['app.nodes', 'app.controle', 'app.toast', 'app.dialog', 'ngMaterial', 'templates','ngRoute']);
 
   app.run(function () {
   });
 
-  app.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider){
+  app.config(function($routeProvider, $mdThemingProvider, $mdIconProvider){
 
     $mdIconProvider
       .defaultFontSet( 'fontawesome' )
@@ -28,18 +28,25 @@
       .iconSet('social', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg', 24)
       .iconSet('toggle', '/assets/material-design-icons/sprites/svg-sprite/svg-sprite-toggle.svg', 24);
 
-    $mdThemingProvider.theme('default')
+    $mdThemingProvider
+      .theme('default')
       .primaryPalette('deep-orange')
       .accentPalette('grey');
 
-    $stateProvider
-      .state('home', {
-        url: '/home',
-        templateUrl: '/assets/nodes/_home.html',
-        controller: '/assets/nodes-module'
-      });
+    $routeProvider
+      .when('/', {
+        templateUrl: "index.html",
+        controller: 'nodesController'
+      })
+      .when('/nodes/new', {
+        templateUrl: "newNode.html",
+        controller: 'nodesController'
+      })
+      .otherwise({
+        redirectTo: '/'
+      });;
 
-    $urlRouterProvider.otherwise('home');
+    // $urlRouterProvider.otherwise('home');
 
   });
 
