@@ -1,9 +1,9 @@
 class Project < ActiveRecord::Base
-  has_one :pbstable
-  accepts_nested_attributes_for :pbstable
-  has_one :wbstable
-  accepts_nested_attributes_for :wbstable
-  has_one :rbstable
-  accepts_nested_attributes_for :rbstable
+  has_many :nodes
+  accepts_nested_attributes_for :nodes
+  has_many :workpackages
+  accepts_nested_attributes_for :workpackages
+  has_many :roles
+  accepts_nested_attributes_for :roles
   validates :name, presence: true
 end

@@ -1,17 +1,18 @@
 class NodesController < ApplicationController
   before_action :set_node, only: [:show, :edit, :update, :destroy]
 
+
+
   # GET /nodes
   # GET /nodes.json
   def index
-    @nodes = Node.all
+    @nodes = Node.where(project_id: params[:project_id])
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )
     data_table.new_column('string', 'Parent')
     data_table.new_column('string', 'ToolTip')
 
-    # Im Moment Nodes.all später aber nur noch die notes zu einer PBSTable, dann muss bei dem Aufruf eine PBSTable-ID mitgegeben werden
     @nodes.each do |nodeItem|
       nodeId = nodeItem.id.to_s
       nodeName = nodeItem.name
@@ -28,9 +29,8 @@ class NodesController < ApplicationController
       data_table.add_row([{v: nodeId, f: nodeName}, nodeParentId, nodeDescription])
 
     end
+    @pbsChart = generate_organisation_graph data_table
 
-    option = { width: 400, height: 400, title: 'Product Breakdown Structure', version: '1.1', allowHtml: true, size: 'large' }
-    @pbsChart = GoogleVisualr::Interactive::OrgChart.new(data_table, option)
   end
 
   # GET /nodes/1
@@ -95,6 +95,6 @@ class NodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def node_params
-      params.require(:node).permit(:name, :description, :level, :duration, :startdate, :enddate, :milestone, :pbstable_id, :parent_id)
+      params.require(:node).permit(:name, :description, :level, :duration, :startdate, :enddate, :milestone, :project_id, :parent_id)
     end
 end

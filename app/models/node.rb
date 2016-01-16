@@ -1,10 +1,10 @@
 class Node < ActiveRecord::Base
-  belongs_to :pbstable
+  belongs_to :project
   belongs_to :parent, :class_name => 'Node'
   has_many :children, :class_name => 'Node', :foreign_key => 'parent_id'
   accepts_nested_attributes_for :parent
   validates :name, presence: true
-  validates :pbstable, presence: true
+  validates :project, presence: true
   validates :startdate, presence: true
   validates :enddate, presence: true
   validates :level, presence: true
@@ -40,7 +40,7 @@ class Node < ActiveRecord::Base
       unless ((parent.level + 1) == level)
         errors.add(:parent, "Parent level must be one smaller than child level")
       end
-      unless (parent.pbstable.id == pbstable.id)
+      unless (parent.project.id == project.id)
         errors.add(:parent, "Parent PBSTable must be the same as child PBSTable")
       end
     end
