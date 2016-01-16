@@ -63,7 +63,7 @@
         <!-- <md-checkbox aria-label="Meilenstein" ng-model="data.milestone" ng-click="updateNode(node)" aria-label="Meilenstein"> -->
       </td>
       <td>
-        <md-button class="md-raised" aria-label="Knoten hinzufügen" ng-click="addNodeDialog($event, node)" flex-gt-md="auto">
+        <md-button class="md-raised" aria-label="Knoten hinzufügen" ng-click="addNodeDialog($event, node, null)" flex-gt-md="auto">
           Add
          </md-button>
          <md-button class="md-warn" aria-label="Knoten löschen" ng-click="deleteNodeDialog($event, node)" flex-gt-md="auto">
@@ -72,33 +72,8 @@
       </td>
     </tr>
 
-    <tr>
-      <th></th>
-      <td>
-        <md-input-container>
-          <label>Name des Knoten</label>
-          <input ng-model="newName" aria-label="Name des Knoten"></input>
-        </md-input-container>
-      </td>
-      <td>
-        <md-datepicker ng-model="newStartdate" aria-label="Startdatum des Knoten" md-placeholder="Start Datum">
-      </td>
-      <td>
-        <md-input-container class="">
-          <label>Dauer</label>
-          <input ng-model="newDuration" aria-label="Dauer des Knoten"></input>
-        </md-input-container>
-      </td>
-      <td>
-        <md-datepicker ng-model="newEnddate" aria-label="Enddatum des Knoten" md-placeholder="End Datum">
-      </td>
-      <td>
-        <md-checkbox aria-label="Meilenstein" ng-model="newMilestone" aria-label="Meilenstein">
-      </td>
-      <td>
-        <md-button class="md-raised md-primary" aria-label="Knoten speichern" ng-click="newNode(newName, newDescription, newLevel, newDuration, newStartdate, newEnddate, newMilestone, pbstable, null)">+</md-button>
-      </td>
-    </tr>
   </tbody>
   </table>
+
+  <md-button class="md-warn" aria-label="Knoten löschen" ng-click="addNodeDialog($event, null, nodes)" flex-gt-md="auto">Add</md-button>
 </div>
