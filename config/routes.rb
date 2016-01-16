@@ -2,10 +2,7 @@ Rails.application.routes.draw do
 
 
   resources :roles
-  resources :rbstables
   resources :workpackages
-  resources :wbstables
-  resources :pbstables
   resources :nodes
   resources :projects
 

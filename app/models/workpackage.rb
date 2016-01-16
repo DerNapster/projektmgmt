@@ -1,10 +1,10 @@
 class Workpackage < ActiveRecord::Base
-  belongs_to :wbstable
+  belongs_to :project
   belongs_to :parent, :class_name => 'Workpackage'
   has_many :children, :class_name => 'Workpackage', :foreign_key => 'parent_id'
   accepts_nested_attributes_for :parent
   validates :name, presence: true
-  validates :wbstable, presence: true
+  validates :project, presence: true
   validates :startdate, presence: true
   validates :enddate, presence: true
   validates :level, presence: true
@@ -44,7 +44,7 @@ class Workpackage < ActiveRecord::Base
       unless ((parent.level + 1) == level)
         errors.add(:parent, "Parent level must be one smaller than child level")
       end
-      unless (parent.wbstable.id == wbstable.id)
+      unless (parent.project.id == project.id)
         errors.add(:parent, "Parent WBSTable must be the same as child WBSTable")
       end
     end

@@ -24,23 +24,14 @@ ActiveRecord::Schema.define(version: 20160113174950) do
     t.date     "startdate"
     t.date     "enddate"
     t.boolean  "milestone"
-    t.integer  "pbstable_id"
+    t.integer  "project_id"
     t.integer  "parent_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   add_index "nodes", ["parent_id"], name: "index_nodes_on_parent_id", using: :btree
-  add_index "nodes", ["pbstable_id"], name: "index_nodes_on_pbstable_id", using: :btree
-
-  create_table "pbstables", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "pbstables", ["project_id"], name: "index_pbstables_on_project_id", using: :btree
+  add_index "nodes", ["project_id"], name: "index_nodes_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -49,38 +40,20 @@ ActiveRecord::Schema.define(version: 20160113174950) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "rbstables", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "rbstables", ["project_id"], name: "index_rbstables_on_project_id", using: :btree
-
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.text     "qualification"
     t.text     "experience"
     t.integer  "quantity"
-    t.integer  "rbstable_id"
+    t.integer  "project_id"
     t.integer  "parent_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
   add_index "roles", ["parent_id"], name: "index_roles_on_parent_id", using: :btree
-  add_index "roles", ["rbstable_id"], name: "index_roles_on_rbstable_id", using: :btree
-
-  create_table "wbstables", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "wbstables", ["project_id"], name: "index_wbstables_on_project_id", using: :btree
+  add_index "roles", ["project_id"], name: "index_roles_on_project_id", using: :btree
 
   create_table "workpackages", force: :cascade do |t|
     t.string   "name"
@@ -97,19 +70,16 @@ ActiveRecord::Schema.define(version: 20160113174950) do
     t.decimal  "costs"
     t.integer  "work"
     t.decimal  "workPerformed", default: 0.0
-    t.integer  "wbstable_id"
+    t.integer  "project_id"
     t.integer  "parent_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
 
   add_index "workpackages", ["parent_id"], name: "index_workpackages_on_parent_id", using: :btree
-  add_index "workpackages", ["wbstable_id"], name: "index_workpackages_on_wbstable_id", using: :btree
+  add_index "workpackages", ["project_id"], name: "index_workpackages_on_project_id", using: :btree
 
-  add_foreign_key "nodes", "pbstables"
-  add_foreign_key "pbstables", "projects"
-  add_foreign_key "rbstables", "projects"
-  add_foreign_key "roles", "rbstables"
-  add_foreign_key "wbstables", "projects"
-  add_foreign_key "workpackages", "wbstables"
+  add_foreign_key "nodes", "projects"
+  add_foreign_key "roles", "projects"
+  add_foreign_key "workpackages", "projects"
 end
