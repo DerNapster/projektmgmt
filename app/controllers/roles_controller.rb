@@ -25,6 +25,7 @@ class RolesController < ApplicationController
   # POST /roles.json
   def create
     @role = Role.new(role_params)
+    @role.level = @role.parent.level + 1
 
     respond_to do |format|
       if @role.save

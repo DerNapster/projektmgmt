@@ -2,7 +2,6 @@ class NodesController < ApplicationController
   before_action :set_node, only: [:show, :edit, :update, :destroy]
 
 
-
   # GET /nodes
   # GET /nodes.json
   def index
@@ -51,6 +50,8 @@ class NodesController < ApplicationController
   # POST /nodes.json
   def create
     @node = Node.new(node_params)
+
+    @node.level = @node.parent.level + 1
 
     respond_to do |format|
       if @node.save
