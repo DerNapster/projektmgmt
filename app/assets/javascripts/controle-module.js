@@ -6,7 +6,6 @@
   var controle = angular.module('app.controle', ['ngMaterial'] );
 
   controle.config( function() {
-
   });
 
 
@@ -14,13 +13,16 @@
   });
 
 
-  controle.controller ('controleController', function($scope, $timeout, $mdSidenav, $mdComponentRegistry, $log, projectService) {
+  controle.controller ('controleController', function($scope, $timeout, $mdSidenav, $mdComponentRegistry, $mdDialog, $log, projectService) {
 
-    // Option #1
-    //
-    // $scope.isOpen = function() { return $mdSidenav('right').isOpen(); };
-    // $scope.toggle = function() { $mdSidenav('right').toggle() };
+    $scope.showDebug = false;
 
+    var originatorEv;
+    $scope.openMenu = function($mdOpenMenu, ev) {
+      $log.debug("openMenu");
+      originatorEv = ev;
+      $mdOpenMenu(ev);
+    };
 
     // Option #2 - See https://github.com/angular/material/issues/974
     $scope.toggle = angular.noop;

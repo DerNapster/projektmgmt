@@ -52,6 +52,9 @@
           <h1 class="md-toolbar-tools">Navigation</h1>
           <span flex>
           <md-menu>
+            <md-button ng-click="close()" class="md-icon-button" hide-gt-md>
+              <md-icon md-font-set="material-icons">close</md-icon>
+            </md-button>
           </md-menu>
         </md-toolbar>
 
@@ -92,37 +95,44 @@
                 <md-divider ></md-divider>
             </div>
           </md-list>
-
-
-          <md-button ng-click="close()" class="md-primary md-raised" hide-gt-md>
-            Close
-          </md-button>
         </md-content>
 
       </md-sidenav>
 
         <md-content flex class="md-whiteframe-z2">
           <div layout="column" layout-fill layout-align="center center" class="view-container">
-            <md-toolbar layout="row" class="md-whiteframe-z1 md-tall" class="md-theme-light">
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Navigation" ng-click="toggleLeft()">
+                  <md-icon md-font-set="material-icons">menu</md-icon>
+                </md-button>
+                <h2>
+                  <span>Projektmanagement</span>
+                </h2>
+                <span flex></span>
+                <md-menu>
+                  <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
+                    <md-icon md-font-set="material-icons">more_vert</md-icon>
+                  </md-button>
 
-            <md-button class="menu" ng-click="toggleLeft()" aria-label="Toggle Menu">
-              <md-icon md-font-set="material-icons"> reorder </md-icon>
-            </md-button>
-            <h1>Projektmanagement</h1>
-             <md-fab-toolbar md-open="$scope.isOpen" count="count" md-direction="{{$scope.selectedDirection}}">
-               <md-fab-trigger class="align-with-text">
-                 <md-button aria-label="menu" class="md-fab md-primary">
-                   <md-icon md-svg-src="ction:menu"></md-icon>
-                 </md-button>
-               </md-fab-trigger>
-               <md-toolbar>
-                 <md-fab-actions class="md-toolbar-tools">
-                   <md-switch ng-model="$scope.showError">Errors {{$scope.showError ? "On" : "Off"}}</md-switch>
-                 </md-fab-actions>
-               </md-toolbar>
-             </md-fab-toolbar>
+                  <md-menu-content width="4">
+                    <md-menu-item>
+                      <md-switch ng-model="$rootScope.showDebug">
+                          <md-icon md-font-set="material-icons">live help</md-icon>
+                          Debug {{$rootScope.showDebug}}
+                      </md-switch>
+                    </md-menu-item>
+                  </md-menu-content>
+              </md-menu>
+
+              </div>
+
+
 
             </md-toolbar>
+
+
+
 
             <div ng-view class="view-frame animate-view"></div>
           </div>
