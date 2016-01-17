@@ -219,3 +219,13 @@ wp2 = Workpackage.create(name: 'Geschäftsplan und Architektur Aufgabe',
                     parent: wp1)
 
 
+r1 = Role.create(name: "Webshop",
+                 description: "Websop Desc",
+                 project_id: project1,
+                 level: 0)
+
+r2 = Role.create(name: "Projektmanagement",
+                 description: "PM",
+                 project_id: project1,
+                 level: 0,
+                 parent: r1)
