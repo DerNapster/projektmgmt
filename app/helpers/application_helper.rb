@@ -5,7 +5,5 @@ module ApplicationHelper
     @pbsChart = GoogleVisualr::Interactive::OrgChart.new(dataTable, option)
   end
 
-  def sort_list_with_parent(list)
-    list
-  end
+
 end

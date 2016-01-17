@@ -6,14 +6,17 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.json
   def index
-    @nodes = sort_list_with_parent Node.where(project_id: params[:project_id])
+    nodes = Node.where(project_id: params[:project_id])
+
+    @nodes = sort_list_with_parent nodes
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )
     data_table.new_column('string', 'Parent')
     data_table.new_column('string', 'ToolTip')
 
-    @nodes.each do |nodeItem|
+    puts "----Nodessize: " + nodes.size.to_s
+    nodes.each do |nodeItem|
       nodeId = nodeItem.id.to_s
       nodeName = nodeItem.name
       nodeDescription = nodeItem.description
@@ -96,5 +99,32 @@ class NodesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def node_params
       params.require(:node).permit(:name, :description, :level, :duration, :startdate, :enddate, :milestone, :project_id, :parent_id)
+    end
+
+    def sort_list_with_parent(list)
+      puts "----List size: " + list.size.to_s
+      rootElementList = list.where(parent_id: nil)
+      puts "----RootElementList size: " + rootElementList.size.to_s
+      sortedList = Array.new
+      rootElement = rootElementList.first
+      puts "----Neues Array: " + sortedList.size.to_s
+      add_to_sorted_array sortedList, rootElement
+      puts "----Neues Array nach einfügen: " + sortedList.size.to_s
+      sortedList
+    end
+
+    def add_to_sorted_array array, element
+      array << element
+      if element != nil
+        puts "----Element ist nicht null"
+        if element.children != nil
+          element.children.each do |childElement|
+            array << childElement
+            add_to_sorted_array array, childElement
+          end
+        end
+      else
+        puts "----Element is null"
+      end
     end
 end
