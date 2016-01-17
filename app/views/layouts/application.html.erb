@@ -84,8 +84,10 @@
         <md-content class="md-padding" ng-controller="projectsController">
           <md-list>
             <div ng-repeat="project in projects">
-                <md-subheader class="md-no-sticky">{{project.name}}</md-subheader>
-                <md-list-item ng-href="#/{{project.id}}/nodes">
+                <md-subheader class="md-no-sticky">
+                  {{project.name}}
+                </md-subheader>
+                <md-list-item>
                   <md-icon md-font-set="material-icons">extension</md-icon>
                     <p>Product Breakdown Structur</p>
                 </md-list-item>
@@ -151,6 +153,7 @@
         </md-content>
 
     </section>
+
   </div>
 
 </body>

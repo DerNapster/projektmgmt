@@ -18,12 +18,13 @@
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog, $mdMedia, $routeParams, $rootScope) {
+  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog, $mdMedia, $routeParams, $rootScope, nodeGraphService) {
 
     $scope.parent;
 
     var project_id = $routeParams.project_id;
 
+    $scope.graph = nodeGraphService.getNodeGraph( { project_id:project_id});
 
     /*
     * GET /nodes.json
@@ -194,6 +195,27 @@
            'getNodes': {method:'GET', isArray:true},
            'deleteNode': {method: 'DELETE' },
            'updateNode': {method: 'PUT', responseType: 'text'} //Rest delivers text not object (succes message)
+          }
+        );
+      }
+  });
+
+  nodes.provider('nodeGraphService', function (  ) {
+      var endpoint = '/nodes/graph.html';
+
+      this.setEndpoint = function ( url ) {
+        endpoint = url;
+      };
+
+      this.$get = function ( $resource ) {
+
+        return $resource (
+          "/:project_id" + endpoint ,
+          {
+            project_id:'@project_id'
+          },
+          {
+           'getNodeGraph': {method:'GET'},
           }
         );
       }

@@ -13,7 +13,7 @@
   });
 
 
-  controle.controller ('controleController', function($scope, $timeout, $mdSidenav, $mdComponentRegistry, $mdDialog, $log, projectService, $rootScope) {
+  controle.controller ('controleController', function($scope, $timeout, $mdSidenav, $mdComponentRegistry, $mdDialog, $log, projectService, $rootScope, $q) {
 
     var originatorEv;
     $scope.openMenu = function($mdOpenMenu, ev) {
@@ -50,9 +50,9 @@
     };
 
     var self = this;
-    self.simulateQuery = true;
+    self.simulateQuery = false;
     self.isDisabled    = false;
-    self.repos         = loadAll();
+    self.repos         = projectService.getProjects();
     self.querySearch   = querySearch;
     self.selectedItemChange = selectedItemChange;
     self.searchTextChange   = searchTextChange;

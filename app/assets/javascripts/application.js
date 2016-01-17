@@ -21,4 +21,5 @@
 //= require angular-animate
 //= require angular-aria
 //= require angular-material
+//= require d3
 //= require_tree .
