@@ -10,12 +10,7 @@
 
 
   works.run ( function ($works, $log, $routeParams){
-
-    $log.debug($works.getWorks());
-
     $log.debug($works.getWork({work_id:1}));
-
-    $log.debug($routeParams);
   });
 
 

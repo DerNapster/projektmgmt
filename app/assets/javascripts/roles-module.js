@@ -10,12 +10,7 @@
 
 
   roles.run ( function ($roles, $log, $routeParams){
-
-    $log.debug($roles.getRoles());
-
     $log.debug($roles.getRole({role_id:1}));
-
-    $log.debug($routeParams);
   });
 
 

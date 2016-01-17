@@ -6,10 +6,18 @@
 md-card img {
 	-webkit-filter: grayscale(0) blur(0);
 	filter: grayscale(0) blur(0);
+	-webkit-transform: scale(1);
+	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
 md-card:hover img {
 	-webkit-filter: grayscale(100%) blur(1px);
 	filter: grayscale(100%) blur(1px);
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+figure {
+		overflow: hidden;
 }

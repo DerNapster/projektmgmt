@@ -23,7 +23,7 @@
          <div layout-gt-xs="row" ng-show="nodes != null">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Parent </label>
-            <md-select placeholder="Assign to parent" ng-model="newNode.partent_id" style="min-width: 200px;">
+            <md-select placeholder="Assign to parent" ng-model="newNode.parent_id" style="min-width: 200px;">
                <md-option ng-value="parent.id" ng-repeat="parent in nodes">{{parent.name}}</md-option>
             </md-select>
           </md-input-container>
@@ -53,7 +53,8 @@
           <md-checkbox aria-label="Meilenstein" ng-model="newNode.milestone" aria-label="Meilenstein"> <label> Meilenstein </label>
         </div>
 
-        <pre>"parent_id":{{node.id}}{{newNode}} </pre>
+        <pre>Parent: {{node.id}}</pre>
+        <pre>{{newNode}} </pre>
 
       </div>
     </md-dialog-content>

@@ -10,12 +10,7 @@
 
 
   nodes.run ( function ($nodes, $log, $routeParams){
-
-    $log.debug($nodes.getNodes());
-
     $log.debug($nodes.getNode({node_id:1}));
-
-    $log.debug($routeParams);
   });
 
 
@@ -36,6 +31,10 @@
     */
     $scope.nodes = $nodes.getNodes( { project_id:project_id } ) ;
 
+    $scope.refresh = function () {
+      return $nodes.getNodes( { project_id:project_id } );
+    }
+
     /*
      * GET /nodes/{id}.json
      * @return Node
@@ -49,7 +48,7 @@
      * @param name, description, level, duration, startdate, enddate, milestone, pbstable_id, parent_id
      * @return created Node
      */
-    $scope.newNode = function ( name, description, milestone, parent_id ) {
+    $scope.newNode = function ( name, description, milestone, parent_id, project_id ) {
       // $nodes.save(
       $nodes.createNode(
         {
@@ -67,7 +66,7 @@
           }
 
           // refresh nodes
-          $scope.nodes = $nodes.getNodes();
+          $scope.nodes = $scope.refresh();
         }
       );
     };
@@ -82,7 +81,7 @@
       node.$updateNode ( function ( data ) {
         $log.debug ( data );
         // refresh nodes
-        $scope.nodes = $nodes.getNodes();
+          $scope.nodes = $scope.refresh();
       });
     };
 
@@ -94,7 +93,7 @@
       $nodes.deleteNode ( { node_id:id }, function ( data ) {
         $log.debug ( data );
         // refresh nodes
-        $scope.nodes = $nodes.getNodes();
+          $scope.nodes = $scope.refresh();
       });
     };
 
@@ -106,16 +105,11 @@
       $nodes.remove ( function ( data ) {
         $log.debug ( data );
         // refresh nodes
-        $scope.nodes = $nodes.getNodes();
+        $scope.nodes =  $scope.refresh();
       });
     };
 
     $scope.addNodeDialog = function(ev, node, nodes) {
-
-      if(node) {
-        $scope.parent = node.id;
-        $scope.project_id = node.project_id;
-      }
 
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
       $mdDialog.show({
@@ -135,9 +129,9 @@
         $log.debug(answer);
 
         if (answer.parent_id) {
-            $scope.newNode ( answer.name, answer.description, answer.milestone, answer.project_id, answer.parent  )
+            $scope.newNode ( answer.name, answer.description, answer.milestone, answer.parent_id, project_id  )
         } else {
-            $scope.newNode ( answer.name, answer.description, answer.milestone, $scope.project_id, $scope.parent  )
+            $scope.newNode ( answer.name, answer.description, answer.milestone, $scope.parent_id, project_id  )
             $scope.parent = "";
         }
 

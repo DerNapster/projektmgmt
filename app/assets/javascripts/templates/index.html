@@ -7,7 +7,7 @@
         <figure><img ng-src="/images/projects.jpg" class="md-card-image"></figure>
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">{{project.name}}</span>
+            <md-button ng-href="#/{{project.id}}" class="md-primary md-hue-1">{{project.name}}</md-button>
           </md-card-title-text>
         </md-card-title>
         <md-card-content>
@@ -17,9 +17,27 @@
         </md-card-content>
 
         <md-card-actions layout="column" layout-align="start">
-          <md-button class="md-primary" href="#/{{project.id}}/nodes">Product Breakdown Structur</md-button>
-          <md-button class="md-primary" href="#/{{project.id}}/works">Work Breakdown Structur</md-button>
-          <md-button class="md-primary" href="#/{{project.id}}/roles">Resource Breakdown Structur</md-button>
+          <md-list>
+           <md-list-item ng-href="#/{{project.id}}/nodes">
+             <md-icon md-font-set="material-icons">extension</md-icon>
+               <p>Product Breakdown Structur</p>
+           </md-list-item>
+           <md-list-item ng-href="#/{{project.id}}/works">
+             <md-icon md-font-set="material-icons">build</md-icon>
+               <p>Work Breakdown Structur</p>
+           </md-list-item>
+
+           <md-list-item ng-href="#/{{project.id}}/roles">
+             <md-icon md-font-set="material-icons">people</md-icon>
+               <p>Role Breakdown Structur</p>
+           </md-list-item>
+
+           <md-list-item ng-href="#/{{project.id}}/delphi">
+             <md-icon md-font-set="material-icons">schedule</md-icon>
+               <p>Delphi</p>
+           </md-list-item>
+         </md-list>
+
         </md-card-actions>
       </md-card>
     </div>

@@ -11,8 +11,6 @@
 
 
   projects.run ( function (projectService, $log){
-    $log.debug(projectService.getProjects());
-
     $log.debug(projectService.getProject({project_id:1}));
   });
 

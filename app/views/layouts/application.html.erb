@@ -85,12 +85,23 @@
           <md-list>
             <div ng-repeat="project in projects">
                 <md-subheader class="md-no-sticky">{{project.name}}</md-subheader>
-                <md-list-item class="md-3-line">
-                  <div class="md-list-item-text" layout="column">
-                    <md-button class="md-primary" href="#/{{project.id}}/nodes">PBS</md-button>
-                    <md-button class="md-primary" href="#/{{project.id}}/works">WBS</md-button>
-                    <md-button class="md-primary" href="#/{{project.id}}/roles">RBS</md-button>
-                  </div>
+                <md-list-item ng-href="#/{{project.id}}/nodes">
+                  <md-icon md-font-set="material-icons">extension</md-icon>
+                    <p>Product Breakdown Structur</p>
+                </md-list-item>
+                <md-list-item ng-href="#/{{project.id}}/works">
+                  <md-icon md-font-set="material-icons">build</md-icon>
+                    <p>Work Breakdown Structur</p>
+                </md-list-item>
+
+                <md-list-item ng-href="#/{{project.id}}/roles">
+                  <md-icon md-font-set="material-icons">people</md-icon>
+                    <p>Role Breakdown Structur</p>
+                </md-list-item>
+
+                <md-list-item ng-href="#/{{project.id}}/delphi">
+                  <md-icon md-font-set="material-icons">schedule</md-icon>
+                    <p>Delphi</p>
                 </md-list-item>
                 <md-divider ></md-divider>
             </div>
