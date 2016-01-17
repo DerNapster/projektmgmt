@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   match ':project_id/nodes', to: 'nodes#index', via: [:get],  :defaults => {:format => :html }
   match ':project_id/workpackages', to: 'workpackages#index', via: [:get],  :defaults => {:format => :html }
   match ':project_id/roles', to: 'roles#index', via: [:get],  :defaults => {:format => :html }
+  match ':project_id/nodes/graph', to: 'nodes#graph', via: [:get],  :defaults => {:format => :html }
+  match ':project_id/workpackages/graph', to: 'workpackages#graph', via: [:get],  :defaults => {:format => :html }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

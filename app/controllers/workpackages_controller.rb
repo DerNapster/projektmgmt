@@ -6,6 +6,10 @@ class WorkpackagesController < ApplicationController
   def index
     workpackageList = Workpackage.where(project_id: params[:project_id])
     @workpackages = sort_list_with_parent workpackageList
+  end
+
+  def graph
+    workpackageList = Workpackage.where(project_id: params[:project_id])
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )
