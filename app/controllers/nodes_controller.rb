@@ -6,7 +6,7 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.json
   def index
-    @nodes = Node.all
+    @nodes = sort_list_with_parent Node.all
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )
