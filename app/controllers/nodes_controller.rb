@@ -53,6 +53,8 @@ class NodesController < ApplicationController
   def create
     @node = Node.new(node_params)
 
+    @node.level = @node.parent.level + 1
+
     respond_to do |format|
       if @node.save
         format.html { redirect_to @node, notice: 'Node was successfully created.' }
