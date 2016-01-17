@@ -2,24 +2,22 @@ class NodesController < ApplicationController
   before_action :set_node, only: [:show, :edit, :update, :destroy]
 
 
+
   # GET /nodes
   # GET /nodes.json
   def index
-    nodeList = Node.where(project_id: params[:project_id])
-    @nodes = sort_list_with_parent nodeList
-
-  end
-
-  # GET /:project_id/nodes/graph'
-  def graph
-    nodeList = Node.where(project_id: params[:project_id])
+<<<<<<< HEAD
+    @nodes = sort_list_with_parent Node.all
+=======
+    @nodes = Node.where(project_id: params[:project_id])
+>>>>>>> 8952d3ca6d723f183b1dcf0ce1e307b520b2ac30
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )
     data_table.new_column('string', 'Parent')
     data_table.new_column('string', 'ToolTip')
 
-    nodeList.each do |nodeItem|
+    @nodes.each do |nodeItem|
       nodeId = nodeItem.id.to_s
       nodeName = nodeItem.name
       nodeDescription = nodeItem.description
@@ -57,8 +55,6 @@ class NodesController < ApplicationController
   # POST /nodes.json
   def create
     @node = Node.new(node_params)
-
-    @node.level = @node.parent.level+1
 
     respond_to do |format|
       if @node.save
