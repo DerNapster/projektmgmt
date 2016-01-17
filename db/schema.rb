@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160113174950) do
     t.text     "qualification"
     t.text     "experience"
     t.integer  "quantity"
+    t.integer  "level"
     t.integer  "project_id"
     t.integer  "parent_id"
     t.datetime "created_at",    null: false
