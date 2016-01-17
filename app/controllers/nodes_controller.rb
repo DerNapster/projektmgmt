@@ -6,14 +6,13 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.json
   def index
-    @nodes = sort_list_with_parent Node.all
+    @nodes = sort_list_with_parent Node.where(project_id: params[:project_id])
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )
     data_table.new_column('string', 'Parent')
     data_table.new_column('string', 'ToolTip')
 
-    # Im Moment Nodes.all später aber nur noch die notes zu einer PBSTable, dann muss bei dem Aufruf eine PBSTable-ID mitgegeben werden
     @nodes.each do |nodeItem|
       nodeId = nodeItem.id.to_s
       nodeName = nodeItem.name
@@ -96,6 +95,6 @@ class NodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def node_params
-      params.require(:node).permit(:name, :description, :level, :duration, :startdate, :enddate, :milestone, :pbstable_id, :parent_id)
+      params.require(:node).permit(:name, :description, :level, :duration, :startdate, :enddate, :milestone, :project_id, :parent_id)
     end
 end

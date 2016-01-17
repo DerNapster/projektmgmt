@@ -15,7 +15,7 @@ class CreateWorkpackages < ActiveRecord::Migration
       t.decimal :costs
       t.integer :work
       t.decimal :workPerformed, :default => 0.0
-      t.references :wbstable, index: true, foreign_key: true
+      t.references :project, index: true, foreign_key: true
       t.references :parent, index: true
 
       t.timestamps null: false

@@ -4,7 +4,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all
+    @roles = Role.where(project_id: params[:project_id])
   end
 
   # GET /roles/1
@@ -69,6 +69,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name, :description, :qualification, :experience, :quantity, :rbstable_id, :parent_id)
+      params.require(:role).permit(:name, :description, :qualification, :experience, :quantity, :project_id, :parent_id)
     end
 end
