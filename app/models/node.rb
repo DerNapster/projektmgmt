@@ -5,12 +5,12 @@ class Node < ActiveRecord::Base
   accepts_nested_attributes_for :parent
   validates :name, presence: true
   validates :project, presence: true
-  validates :startdate, presence: true
-  validates :enddate, presence: true
+  #validates :startdate, presence: true
+  #validates :enddate, presence: true
   validates :level, presence: true
-  validates :duration, presence: true
-  validate :enddate_must_be_greater_than_startdate
-  validate :startdate_plus_duration_must_be_enddate
+  #validates :duration, presence: true
+  #validate :enddate_must_be_greater_than_startdate
+  #validate :startdate_plus_duration_must_be_enddate
   validate :validate_parent
 
 
