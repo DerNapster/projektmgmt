@@ -2,7 +2,7 @@
 
 (function () {
 
-  var app = angular.module('app', ['app.nodes', 'app.controle', 'app.toast', 'app.dialog', 'ngMaterial', 'templates','ngRoute']);
+  var app = angular.module('app', ['app.projects', 'app.nodes', 'app.works', 'app.roles', 'app.controle', 'ngMaterial', 'templates','ngRoute']);
 
   app.run(function () {
   });
@@ -36,11 +36,19 @@
     $routeProvider
       .when('/', {
         templateUrl: "index.html",
-        controller: 'nodesController'
+        controller: 'projectsController'
       })
-      .when('/nodes/new', {
-        templateUrl: "newNode.html",
-        controller: 'nodesController'
+      .when('/:project_id/nodes', {
+        templateUrl: "nodes.html",
+        controller: 'nodesController',
+      })
+      .when('/:project_id/roles', {
+        templateUrl: "roles.html",
+        controller: 'rolesController',
+      })
+      .when('/:project_id/works', {
+        templateUrl: "works.html",
+        controller: 'worksController',
       })
       .otherwise({
         redirectTo: '/'

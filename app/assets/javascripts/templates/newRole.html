@@ -16,15 +16,15 @@
       <div class="md-dialog-content">
         <h2>Eintrag hinzufügen</h2>
 
-        <form name="nodeForm">
+        <form name="roleForm">
 
-        <pre>{{node}} </pre>
+        <pre>{{role}} </pre>
 
-         <div layout-gt-xs="row" ng-show="nodes != null">
+         <div layout-gt-xs="row" ng-show="roles != null">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Parent </label>
-            <md-select placeholder="Assign to parent" ng-model="newNode.partent_id" style="min-width: 200px;">
-               <md-option ng-value="parent.id" ng-repeat="parent in nodes">{{parent.name}}</md-option>
+            <md-select placeholder="Assign to parent" ng-model="newrole.partent_id" style="min-width: 200px;">
+               <md-option ng-value="parent.id" ng-repeat="parent in roles">{{parent.name}}</md-option>
             </md-select>
           </md-input-container>
         </div>
@@ -32,9 +32,9 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Name </label>
-            <input ng-model="newNode.name" aria-label="Name des Knoten" md-maxlength="30"> </input>
+            <input ng-model="newrole.name" aria-label="Name des Knoten" md-maxlength="30"> </input>
             <div class="hint">Wie ist der Name des Knoten</div>
-            <div ng-messages="nodeForm.name.$error" ng-hide="showHints">
+            <div ng-messages="roleForm.name.$error" ng-hide="showHints">
             </div>
           </md-input-container>
         </div>
@@ -42,24 +42,20 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Beschreibung*</label>
-            <input ng-model="newNode.description" aria-label="Name des Knoten"></input>
+            <input ng-model="newrole.description" aria-label="Name des Knoten"></input>
             <div class="hint" >Optional: Geben Sie eine Beschreibung des Knoten ein.</div>
-            <div ng-messages="nodeForm.descritpion.$error" ng-hide="showHints">
+            <div ng-messages="roleForm.descritpion.$error" ng-hide="showHints">
             </div>
           </md-input-container>
         </div>
 
-        <div layout-gt-sm="row">
-          <md-checkbox aria-label="Meilenstein" ng-model="newNode.milestone" aria-label="Meilenstein"> <label> Meilenstein </label>
-        </div>
-
-        <pre>"parent_id":{{node.id}}{{newNode}} </pre>
+        <pre>"parent_id":{{role.id}}{{newrole}} </pre>
 
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
       <span flex></span>
-      <md-button ng-click="answer( newNode )">
+      <md-button ng-click="answer( newrole )">
         Hinzufügen
       </md-button>
       <md-button ng-click="cancel()" style="margin-right:20px;">

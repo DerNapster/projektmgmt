@@ -5,12 +5,12 @@ class Node < ActiveRecord::Base
   accepts_nested_attributes_for :parent
   validates :name, presence: true
   validates :project, presence: true
-  validates :startdate, presence: true
-  validates :enddate, presence: true
+  #validates :startdate, presence: true
+  #validates :enddate, presence: true
   validates :level, presence: true
-  validates :duration, presence: true
-  validate :enddate_must_be_greater_than_startdate
-  validate :startdate_plus_duration_must_be_enddate
+  #validates :duration, presence: true
+  #validate :enddate_must_be_greater_than_startdate
+  #validate :startdate_plus_duration_must_be_enddate
   validate :validate_parent
 
 
@@ -28,15 +28,15 @@ class Node < ActiveRecord::Base
 
   def validate_parent
     if parent
-      unless parent.startdate <= startdate
-        errors.add(:parent, "Parent startdate can't be greater than child startdate")
-      end
-      unless parent.enddate >= enddate
-        errors.add(:parent, "Parent enddate can't be smaller than child enddate")
-      end
-      unless parent.duration >= duration
-        errors.add(:parent, "Parent duration can't be smaller than child duration")
-      end
+      #unless parent.startdate <= startdate
+      #  errors.add(:parent, "Parent startdate can't be greater than child startdate")
+      #end
+      #unless parent.enddate >= enddate
+      #  errors.add(:parent, "Parent enddate can't be smaller than child enddate")
+      #end
+      #unless parent.duration >= duration
+      #  errors.add(:parent, "Parent duration can't be smaller than child duration")
+      #end
       unless ((parent.level + 1) == level)
         errors.add(:parent, "Parent level must be one smaller than child level")
       end

@@ -4,14 +4,29 @@
 
   var toaster = angular.module('app.toast', ['ngMaterial'])
 
-  toaster.controller('toasterController', function($scope, $mdToast, $document) {
+  toaster.provider('toasterService', function($scope, $mdToast, $document) {
     var last = {
         bottom: false,
         top: true,
         left: false,
         right: true
       };
+
     $scope.toastPosition = angular.extend({},last);
+
+    this.$get = function ( message ) {
+
+      showSimpleToast = function( message ) {
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent(message)
+            .position($scope.getToastPosition())
+            .hideDelay(3000)
+        );
+      };
+
+    }
+
     $scope.getToastPosition = function() {
       sanitizePosition();
       return Object.keys($scope.toastPosition)

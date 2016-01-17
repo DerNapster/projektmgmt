@@ -6,8 +6,8 @@
 
   dialog.controller('dialogController', function($scope, $mdDialog, $mdMedia) {
 
-    $scope.status = '  ';
-    $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+    var dialogService = {};
+
 
     $scope.showAlert = function(ev) {
       // Appending dialog to document.body to cover sidenav in docs app
@@ -63,20 +63,7 @@
       });
     };
 
-    $scope.showTabDialog = function(ev) {
-      $mdDialog.show({
-        controller: DialogController,
-        templateUrl: 'tabDialog.tmpl.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true
-      })
-          .then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
-          }, function() {
-            $scope.status = 'You cancelled the dialog.';
-          });
-    };
+
   });
 
   function DialogController($scope, $mdDialog) {
