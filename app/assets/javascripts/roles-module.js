@@ -23,7 +23,7 @@
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  roles.controller ('rolesController', function ($scope, $roles, $log, $mdDialog, $mdMedia, $routeParams) {
+  roles.controller ('rolesController', function ($scope, $roles, $log, $mdDialog, $mdMedia, $routeParams, $rootScope) {
 
     $scope.parent;
 

@@ -13,9 +13,7 @@
   });
 
 
-  controle.controller ('controleController', function($scope, $timeout, $mdSidenav, $mdComponentRegistry, $mdDialog, $log, projectService) {
-
-    $scope.showDebug = false;
+  controle.controller ('controleController', function($scope, $timeout, $mdSidenav, $mdComponentRegistry, $mdDialog, $log, projectService, $rootScope) {
 
     var originatorEv;
     $scope.openMenu = function($mdOpenMenu, ev) {

@@ -16,7 +16,7 @@
     $log.debug(projectService.getProject({project_id:1}));
   });
 
-  projects.controller('projectsController', function ($scope, projectService, $log, $mdDialog, $mdMedia) {
+  projects.controller('projectsController', function ($scope, projectService, $log, $mdDialog, $mdMedia, $rootScope) {
 
         /*
         * GET /nodes.json
