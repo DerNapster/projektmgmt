@@ -6,6 +6,7 @@ class CreateRoles < ActiveRecord::Migration
       t.text :qualification
       t.text :experience
       t.integer :quantity
+      t.integer :level
       t.references :project, index: true, foreign_key: true
       t.references :parent, index: true
       t.timestamps null: false
