@@ -5,16 +5,16 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.json
   def index
-    nodes = Node.where(project_id: params[:project_id])
-    @nodes = sort_list_with_parent nodes
+    nodeList = Node.where(project_id: params[:project_id])
+    @nodes = sort_list_with_parent nodeList
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )
     data_table.new_column('string', 'Parent')
     data_table.new_column('string', 'ToolTip')
 
-    puts "----Nodessize: " + nodes.size.to_s
-    nodes.each do |nodeItem|
+    puts "----Nodessize: " + nodeList.size.to_s
+    nodeList.each do |nodeItem|
       nodeId = nodeItem.id.to_s
       nodeName = nodeItem.name
       nodeDescription = nodeItem.description
@@ -119,7 +119,6 @@ class NodesController < ApplicationController
         puts "----Element ist nicht null"
         if element.children != nil
           element.children.each do |childElement|
-            array << childElement
             add_to_sorted_array array, childElement
           end
         end
