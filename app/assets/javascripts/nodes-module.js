@@ -29,9 +29,6 @@
 
     var project_id = $routeParams.project_id;
 
-    $scope.pbstable = function () {
-      $scope.pbstable = $scope.nodes[0].pbstable_id;
-    };
 
     /*
     * GET /nodes.json
@@ -52,13 +49,12 @@
      * @param name, description, level, duration, startdate, enddate, milestone, pbstable_id, parent_id
      * @return created Node
      */
-    $scope.newNode = function ( name, description, level, milestone, parent_id ) {
+    $scope.newNode = function ( name, description, milestone, parent_id ) {
       // $nodes.save(
       $nodes.createNode(
         {
           name: name,
           description: description,
-          level: level,
           milestone: milestone,
           project_id: project_id,
           parent_id: parent_id
@@ -118,6 +114,7 @@
 
       if(node) {
         $scope.parent = node.id;
+        $scope.project_id = node.project_id;
       }
 
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
@@ -138,9 +135,9 @@
         $log.debug(answer);
 
         if (answer.parent_id) {
-            $scope.newNode ( answer.name, answer.description, answer.level, answer.duration, answer.startdate, answer.enddate, answer.milestone, $scope.pbstable, answer.parent  )
+            $scope.newNode ( answer.name, answer.description, answer.milestone, answer.project_id, answer.parent  )
         } else {
-            $scope.newNode ( answer.name, answer.description, answer.level, answer.duration, answer.startdate, answer.enddate, answer.milestone, $scope.pbstable, $scope.parent  )
+            $scope.newNode ( answer.name, answer.description, answer.milestone, $scope.project_id, $scope.parent  )
             $scope.parent = "";
         }
 

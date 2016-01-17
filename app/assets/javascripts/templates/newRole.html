@@ -1,0 +1,66 @@
+
+
+<md-dialog aria-label="Neuer Eintrag" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Neuer Eintrag</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          Exit
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>Eintrag hinzufügen</h2>
+
+        <form name="roleForm">
+
+        <pre>{{role}} </pre>
+
+         <div layout-gt-xs="row" ng-show="roles != null">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Parent </label>
+            <md-select placeholder="Assign to parent" ng-model="newrole.partent_id" style="min-width: 200px;">
+               <md-option ng-value="parent.id" ng-repeat="parent in roles">{{parent.name}}</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Name </label>
+            <input ng-model="newrole.name" aria-label="Name des Knoten" md-maxlength="30"> </input>
+            <div class="hint">Wie ist der Name des Knoten</div>
+            <div ng-messages="roleForm.name.$error" ng-hide="showHints">
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Beschreibung*</label>
+            <input ng-model="newrole.description" aria-label="Name des Knoten"></input>
+            <div class="hint" >Optional: Geben Sie eine Beschreibung des Knoten ein.</div>
+            <div ng-messages="roleForm.descritpion.$error" ng-hide="showHints">
+            </div>
+          </md-input-container>
+        </div>
+
+        <pre>"parent_id":{{role.id}}{{newrole}} </pre>
+
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer( newrole )">
+        Hinzufügen
+      </md-button>
+      <md-button ng-click="cancel()" style="margin-right:20px;">
+        Abbrechen
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
