@@ -4,7 +4,7 @@ class WorkpackagesController < ApplicationController
   # GET /workpackages
   # GET /workpackages.json
   def index
-    @workpackages = Workpackage.all
+    @workpackages = Workpackage.where(project_id: params[:project_id])
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )

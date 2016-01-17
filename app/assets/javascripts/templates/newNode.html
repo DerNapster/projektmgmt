@@ -29,10 +29,10 @@
           </md-input-container>
         </div>
 
-         <div layout-gt-xs="row">
+         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Name </label>
-            <input ng-model="newNode.name" aria-label="Name des Knoten" md-maxlength="30"</input>
+            <input ng-model="newNode.name" aria-label="Name des Knoten" md-maxlength="30"> </input>
             <div class="hint">Wie ist der Name des Knoten</div>
             <div ng-messages="nodeForm.name.$error" ng-hide="showHints">
             </div>
@@ -50,24 +50,10 @@
         </div>
 
         <div layout-gt-sm="row">
-            <md-datepicker ng-model="newNode.startdate" aria-label="Startdatum" md-placeholder="Start Datum">
-        </div>
-
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Dauer</label>
-            <input ng-model="newNode.duration" aria-label="Dauer des Knoten"></input>
-            <div class="hint" >Dauer des Knoten</div>
-          </md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
-          <md-datepicker ng-model="newNode.enddate" aria-label="Enddatum" md-placeholder="End Datum" flex="600">
-        </div>
-
-        <div layout-gt-sm="row">
           <md-checkbox aria-label="Meilenstein" ng-model="newNode.milestone" aria-label="Meilenstein"> <label> Meilenstein </label>
         </div>
+
+        <pre>"parent_id":{{node.id}}{{newNode}} </pre>
 
       </div>
     </md-dialog-content>

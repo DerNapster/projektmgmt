@@ -4,7 +4,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all
+    @roles = Role.where(project_id: params[:project_id])
   end
 
   # GET /roles/1

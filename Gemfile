@@ -40,6 +40,9 @@ gem 'puma'
 #https://github.com/stve/bower
 gem 'bower'
 
+# https://github.com/Angelmmiguel/material_icons
+gem 'material_icons'
+
 # http://stackoverflow.com/questions/29709334/angular-rails-templates-just-not-working
 gem 'sprockets', '2.12.3'
 
