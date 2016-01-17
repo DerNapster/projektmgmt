@@ -49,6 +49,7 @@ class WorkpackagesController < ApplicationController
   # POST /workpackages.json
   def create
     @workpackage = Workpackage.new(workpackage_params)
+    @workpackage.level = @workpackage.parent.level + 1
 
     respond_to do |format|
       if @workpackage.save
