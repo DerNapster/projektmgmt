@@ -23,7 +23,7 @@
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  works.controller ('worksController', function ($scope, $works, $log, $mdDialog, $mdMedia, $routeParams) {
+  works.controller ('worksController', function ($scope, $works, $log, $mdDialog, $mdMedia, $routeParams, $rootScope) {
 
     $scope.parent;
 
