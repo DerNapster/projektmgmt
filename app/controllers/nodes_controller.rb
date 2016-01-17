@@ -6,7 +6,6 @@ class NodesController < ApplicationController
   # GET /nodes.json
   def index
     nodes = Node.where(project_id: params[:project_id])
-
     @nodes = sort_list_with_parent nodes
 
     data_table = GoogleVisualr::DataTable.new
