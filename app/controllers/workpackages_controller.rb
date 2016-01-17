@@ -4,7 +4,8 @@ class WorkpackagesController < ApplicationController
   # GET /workpackages
   # GET /workpackages.json
   def index
-    @workpackages = Workpackage.where(project_id: params[:project_id])
+    workpackageList = Workpackage.where(project_id: params[:project_id])
+    @workpackages = sort_list_with_parent workpackageList
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'ID' )
@@ -12,7 +13,7 @@ class WorkpackagesController < ApplicationController
     data_table.new_column('string', 'ToolTip')
 
     # Im Moment Workpackage.all später aber nur noch die workpackages zu einer WBSTable, dann muss bei dem Aufruf eine WBSTable-ID mitgegeben werden
-    @workpackages.each do |workpackage|
+    workpackageList.each do |workpackage|
       workpackageId = workpackage.id.to_s
       workpackageName = workpackage.name
       workpackageDescription = workpackage.description

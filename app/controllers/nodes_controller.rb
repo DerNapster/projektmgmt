@@ -13,7 +13,6 @@ class NodesController < ApplicationController
     data_table.new_column('string', 'Parent')
     data_table.new_column('string', 'ToolTip')
 
-    puts "----Nodessize: " + nodeList.size.to_s
     nodeList.each do |nodeItem|
       nodeId = nodeItem.id.to_s
       nodeName = nodeItem.name
@@ -99,31 +98,5 @@ class NodesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def node_params
       params.require(:node).permit(:name, :description, :level, :duration, :startdate, :enddate, :milestone, :project_id, :parent_id)
-    end
-
-    def sort_list_with_parent(list)
-      puts "----List size: " + list.size.to_s
-      rootElementList = list.where(parent_id: nil)
-      puts "----RootElementList size: " + rootElementList.size.to_s
-      sortedList = Array.new
-      rootElement = rootElementList.first
-      puts "----Neues Array: " + sortedList.size.to_s
-      add_to_sorted_array sortedList, rootElement
-      puts "----Neues Array nach einfügen: " + sortedList.size.to_s
-      sortedList
-    end
-
-    def add_to_sorted_array array, element
-      array << element
-      if element != nil
-        puts "----Element ist nicht null"
-        if element.children != nil
-          element.children.each do |childElement|
-            add_to_sorted_array array, childElement
-          end
-        end
-      else
-        puts "----Element is null"
-      end
     end
 end
