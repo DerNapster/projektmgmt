@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113174950) do
+ActiveRecord::Schema.define(version: 20160118134505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "delphis", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "workpackage_id"
+    t.integer  "round"
+    t.integer  "pessimistic"
+    t.integer  "realistic"
+    t.integer  "optimistic"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "delphis", ["workpackage_id"], name: "index_delphis_on_workpackage_id", using: :btree
 
   create_table "nodes", force: :cascade do |t|
     t.string   "name"
@@ -80,6 +93,7 @@ ActiveRecord::Schema.define(version: 20160113174950) do
   add_index "workpackages", ["parent_id"], name: "index_workpackages_on_parent_id", using: :btree
   add_index "workpackages", ["project_id"], name: "index_workpackages_on_project_id", using: :btree
 
+  add_foreign_key "delphis", "workpackages"
   add_foreign_key "nodes", "projects"
   add_foreign_key "roles", "projects"
   add_foreign_key "workpackages", "projects"

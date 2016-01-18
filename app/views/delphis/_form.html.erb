@@ -1,0 +1,41 @@
+<%= form_for(@delphi) do |f| %>
+  <% if @delphi.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@delphi.errors.count, "error") %> prohibited this delphi from being saved:</h2>
+
+      <ul>
+      <% @delphi.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :workpackage_id %><br>
+    <%= f.text_field :workpackage_id %>
+  </div>
+  <div class="field">
+    <%= f.label :round %><br>
+    <%= f.text_field :round %>
+  </div>
+  <div class="field">
+    <%= f.label :pessimistic %><br>
+    <%= f.text_field :pessimistic %>
+  </div>
+  <div class="field">
+    <%= f.label :realistic %><br>
+    <%= f.text_field :realistic %>
+  </div>
+  <div class="field">
+    <%= f.label :optimistic %><br>
+    <%= f.text_field :optimistic %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

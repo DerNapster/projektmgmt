@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :delphis
   resources :roles
   resources :workpackages
   resources :nodes
