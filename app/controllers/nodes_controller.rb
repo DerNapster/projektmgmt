@@ -14,10 +14,12 @@ class NodesController < ApplicationController
   def graph
     nodeList = Node.where(project_id: params[:project_id])
 
-    data_table = GoogleVisualr::DataTable.new
-    data_table.new_column('string', 'ID' )
-    data_table.new_column('string', 'Parent')
-    data_table.new_column('string', 'ToolTip')
+#    data_table = GoogleVisualr::DataTable.new
+#    data_table.new_column('string', 'ID' )
+#    data_table.new_column('string', 'Parent')
+#    data_table.new_column('string', 'ToolTip')
+
+    res= Array.new
 
     nodeList.each do |nodeItem|
       nodeId = nodeItem.id.to_s
@@ -32,10 +34,15 @@ class NodesController < ApplicationController
         nodeDescription = ''
       end
 
-      data_table.add_row([{v: nodeId, f: nodeName}, nodeParentId, nodeDescription])
+      res.push([{v: nodeId, f: nodeName}, nodeParentId, nodeDescription])
 
     end
-    @pbsChart = generate_organisation_graph data_table
+
+    respond_to do |format|
+      format.html { render :new }
+      format.json { render json: res }
+    end
+    # @pbsChart = generate_organisation_graph data_table
 
   end
 

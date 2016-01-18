@@ -1,6 +1,6 @@
 
 <div class="container">
-  <pre ng-if="$rootScope.showDebug">{{projects}}</pre>
+  <pre ng-if="$root.showDebug">{{projects}}</pre>
   <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="column">
     <div flex="50" flex-xs="100" layout="column" ng-repeat="project in projects">
       <md-card>
@@ -32,7 +32,7 @@
                <p>Role Breakdown Structur</p>
            </md-list-item>
 
-           <md-list-item ng-href="#/{{project.id}}/delphi">
+           <md-list-item ng-href="#/{{project.id}}/delphis">
              <md-icon md-font-set="material-icons">schedule</md-icon>
                <p>Delphi</p>
            </md-list-item>

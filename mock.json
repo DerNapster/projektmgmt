@@ -1,0 +1,23 @@
+[
+  [{"v":"1","f":"WebShop 123"},"","Dies ist ein Webshop"],
+  [{"v":"2","f":"Geschäftsplan und Architektur"},"1",""],
+  [{"v":"3","f":"Geschäftsplan"},"2",""],
+  [{"v":"4","f":"Business Case"},"3",""],
+  [{"v":"5","f":"Projektplan"},"3",""],
+  [{"v":"6","f":"Lastenheft"},"3",""],
+  [{"v":"7","f":"Architektur"},"2",""],
+  [{"v":"8","f":"Anwendungs-Architektur"},"7",""],
+  [{"v":"9","f":"Technische Architektur"},"7",""],
+  [{"v":"10","f":"Transaktionsverwaltung"},"1",""],
+  [{"v":"11","f":"Auftragsverwaltung"},"10",""],
+  [{"v":"12","f":"Warenwirtschaftsverwaltung"},"10",""]
+]
+
+
+[
+  ['Mike', ''],
+  ['Jim', 'Mike'],
+  ['Alice', 'Mike'],
+  ['Bob', 'Jim'],
+  ['Carol', 'Bob']
+]
