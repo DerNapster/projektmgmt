@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Delphis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Workpackage</th>
+      <th>Round</th>
+      <th>Pessimistic</th>
+      <th>Realistic</th>
+      <th>Optimistic</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @delphis.each do |delphi| %>
+      <tr>
+        <td><%= delphi.name %></td>
+        <td><%= delphi.workpackage %></td>
+        <td><%= delphi.round %></td>
+        <td><%= delphi.pessimistic %></td>
+        <td><%= delphi.realistic %></td>
+        <td><%= delphi.optimistic %></td>
+        <td><%= link_to 'Show', delphi %></td>
+        <td><%= link_to 'Edit', edit_delphi_path(delphi) %></td>
+        <td><%= link_to 'Destroy', delphi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Delphi', new_delphi_path %>

@@ -1,0 +1,74 @@
+class DelphisController < ApplicationController
+  before_action :set_delphi, only: [:show, :edit, :update, :destroy]
+
+  # GET /delphis
+  # GET /delphis.json
+  def index
+    @delphis = Delphi.all
+  end
+
+  # GET /delphis/1
+  # GET /delphis/1.json
+  def show
+  end
+
+  # GET /delphis/new
+  def new
+    @delphi = Delphi.new
+  end
+
+  # GET /delphis/1/edit
+  def edit
+  end
+
+  # POST /delphis
+  # POST /delphis.json
+  def create
+    @delphi = Delphi.new(delphi_params)
+
+    respond_to do |format|
+      if @delphi.save
+        format.html { redirect_to @delphi, notice: 'Delphi was successfully created.' }
+        format.json { render :show, status: :created, location: @delphi }
+      else
+        format.html { render :new }
+        format.json { render json: @delphi.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /delphis/1
+  # PATCH/PUT /delphis/1.json
+  def update
+    respond_to do |format|
+      if @delphi.update(delphi_params)
+        format.html { redirect_to @delphi, notice: 'Delphi was successfully updated.' }
+        format.json { render :show, status: :ok, location: @delphi }
+      else
+        format.html { render :edit }
+        format.json { render json: @delphi.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /delphis/1
+  # DELETE /delphis/1.json
+  def destroy
+    @delphi.destroy
+    respond_to do |format|
+      format.html { redirect_to delphis_url, notice: 'Delphi was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_delphi
+      @delphi = Delphi.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def delphi_params
+      params.require(:delphi).permit(:name, :workpackage_id, :round, :pessimistic, :realistic, :optimistic)
+    end
+end
