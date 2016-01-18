@@ -10,4 +10,4 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-Rails.application.config.assets.precompile += ['app.js', 'dialog-module.js', 'toast-module.js', 'controle-module.js', 'nodes-module.js', 'projects-module.js', 'roles-module.js', 'works-module.js']
+Rails.application.config.assets.precompile += ['app.js', 'graph-module.js', 'controle-module.js', 'nodes-module.js', 'projects-module.js', 'roles-module.js', 'works-module.js']

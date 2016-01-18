@@ -1,7 +1,139 @@
 "user strict";
-/*
+
 (function () {
-  var graph = angular.module('app.graph', [] );
+  var graph = angular.module('app.graph', ['templates'] );
+
+  /* graph.directive('graph', function () {
+
+    return {
+      restrict: 'A',
+          link: function($scope, $elm, $attr) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+              ['Mushrooms', 3],
+              ['Onions', 1],
+              ['Olives', 1],
+              ['Zucchini', 1],
+              ['Pepperoni', 2]
+            ]);
+
+            // For each orgchart box, provide the name, manager, and tooltip to show.
+            data.addRows(rows);
+
+            // Set chart options
+          var options = {'title':'How Much Pizza I Ate Last Night',
+                         'width':400,
+                         'height':300};
+
+            // Create the chart.
+            var chart = new google.visualization.OPieChart($elm[0]);
+            // Draw the chart, setting the allowHtml option to true for the tooltips.
+            chart.draw(data, options);
+
+      }
+    }
+  });*/
+
+  graph.directive('orgCharttemp', function() {
+
+    return {
+        templateUrl: "orgchart.html",
+        replace: false
+    };
+  });
+
+  graph.directive('orgChart', function($window) {
+    return{
+      restrict: "EA",
+      template: "<div id='chart_div'></div>",
+      link: function(scope, elem, attrs){
+        google.charts.load('current', {packages:['orgchart']});
+
+        google.charts.setOnLoadCallback(drawChart);
+
+        var rows = scope[attrs.chartData]
+
+          function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('string', 'Parent');
+            // data.addColumn('string', 'ToolTip');
+
+            // For each orgchart box, provide the name, manager, and tooltip to show.
+            data.addRows(rows);
+
+            // Create the chart.
+            var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+            // Draw the chart, setting the allowHtml option to true for the tooltips.
+            chart.draw(data, {allowHtml:true});
+          }
+      }
+    };
+  });
+
+})();
+/*
+
+  graph.directive('qnPiechart', [
+      function() {
+          return {
+              require: '?ngModel',
+              link: function(scope, element, attr, controller) {
+                  var settings = {
+                      is3D: true
+                  };
+
+                  var getOptions = function() {
+                      return angular.extend({ }, settings, scope.$eval(attr.qnPiechart));
+                  };
+
+                  // creates instance of datatable and adds columns from settings
+                  var getDataTable = function() {
+                      var columns = scope.$eval(attr.qnColumns);
+                      var data = new google.visualization.DataTable();
+                      angular.forEach(columns, function(column) {
+                          data.addColumn(column.type, column.name);
+                      });
+                      return data;
+                  };
+
+                  var init = function() {
+                      var options = getOptions();
+                      if (controller) {
+
+                          var drawChart = function() {
+                              var data = getDataTable();
+                              // set model
+                              data.addRows(controller.$viewValue);
+
+                              // Instantiate and draw our chart, passing in some options.
+                              var pie = new google.visualization.PieChart(element[0]);
+                              pie.draw(data, options);
+                          };
+
+                          controller.$render = function() {
+                              drawChart();
+                          };
+                      }
+
+                      if (controller) {
+                          // Force a render to override
+                          controller.$render();
+                      }
+                  };
+
+                  // Watch for changes to the directives options
+                  scope.$watch(getOptions, init, true);
+                  scope.$watch(getDataTable, init, true);
+              }
+          };
+      }
+  ]);
+/*
+
+/*
 
 
   graph.factory('graphService' function () {

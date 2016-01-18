@@ -2,7 +2,7 @@
 
 (function(){
 
-  var nodes = angular.module('app.nodes', ['ngResource', 'ngRoute'] );
+  var nodes = angular.module('app.nodes', ['ngResource', 'ngRoute', 'app.graph'] );
 
   nodes.config( function($routeProvider, $httpProvider, $nodesProvider) {
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
@@ -13,18 +13,24 @@
     $log.debug($nodes.getNode({node_id:1}));
   });
 
-
   ///
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog, $mdMedia, $routeParams, $rootScope, nodeGraphService) {
+  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog, $mdMedia, $routeParams, $rootScope) {
 
     $scope.parent;
 
     var project_id = $routeParams.project_id;
 
-    $scope.graph = nodeGraphService.getNodeGraph( { project_id:project_id});
+    $scope.chartData =
+    [
+      ['Mike', ''],
+      ['Jim', 'Mike'],
+      ['Alice', 'Mike'],
+      ['Bob', 'Jim'],
+      ['Carol', 'Bob']
+    ];
 
     /*
     * GET /nodes.json
@@ -34,7 +40,7 @@
 
     $scope.refresh = function () {
       return $nodes.getNodes( { project_id:project_id } );
-    }
+    };
 
     /*
      * GET /nodes/{id}.json
@@ -200,26 +206,6 @@
       }
   });
 
-  nodes.provider('nodeGraphService', function (  ) {
-      var endpoint = '/nodes/graph.html';
-
-      this.setEndpoint = function ( url ) {
-        endpoint = url;
-      };
-
-      this.$get = function ( $resource ) {
-
-        return $resource (
-          "/:project_id" + endpoint ,
-          {
-            project_id:'@project_id'
-          },
-          {
-           'getNodeGraph': {method:'GET'},
-          }
-        );
-      }
-  });
 
   function NodeDialogController($scope, $mdDialog, node, nodes) {
     $scope.node = node;

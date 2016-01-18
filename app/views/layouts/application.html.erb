@@ -15,8 +15,7 @@
 
   <%= javascript_include_tag "application" %>
 
-  <%= javascript_include_tag "dialog-module" %>
-  <%= javascript_include_tag "toast-module" %>
+  <%= javascript_include_tag "graph-module" %>
   <%= javascript_include_tag "controle-module" %>
   <%= javascript_include_tag "nodes-module" %>
   <%= javascript_include_tag "projects-module" %>
@@ -89,7 +88,7 @@
                 <md-subheader class="md-no-sticky">
                   {{project.name}}
                 </md-subheader>
-                <md-list-item>
+                <md-list-item ng-href="#/{{project.id}}/nodes">
                   <md-icon md-font-set="material-icons">extension</md-icon>
                     <p>Product Breakdown Structur</p>
                 </md-list-item>
