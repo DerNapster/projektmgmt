@@ -18,7 +18,7 @@
 
         <form name="workForm">
 
-        <pre>{{work}} </pre>
+        <pre ng-if="$root.showDebug">{{work}} </pre>
 
          <div layout-gt-xs="row" ng-show="works != null">
           <md-input-container class="md-block" flex-gt-sm>
