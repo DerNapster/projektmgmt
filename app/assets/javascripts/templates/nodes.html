@@ -1,6 +1,7 @@
 
 <div class="container" >
  <pre ng-if="$rootScope.showDebug">{{nodes}}</pre>
+ <pre ng-if="$rootScope.showDebug"> {{chartData}} </pre>
 </div>
 <md-tabs md-dynamic-height md-border-bottom>
   <md-tab label="Content">
@@ -43,7 +44,6 @@
   </md-tab>
 
   <md-tab label="Chart">
-
-  <div org-Chart chart-data="chartData"></div>
+  <div org-Chart chart="$scope.chartData"></div>
   </md-tab>
 </md-tabs>

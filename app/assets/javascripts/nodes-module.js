@@ -9,28 +9,37 @@
   });
 
 
-  nodes.run ( function ($nodes, $log, $routeParams){
+  nodes.run ( function ($nodes, nodesGraph, $log, $routeParams){
+    $log.debug('app.nodes');
     $log.debug($nodes.getNode({node_id:1}));
+    $log.debug("nodes Graph");
+    $log.debug(nodesGraph.get(1));
   });
 
   ///
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  nodes.controller ('nodesController', function ($scope, $nodes, $log, $mdDialog, $mdMedia, $routeParams, $rootScope) {
+  nodes.controller ('nodesController', function ($scope, $nodes, nodesGraph, $log, $mdDialog, $mdMedia, $routeParams, $rootScope, $q, $http) {
 
     $scope.parent;
 
     var project_id = $routeParams.project_id;
 
-    $scope.chartData =
-    [
+
+    nodesGraph.get( project_id )
+      .then(function (data) {
+        $log.debug(data);
+        $scope.chartData = data.data;
+      });
+
+  /*  [
       ['Mike', ''],
       ['Jim', 'Mike'],
       ['Alice', 'Mike'],
       ['Bob', 'Jim'],
       ['Carol', 'Bob']
-    ];
+    ];*/
 
     /*
     * GET /nodes.json
@@ -56,6 +65,8 @@
      * @return created Node
      */
     $scope.newNode = function ( name, description, milestone, parent_id, project_id ) {
+      $log.debug(name, description, milestone, parent_id, project_id);
+
       // $nodes.save(
       $nodes.createNode(
         {
@@ -118,6 +129,10 @@
 
     $scope.addNodeDialog = function(ev, node, nodes) {
 
+      var _temp_parent_id = [];
+      if ( node ) _temp_parent_id = node.id;
+
+
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
       $mdDialog.show({
         controller: NodeDialogController,
@@ -136,13 +151,12 @@
         $log.debug(answer);
 
         if (answer.parent_id) {
+
             $scope.newNode ( answer.name, answer.description, answer.milestone, answer.parent_id, project_id  )
         } else {
-            $scope.newNode ( answer.name, answer.description, answer.milestone, $scope.parent_id, project_id  )
-            $scope.parent = "";
+            $scope.newNode ( answer.name, answer.description, answer.milestone, _temp_parent_id, project_id  )
+            _temp_parent_id = null;
         }
-
-
 
       }, function() {
         $scope.status = 'You cancelled the dialog.';
@@ -204,6 +218,31 @@
           }
         );
       }
+  });
+
+  nodes.provider('nodesGraph', function () {
+      var endpoint = '/nodes/graph.json';
+
+      this.$get = function ($http, $log, $q) {
+        return {
+
+          get : function ( id ) {
+
+            var promise = $http.get("/" + id + endpoint)
+            .success(function (data) {
+              $log.debug(data);
+            })
+            .error(function (data) {
+              $log.debug(data);
+            });
+
+            return promise;
+
+          }
+        }
+      }
+
+
   });
 
 
