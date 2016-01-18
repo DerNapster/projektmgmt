@@ -7,7 +7,7 @@ class Delphi < ActiveRecord::Base
   validates :realistic, presence: true
   validates :optimistic, presence: true
   validates :round , presence: true
-  validate validate_values
+  validate :validate_values
 
   def validate_values
     if optimistic > realistic

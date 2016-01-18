@@ -4,7 +4,7 @@ class Workpackage < ActiveRecord::Base
   has_many :children, :class_name => 'Workpackage', :foreign_key => 'parent_id'
   has_many :delphiValues, :class_name => 'Delphi', :foreign_key => 'delphi_id'
   accepts_nested_attributes_for :parent
-  
+
   validates :name, presence: true
   validates :project, presence: true
   #validates :startdate, presence: true
