@@ -69,6 +69,6 @@ class DelphisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delphi_params
-      params.require(:delphi).permit(:name, :workpackage_id, :round, :pessimistic, :realistic, :optimistic)
+      params.require(:delphi).permit(:name, :workpackage_id, :value)
     end
 end

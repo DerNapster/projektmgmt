@@ -17,12 +17,9 @@ ActiveRecord::Schema.define(version: 20160118134505) do
   enable_extension "plpgsql"
 
   create_table "delphis", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",           null: false
     t.integer  "workpackage_id"
-    t.integer  "round"
-    t.integer  "pessimistic"
-    t.integer  "realistic"
-    t.integer  "optimistic"
+    t.integer  "value"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

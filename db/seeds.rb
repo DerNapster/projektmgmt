@@ -229,3 +229,7 @@ r2 = Role.create(name: "Projektmanagement",
                  project_id: project1,
                  level: 0,
                  parent: r1)
+
+Delphi.create(name: "Hans",
+              value: 1,
+              workpackage: wp1)
