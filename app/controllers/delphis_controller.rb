@@ -32,22 +32,26 @@ class DelphisController < ApplicationController
   end
 
   def savedelphis
+    saved = true
     username = params[:username]
     workpackageArray = params[:array]
-    puts "Username : " + username.to_s
     workpackageArray.each do |item|
-      puts "Element: " + item.to_s
+      workpackageid = item["workpackageid"]
+      duration = item["duration"]
+      delphi = Delphi.new(:name => username, :workpackage_id => workpackageid, :value => duration)
+      if delphi.save
+        saved = saved & true
+      else
+        saved = saved & false
+      end
     end
 
     respond_to do |format|
-#      if @delphi.save
-#        format.html { redirect_to @delphi, notice: 'Delphi was successfully created.' }
-#        format.json { render :show, status: :created, location: @delphi }
-#      else
-        format.html { render :new }
+      if saved
         format.json { render json: '200'}
-#        format.json { render json: @delphi.errors, status: :unprocessable_entity }
-#      end
+      else
+        format.json { render json: '501'}
+      end
     end
 
   end
