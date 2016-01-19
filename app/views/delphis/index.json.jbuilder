@@ -1,4 +1,4 @@
 json.array!(@delphis) do |delphi|
-  json.extract! delphi, :id, :name, :workpackage_id, :value
+  json.extract! delphi, :id, :username, :workpackage_id, :workpackagename, :value
   json.url delphi_url(delphi, format: :json)
 end

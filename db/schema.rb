@@ -17,11 +17,12 @@ ActiveRecord::Schema.define(version: 20160118134505) do
   enable_extension "plpgsql"
 
   create_table "delphis", force: :cascade do |t|
-    t.string   "name",           null: false
+    t.string   "username",        null: false
     t.integer  "workpackage_id"
     t.integer  "value"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "workpackagename"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "delphis", ["workpackage_id"], name: "index_delphis_on_workpackage_id", using: :btree

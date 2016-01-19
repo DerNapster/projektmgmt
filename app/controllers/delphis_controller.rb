@@ -12,48 +12,42 @@ class DelphisController < ApplicationController
   # GET /:project_id/delphi/:name
   # GET /:project_id/delphi/:name.json
   def workpackagesforuser
-    allDelphis = Delphi.where(name: params[:name])
+    username = params[:name]
+    allDelphis = Delphi.where(username: username)
+    saved = true
+    @delphis = nil
     if allDelphis.size == 0
-      @delphis = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name, value: ''}}
+      workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name}}
+
+      workpackage.each do |item|
+        workpackageid = item["id".to_sym]
+        workpackagename = item["name".to_sym]
+        delphi = Delphi.new(:username => username, :workpackagename => workpackagename, :workpackage_id => workpackageid, :value => 0)
+
+        if delphi.save
+          saved = saved & true
+        else
+          saved = saved & false
+        end
+      end
+      @delphis = Delphi.where(username: username)
     else
       @delphis = Array.new
-
       allDelphis.each do |delphi|
         avg = get_avg_of_workpackage delphi.workpackage_id
-        if (delphi.value > (avg*1.2)) || (delphi.value < (avg*0.8))
+
+        if (delphi.value >= (avg*1.2)) || (delphi.value <= (avg*0.8))
           @delphis << delphi
         end
       end
-
     end
-    respond_to do |format|
-      format.json { render json: @delphis }
-    end
-  end
-
-  def savedelphis
-    saved = true
-    username = params[:username]
-    workpackageArray = params[:array]
-    workpackageArray.each do |item|
-      workpackageid = item["workpackageid"]
-      duration = item["duration"]
-      delphi = Delphi.new(:name => username, :workpackage_id => workpackageid, :value => duration)
-      if delphi.save
-        saved = saved & true
-      else
-        saved = saved & false
-      end
-    end
-
     respond_to do |format|
       if saved
-        format.json { render json: '200'}
+        format.json { render json: @delphis }
       else
         format.json { render json: '501'}
       end
     end
-
   end
 
   def evaluation
@@ -122,6 +116,6 @@ class DelphisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delphi_params
-      params.require(:delphi).permit(:name, :workpackage_id, :value)
+      params.require(:delphi).permit(:username, :workpackagename, :workpackage_id, :value)
     end
 end
