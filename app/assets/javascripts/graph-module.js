@@ -3,7 +3,7 @@
 (function () {
   var graph = angular.module('app.graph', ['templates'] );
 
-  graph.directive('orgNodesChart', function($window, nodesGraph, $routeParams) {
+  graph.directive('orgNodeschart', function($window, nodesGraph, $routeParams) {
     return{
       restrict: "EA",
       template: "<div id='chart_div'></div>",
@@ -47,7 +47,7 @@
     };
   });
 
-    graph.directive('orgWorksChart', function($window, worksGraph, $routeParams) {
+    graph.directive('orgWorkschart', function($window, worksGraph, $routeParams) {
       return{
         restrict: "EA",
         template: "<div id='chart_div'></div>",
@@ -91,7 +91,7 @@
       };
     });
 
-    graph.directive('orgProjectsChart', function($window, projectsGraph, $routeParams) {
+    graph.directive('orgProjectschart', function($window, projectsGraph, $routeParams) {
       return{
         restrict: "EA",
         template: "<div id='chart_div'></div>",
