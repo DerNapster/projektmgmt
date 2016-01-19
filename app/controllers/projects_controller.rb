@@ -7,6 +7,24 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
+  def graph
+
+    res = [
+      ['Mike', '', ''],
+      ['Jim', 'Mike', ''],
+      ['Alice', 'Mike', ''],
+      ['Bob', 'Jim', ''],
+      ['Carol', 'Bob', '']
+    ]
+
+
+    respond_to do |format|
+      format.html { render :new }
+      format.json { render json: res }
+    end
+
+  end
+
   # GET /projects/1
   # GET /projects/1.json
   def show

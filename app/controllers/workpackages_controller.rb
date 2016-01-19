@@ -11,10 +11,12 @@ class WorkpackagesController < ApplicationController
   def graph
     workpackageList = Workpackage.where(project_id: params[:project_id])
 
-    data_table = GoogleVisualr::DataTable.new
-    data_table.new_column('string', 'ID' )
-    data_table.new_column('string', 'Parent')
-    data_table.new_column('string', 'ToolTip')
+    # data_table = GoogleVisualr::DataTable.new
+    # data_table.new_column('string', 'ID' )
+    # data_table.new_column('string', 'Parent')
+    # data_table.new_column('string', 'ToolTip')
+
+    res= Array.new
 
     # Im Moment Workpackage.all später aber nur noch die workpackages zu einer WBSTable, dann muss bei dem Aufruf eine WBSTable-ID mitgegeben werden
     workpackageList.each do |workpackage|
@@ -30,10 +32,16 @@ class WorkpackagesController < ApplicationController
         workpackageDescription = ''
       end
 
-      data_table.add_row([{v: workpackageId, f: workpackageName}, workpackageParentId, workpackageDescription])
+      res.push([{v: workpackageId, f: workpackageName}, workpackageParentId, workpackageDescription]);
+      # data_table.add_row([{v: workpackageId, f: workpackageName}, workpackageParentId, workpackageDescription])
 
     end
-    @wbsChart = generate_organisation_graph data_table
+
+    respond_to do |format|
+      format.html { render :new }
+      format.json { render json: res }
+    end
+    #@wbsChart = generate_organisation_graph data_table
   end
 
   # GET /workpackages/1

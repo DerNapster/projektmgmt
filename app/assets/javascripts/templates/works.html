@@ -1,42 +1,47 @@
-<div class="container">
- <pre ng-if="$root.showDebug">{{works}}</pre>
-</div>
-<div class="table-responsive">
-<table class="table">
-  <thead>
-    <tr>
-      <th class="col-lg-1"></th>
-      <th class="col-lg-8">Name</th>
-      <th class="col-lg-1">Meilenstein</th>
-      <th class="col-lg-2">Actions</th>
-    </tr>
-  </thead>
-  <tbody >
-    <tr ng-repeat="work in works" id="{{work.id}}">
-      <th class="col-lg-1 col-xs-1"></th>
-      <td class="col-lg-8 col-xs-7" style="padding-left: {{work.level * 10}}px;">
-        <md-input-container class="tableinput md-block" flex-gt-xs>
-          <input ng-model="work.name" aria-label="Name des Knoten" ng-blur="updatework(work)"></input>
-        </md-input-container>
-      </td>
-      <td class="col-lg-1 col-xs-2">
-        <!-- <md-switch ng-model="work.milestone" aria-label="Meilenstein" ng-click="updatework(work)" class="md-primary">
-       </md-switch> -->
-       <p> no milestone </p>
-        <!-- <md-checkbox aria-label="Meilenstein" ng-model="data.milestone" ng-click="updatework(work)" aria-label="Meilenstein"> -->
-      </td>
-      <td class="col-lg-2 col-xs-2">
-        <md-button class="md-icon-button" aria-label="Knoten hinzufügen" ng-click="addWorkDialog($event, work, null)" flex-gt-md="auto">
-              <md-icon md-font-set="material-icons"> add </md-icon>
-         </md-button>
-         <md-button class="md-icon-button" aria-label="Knoten löschen" ng-click="deleteWorkDialog($event, work)" flex-gt-md="auto">
-              <md-icon md-font-set="material-icons"> delete </md-icon>
-          </md-button>
-      </td>
-    </tr>
 
-  </tbody>
-  </table>
-
-  <md-button class="md-warn" aria-label="Knoten löschen" ng-click="addWorkDialog($event, null, works)" flex-gt-md="auto">Add</md-button>
+<div class="container" >
+ <pre ng-if="$root.showDebug">{{roles}}</pre>
+ <pre ng-if="$root.showDebug"> {{chartData}} </pre>
 </div>
+
+<md-tabs md-dynamic-height md-border-bottom>
+
+  <md-tab label="Content">
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-lg-1"></th>
+          <th class="col-lg-8">Name</th>
+          <th class="col-lg-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr ng-repeat="work in works" id="{{work.id}}">
+          <th class="col-lg-1 col-xs-1"></th>
+          <td class="col-lg-8 col-xs-7" style="padding-left: {{work.level * 10}}px;">
+            <md-input-container class="tableinput md-block" flex-gt-xs>
+              <input ng-model="work.name" aria-label="Name des Knoten" ng-blur="updatework(work)"></input>
+            </md-input-container>
+          </td>
+          <td class="col-lg-3 col-xs-3">
+            <md-button class="md-icon-button" aria-label="Knoten hinzufügen" ng-click="addWorkDialog($event, work, null)" flex-gt-md="auto">
+                  <md-icon md-font-set="material-icons"> add </md-icon>
+             </md-button>
+             <md-button class="md-icon-button" aria-label="Knoten löschen" ng-click="deleteWorkDialog($event, work)" flex-gt-md="auto">
+                  <md-icon md-font-set="material-icons"> delete </md-icon>
+              </md-button>
+          </td>
+        </tr>
+
+      </tbody>
+      </table>
+
+      <md-button class="md-warn" aria-label="Knoten löschen" ng-click="addWorkDialog($event, null, works)" flex-gt-md="auto">Add</md-button>
+    </div>
+  </md-tab>
+
+  <md-tab label="Chart">
+  <div org-WorksChart chart="$scope.chartData"></div>
+  </md-tab>
+</md-tabs>

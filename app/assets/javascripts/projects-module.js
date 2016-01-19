@@ -11,10 +11,11 @@
 
 
   projects.run ( function (projectService, $log){
-    $log.debug(projectService.getProject({project_id:1}));
+    $log.debug('app.projects', projectService.getProjects());
+    $log.debug('app.projects', projectService.getProject({project_id:1}));
   });
 
-  projects.controller('projectsController', function ($scope, projectService, $log, $mdDialog, $mdMedia, $rootScope) {
+  projects.controller('projectsController', function ($scope, projectService, projectsGraph, $log, $mdDialog, $mdMedia, $rootScope, $routeParams) {
 
         /*
         * GET /nodes.json
@@ -22,13 +23,21 @@
         */
         $scope.projects = projectService.getProjects();
 
+        var project_id = $routeParams.project_id;
+
+        projectsGraph.get( project_id )
+          .then(function (data) {
+            $log.debug(data);
+            $scope.chartData = data.data;
+          });
+
+        $scope.selectedProject = projectService.getProject(  { project_id:$routeParams.project_id } );
+
         /*
          * GET /nodes/{id}.json
          * @return Node
          */
-        $scope.getProject = function ( id ) {
-          projectService.getProject( { project_id:id } );
-        };
+        $scope.getProject = projectService.getProject( { project_id:$routeParams.project_id } );
 
         /*
          * POST /nodes
@@ -91,6 +100,35 @@
             $scope.projects = projectService.getProjects();
           });
         };
+
+
+      $scope.addProjectDialog = function(ev) {
+
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+          controller: ProjectDialogController,
+          templateUrl: 'newProject.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen
+        })
+        .then(function(answer) {
+          // $scope.status = 'You said the information was "' + answer + '".';
+          $log.debug(answer);
+          $scope.newProject ( answer.name, answer.description );
+        }, function() {
+          $scope.status = 'You cancelled the dialog.';
+        });
+        $scope.$watch(function() {
+          return $mdMedia('xs') || $mdMedia('sm');
+        }, function(wantsFullScreen) {
+          $scope.customFullscreen = (wantsFullScreen === true);
+        });
+
+      };
+
+
   });
 
 
@@ -118,5 +156,41 @@
       );
     }
   });
+
+  projects.provider('projectsGraph', function () {
+      var endpoint = '/projects/graph.json';
+
+      this.$get = function ($http, $log, $q) {
+        return {
+
+          get : function ( id ) {
+
+            var promise = $http.get("/" + id + endpoint)
+            .success(function (data) {
+              $log.debug(data);
+            })
+            .error(function (data) {
+              $log.debug(data);
+            });
+
+            return promise;
+
+          }
+        }
+      }
+
+
+  });
+
+  function ProjectDialogController($scope, $mdDialog) {
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function( answer ) {
+      $mdDialog.hide(answer);
+    };
+  }
 
 })();

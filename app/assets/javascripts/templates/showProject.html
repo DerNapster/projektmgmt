@@ -1,0 +1,54 @@
+<md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="column">
+
+    <md-card>
+      <figure><img ng-src="/images/projects.jpg" class="md-card-image"></figure>
+      <md-card-title>
+        <md-card-title-text>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Name </label>
+            <input ng-model="selectedProject.name" ng-blur="updateProject(selectedProject)" aria-label="Name des Projektes" md-maxlength="30"> </input>
+            <div class="hint">Wie ist der Name des Projekts</div>
+            <div ng-messages="roleForm.name.$error">
+            </div>
+          </md-input-container>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Name </label>
+          <textarea ng-model="selectedProject.description" ng-blur="updateProject(selectedProject)" aria-label="Beschreibung des Projektes" columns="1" md-maxlength="150" rows="5"> </textarea>
+          <div class="hint">Was Bedeutet das Projekts</div>
+          <div ng-messages="roleForm.description.$error">
+          </div>
+        </md-input-container>
+      </md-card-content>
+
+      <md-card-actions layout="column" layout-align="start">
+        <md-list>
+         <md-list-item ng-href="#/{{selectedProject.id}}/nodes">
+           <md-icon md-font-set="material-icons">extension</md-icon>
+             <p>Product Breakdown Structur</p>
+         </md-list-item>
+         <md-list-item ng-href="#/{{selectedProject.id}}/works">
+           <md-icon md-font-set="material-icons">build</md-icon>
+             <p>Work Breakdown Structur</p>
+         </md-list-item>
+
+         <md-list-item ng-href="#/{{selectedProject.id}}/roles">
+           <md-icon md-font-set="material-icons">people</md-icon>
+             <p>Role Breakdown Structur</p>
+         </md-list-item>
+
+         <md-list-item ng-href="#/{{selectedProject.id}}/delphis">
+           <md-icon md-font-set="material-icons">schedule</md-icon>
+             <p>Delphi</p>
+         </md-list-item>
+       </md-list>
+
+      </md-card-actions>
+    </md-card>
+
+
+    <div org-ProjectsChart chart="$scope.chartData"></div>
+
+</md-content>

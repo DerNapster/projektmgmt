@@ -38,6 +38,14 @@
         templateUrl: "index.html",
         controller: 'projectsController'
       })
+      .when('/new', {
+        templateUrl: "newProject.html",
+        controller: 'projectsController'
+      })
+      .when('/:project_id', {
+        templateUrl: "showProject.html",
+        controller: 'projectsController',
+      })
       .when('/:project_id/nodes', {
         templateUrl: "nodes.html",
         controller: 'nodesController',

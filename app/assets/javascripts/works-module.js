@@ -18,11 +18,18 @@
   /// Datalogic
   /// Provides Methods to consume the REST API
   ///
-  works.controller ('worksController', function ($scope, $works, $log, $mdDialog, $mdMedia, $routeParams, $rootScope) {
+  works.controller ('worksController', function ($scope, $works, worksGraph, $log, $mdDialog, $mdMedia, $routeParams, $rootScope) {
 
     $scope.parent;
 
     var project_id = $routeParams.project_id;
+
+    worksGraph.get( project_id )
+      .then(function (data) {
+        $log.debug(data);
+        $scope.chartData = data.data;
+      });
+
 
     /*
     * GET /works.json
@@ -196,6 +203,32 @@
         );
       }
   });
+
+  works.provider('worksGraph', function () {
+      var endpoint = '/workpackages/graph.json';
+
+      this.$get = function ($http, $log, $q) {
+        return {
+
+          get : function ( id ) {
+
+            var promise = $http.get("/" + id + endpoint)
+            .success(function (data) {
+              $log.debug(data);
+            })
+            .error(function (data) {
+              $log.debug(data);
+            });
+
+            return promise;
+
+          }
+        }
+      }
+
+
+  });
+
 
   function WorkDialogController($scope, $mdDialog, work, works) {
     $scope.work = work;
