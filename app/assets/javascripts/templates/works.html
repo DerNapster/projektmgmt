@@ -22,6 +22,7 @@
           <td class="col-lg-8 col-xs-7" style="padding-left: {{work.level * 10}}px;">
             <md-input-container class="tableinput md-block" flex-gt-xs>
               <input ng-model="work.name" aria-label="Name des Knoten" ng-blur="updatework(work)"></input>
+              <div class="hint">{{work.description}}</div>
             </md-input-container>
           </td>
           <td class="col-lg-3 col-xs-3">
