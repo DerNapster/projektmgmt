@@ -31,6 +31,15 @@ class DelphisController < ApplicationController
     end
   end
 
+  def savedelphis
+    username = params[:username]
+    workpackageArray = params[:array]
+    puts "Username : " + username.to_s
+    workpackageArray.each do |item|
+      puts "Element: " + item.to_s
+    end
+  end
+
   def evaluation
 
   end
