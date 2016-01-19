@@ -38,6 +38,18 @@ class DelphisController < ApplicationController
     workpackageArray.each do |item|
       puts "Element: " + item.to_s
     end
+
+    respond_to do |format|
+#      if @delphi.save
+#        format.html { redirect_to @delphi, notice: 'Delphi was successfully created.' }
+#        format.json { render :show, status: :created, location: @delphi }
+#      else
+        format.html { render :new }
+        format.json { render json: '200'}
+#        format.json { render json: @delphi.errors, status: :unprocessable_entity }
+#      end
+    end
+
   end
 
   def evaluation
