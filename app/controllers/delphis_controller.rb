@@ -106,6 +106,38 @@ class DelphisController < ApplicationController
 
   end
 
+  # GET /:project_id/users
+  def usernameswithvariance
+    @names = Array.new
+
+
+    workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
+
+    workpackage.each do |item|
+      workpackageid = item["id".to_sym]
+      workpackagename = item["name".to_sym]
+      workpackageduration = item["duration".to_sym]
+
+      allDelphisForPackage = Delphi.where(workpackage_id: workpackageid)
+
+      usernamesOfWorkpackage = Array.new # Namen der User, die ddas workpackage unzureichend beantwortet haben
+      allDelphisForPackage.each do |delphi|
+        if (delphi.value >= (workpackageduration*1.2)) || (delphi.value <= (workpackageduration*0.8))
+          usernamesOfWorkpackage << delphi.username
+        end
+      end
+
+      workpackage = Hash.new
+      workpackage["workpackagename"] = workpackagename
+      workpackage["usernamesarray"] = usernamesOfWorkpackage
+      @names << workpackage
+    end
+
+    respond_to do |format|
+      format.json { render json: @names }
+    end
+  end
+
   # GET /delphis/1
   # GET /delphis/1.json
   def show

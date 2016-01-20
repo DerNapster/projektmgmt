@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   match ':project_id/projects/graph', to: 'projects#graph', via: [:get],  :defaults => {:format => :html }
 
   match ':project_id/users/graph', to: 'delphis#variance', via: [:get],  :defaults => {:format => :json}
+  match ':project_id/users', to: 'delphis#usernameswithvariance', via: [:get],  :defaults => {:format => :json}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
