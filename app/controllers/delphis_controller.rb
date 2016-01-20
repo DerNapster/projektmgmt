@@ -9,6 +9,38 @@ class DelphisController < ApplicationController
     @delphis = Delphi.all
   end
 
+  # GET /:project_id/users/graph
+  def variance
+    workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
+
+    @delphiVariance = Array.new
+
+    workpackage.each do |item|
+      workpackageid = item["id".to_sym]
+      workpackagename = item["name".to_sym]
+      workpackageduration = item["duration".to_sym]
+
+      allDelphisForPackage = Delphi.where(workpackage_id: workpackageid)
+
+      countVariance = 0  # Anzahl der Delphis die vom AVG abweichen
+      allDelphisForPackage.each do |delphi|
+        if (delphi.value >= (workpackageduration*1.2)) || (delphi.value <= (workpackageduration*0.8))
+          countVariance = countVariance + 1
+        end
+      end
+      procentVariance = (countVariance / allDelphisForPackage.size)
+
+      varianceObject = Hash.new
+      varianceObject["workpackagename"] = workpackagename
+      varianceObject["variance"] = procentVariance
+      @delphiVariance << varianceObject
+    end
+    respond_to do |format|
+      format.json { render json: @delphiVariance }
+    end
+
+  end
+
   # GET /:project_id/delphi/:name
   # GET /:project_id/delphi/:name.json
   def workpackagesforuser
@@ -19,7 +51,6 @@ class DelphisController < ApplicationController
     if allDelphis.size == 0
       allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
       allParentIds.uniq
-
 
       workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name}}
 
