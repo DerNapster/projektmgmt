@@ -88,25 +88,22 @@ class DelphisController < ApplicationController
 
   # GET /:project_id/delphi/evaluation
   def evaluation
-    delphis = Delphi.all
-    wpSet = []
-    delphis.each do |delphi|
-      if delphi.workpackage.project_id == params[:project_id]
-        # alle WorkpackageIds zu einem Projekt
-        wpSet << delphi.workpackage_id
+    allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
+    allParentIds.uniq
+
+    allWorkpackages = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
+    @workpackages = Array.new
+
+    allWorkpackages.each do  |workpackage|
+      if allParentIds.include?(workpackage["id".to_sym]) == false
+        @workpackages << workpackage
       end
     end
 
-    # überflüssige Einträge eliminieren
-    wpSet.uniq
-
-    wpSet.each do |wpId|
-        # alle Delphieinträge zu einem Workpackage
-        sameDelphis = Delphi.where(workpackage_id: wpId)
-        sameDelphis.each do |delphi|
-             
-        end
+    respond_to do |format|
+      format.json { render json: @workpackages }
     end
+
   end
 
   # GET /delphis/1
