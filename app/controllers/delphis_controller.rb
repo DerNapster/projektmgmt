@@ -50,7 +50,27 @@ class DelphisController < ApplicationController
     end
   end
 
+  # GET /:project_id/delphi/evaluation
   def evaluation
+    delphis = Delphi.all
+    wpSet = []
+    delphis.each do |delphi|
+      if delphi.workpackage.project_id == params[:project_id]
+        # alle WorkpackageIds zu einem Projekt
+        wpSet << delphi.workpackage_id
+      end
+    end
+
+    # überflüssige Einträge eliminieren
+    wpSet.uniq
+
+    wpSet.each do |wpId|
+        # alle Delphieinträge zu einem Workpackage
+        sameDelphis = Delphi.where(workpackage_id: wpId)
+        sameDelphis.each do |delphi|
+             
+        end
+    end
 
   end
 
