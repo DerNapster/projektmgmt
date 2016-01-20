@@ -17,17 +17,22 @@ class DelphisController < ApplicationController
     saved = true
     @delphis = nil
     if allDelphis.size == 0
+      allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
+      allParentIds.uniq
+
+
       workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name}}
 
       workpackage.each do |item|
         workpackageid = item["id".to_sym]
-        workpackagename = item["name".to_sym]
-        delphi = Delphi.new(:username => username, :workpackagename => workpackagename, :workpackage_id => workpackageid, :value => 0)
-
-        if delphi.save
-          saved = saved & true
-        else
-          saved = saved & false
+        if allParentIds.include?(workpackageid) == false
+          workpackagename = item["name".to_sym]
+          delphi = Delphi.new(:username => username, :workpackagename => workpackagename, :workpackage_id => workpackageid, :value => 0)
+          if delphi.save
+            saved = saved & true
+          else
+            saved = saved & false
+          end
         end
       end
       @delphis = Delphi.where(username: username)
@@ -51,7 +56,7 @@ class DelphisController < ApplicationController
   end
 
   def evaluation
-
+    workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name}}
   end
 
   # GET /delphis/1
