@@ -19,7 +19,9 @@
       * GET /delphis.json
       * @return Delphis List
       */
-      $scope.delphis = $delphis.getDelphis( { project_id:project_id } ) ;
+      $scope.getDelphis = function ( name ) {
+        $scope.delphis = $delphis.getDelphis( { project_id:project_id, delphi_username:name } ) ;
+      }
 
       /*
        * GET /delphis/{id}.json
@@ -65,7 +67,7 @@
        * @return updated Delphi
        */
       $scope.updateDelphi = function ( delphi ) {
-        $log.debug(delphi);
+        $log.debug("updateDelphi", delphi);
         delphi.$updateDelphi ( function ( data ) {
           $log.debug ( data );
           // refresh delphis
@@ -110,7 +112,7 @@
       this.$get = function ( $resource ) {
 
         return $resource (
-          "/:project_id" + endpoint + "/:delphi_id" + ".json",
+          "/:project_id" + endpoint + "/:delphi_username" + ".json",
           {
             delphi_id:'@id',
             project_id:'@sub_id'

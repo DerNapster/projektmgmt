@@ -17,14 +17,12 @@ ActiveRecord::Schema.define(version: 20160118134505) do
   enable_extension "plpgsql"
 
   create_table "delphis", force: :cascade do |t|
-    t.string   "name"
+    t.string   "username",        null: false
     t.integer  "workpackage_id"
-    t.integer  "round"
-    t.integer  "pessimistic"
-    t.integer  "realistic"
-    t.integer  "optimistic"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "value"
+    t.string   "workpackagename"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "delphis", ["workpackage_id"], name: "index_delphis_on_workpackage_id", using: :btree
@@ -59,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160118134505) do
     t.text     "qualification"
     t.text     "experience"
     t.integer  "quantity"
+    t.integer  "level"
     t.integer  "project_id"
     t.integer  "parent_id"
     t.datetime "created_at",    null: false
