@@ -125,6 +125,8 @@ class DelphisController < ApplicationController
   def update
     respond_to do |format|
       if @delphi.update(delphi_params)
+        workpackageid = @delphi.workpackage_id
+        update_duration_of_workpackage(workpackageid)
         format.html { redirect_to @delphi, notice: 'Delphi was successfully updated.' }
         format.json { render :show, status: :ok, location: @delphi }
       else
@@ -137,7 +139,9 @@ class DelphisController < ApplicationController
   # DELETE /delphis/1
   # DELETE /delphis/1.json
   def destroy
+    workpackageid = @delphi.workpackage_id
     @delphi.destroy
+    update_duration_of_workpackage(workpackageid)
     respond_to do |format|
       format.html { redirect_to delphis_url, notice: 'Delphi was successfully destroyed.' }
       format.json { head :no_content }
