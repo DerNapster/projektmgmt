@@ -8,7 +8,7 @@
 
   users.config( function() {})
 
-  users.controller( "usersController", function($users, $log, $scope, $routeParams) {
+  users.controller( "usersController", function($users, $log, $scope, $routeParams, $mdDialog) {
 
         var project_id = $routeParams.project_id;
 
@@ -30,16 +30,34 @@
         };
 
         /*
-         * PUT /users
-         * @param User Object
-         * @return updated User
+         * DELETE /users/{id}.json
+         * @param id of node
          */
-        $scope.updateUser = function ( user ) {
-          $log.debug(user);
-          user.$updateUser ( function ( data ) {
+        $scope.deleteUser = function ( user ) {
+          $users.deleteUser ( { project_id:project_id, user_name:user }, function ( data ) {
             $log.debug ( data );
+            // refresh nodes
+            $scope.users = $scope.refresh();
           });
         };
+
+        $scope.deleteUserDialog = function(ev, user) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.confirm()
+                  .title('Wollen Sie wirklich den User "' + user + '" löschen?')
+                  .textContent('Es werden alle Delphi eingaben des Users gelöscht')
+                  .targetEvent(ev)
+                  .cancel('Abbrechen')
+                  .ok('Löschen')
+
+            $mdDialog.show(confirm).then(function( ) {
+              $scope.deleteUser ( user );
+              $scope.message = 'User gelöscht';
+            }, function() {
+              $scope.message = 'User behalten';
+            });
+          };
+
   });
 
   users.provider ( "$users", function() {
@@ -52,9 +70,9 @@
     this.$get = function ( $resource ) {
 
       return $resource (
-        "/:project_id" + endpoint + "/:user_id" + ".json",
+        "/:project_id" + endpoint + "/:user_name" + ".json",
         {
-          user_id:'@id',
+          user_name:'@uname',
           project_id:'@sub_id'
         },
         {

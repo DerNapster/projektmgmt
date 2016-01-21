@@ -52,6 +52,7 @@
     <!-- <div org-Projectschart chart="$scope.chartData"></div> -->
 
   <div flex="50" flex-xs="100" layout="column">
+    <pre ng-if="showDebug">{{users}}</pre>
     <md-card>
       <md-content ng-controller="usersController">
         <md-list>
@@ -60,7 +61,7 @@
             <div class="md-list-item-text" layout="column">
               <h4 class="md-subhead">{{ user.workpackagename }}</h4>
               <ul>
-                <li ng-repeat="uname in user.usernamesarray">{{uname}}</li>
+                <li ng-repeat="uname in user.usernamesarray" ng-click="deleteUserDialog($event, uname)">{{uname}}</li>
               </ul>
            </div>
           </md-list-item>
