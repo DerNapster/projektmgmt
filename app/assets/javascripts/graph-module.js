@@ -19,7 +19,6 @@
 
         var option = { width: 400, height: 400, title: 'Product Breakdown Structure', version: '1.1', allowHtml: true, size: 'large' }
 
-        console.log(attrs);
         console.log(elem);
 
         google.charts.load('current', {packages:['orgchart']});
@@ -63,7 +62,6 @@
 
           var option = { width: 400, height: 400, title: 'Product Breakdown Structure', version: '1.1', allowHtml: true, size: 'large' }
 
-          console.log(attrs);
           console.log(elem);
 
           google.charts.load('current', {packages:['orgchart']});
@@ -107,7 +105,6 @@
 
           var option = { width: 400, height: 400, title: 'Product Breakdown Structure', version: '1.1', allowHtml: true, size: 'large' }
 
-          console.log(attrs);
           console.log(elem);
 
           google.charts.load('current', {packages:['orgchart']});

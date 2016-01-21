@@ -12,7 +12,7 @@
 
   projects.run ( function (projectService, $log){
     $log.debug('app.projects', projectService.getProjects());
-    $log.debug('app.projects', projectService.getProject({project_id:1}));
+
   });
 
   projects.controller('projectsController', function ($scope, projectService, projectsGraph, $log, $mdDialog, $mdMedia, $rootScope, $routeParams) {
@@ -33,6 +33,10 @@
 
         $scope.selectedProject = projectService.getProject(  { project_id:$routeParams.project_id } );
 
+        $scope.refresh = function () {
+          return $scope.getProjects( );
+        };
+
         /*
          * GET /nodes/{id}.json
          * @return Node
@@ -41,14 +45,15 @@
 
         /*
          * POST /nodes
-         * @param name, description, level, duration, startdate, enddate, milestone, pbstable_id, parent_id
+         * @param newproject
          * @return created Node
          */
-        $scope.newProject = function ( ) {
+        $scope.newProject = function ( newproject ) {
 
           projectService.createProject(
             {
-
+              name: newproject.name,
+              description: newproject.description
             }, function ( data )
             {
               $log.debug ( data );
@@ -57,8 +62,8 @@
                 $log.debug( '500');
               }
 
-              // refresh nodes
-              $scope.projects = projectService.getProjects();
+              // refresh works
+              $scope.projects = $scope.refresh();
             }
           );
         };
@@ -73,7 +78,7 @@
           project.$updateProject ( function ( data ) {
             $log.debug ( data );
             // refresh nodes
-            $scope.projects = projectService.getProjects();
+            $scope.projects = $scope.refresh();
           });
         };
 
@@ -85,7 +90,7 @@
           projectService.deleteProject ( { project_id:id }, function ( data ) {
             $log.debug ( data );
             // refresh nodes
-            $scope.projects = projectService.getProjects();
+            $scope.projects = $scope.refresh();
           });
         };
 
@@ -97,7 +102,7 @@
           $nodes.remove ( function ( data ) {
             $log.debug ( data );
             // refresh nodes
-            $scope.projects = projectService.getProjects();
+            $scope.projects = $scope.refresh();
           });
         };
 

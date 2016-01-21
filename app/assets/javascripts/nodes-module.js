@@ -82,7 +82,6 @@
           if (data.status == 500 ) {
             $log.debug( '500');
           }
-
           // refresh nodes
           $scope.nodes = $scope.refresh();
         }
@@ -98,8 +97,7 @@
       $log.debug(node);
       node.$updateNode ( function ( data ) {
         $log.debug ( data );
-        // refresh nodes
-          $scope.nodes = $scope.refresh();
+
       });
     };
 
@@ -111,7 +109,7 @@
       $nodes.deleteNode ( { node_id:id }, function ( data ) {
         $log.debug ( data );
         // refresh nodes
-          $scope.nodes = $scope.refresh();
+        $scope.nodes = $scope.refresh();
       });
     };
 
@@ -123,7 +121,7 @@
       $nodes.remove ( function ( data ) {
         $log.debug ( data );
         // refresh nodes
-        $scope.nodes =  $scope.refresh();
+        $scope.nodes = $scope.refresh();
       });
     };
 
@@ -151,7 +149,6 @@
         $log.debug(answer);
 
         if (answer.parent_id) {
-
             $scope.newNode ( answer.name, answer.description, answer.milestone, answer.parent_id, project_id  )
         } else {
             $scope.newNode ( answer.name, answer.description, answer.milestone, _temp_parent_id, project_id  )

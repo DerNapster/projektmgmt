@@ -11,15 +11,34 @@
 
     delphi.run ( function () {});
 
-    delphi.controller('delphiController', function ($scope, $delphis, $log, $routeParams) {
+    delphi.controller('delphiController', function ($scope, $delphis, deliphiEvaluation, $log, $routeParams) {
 
       var project_id = $routeParams.project_id;
+
+      /*
+       * Refreshes the object list
+       */
+      $scope.refresh = function () {
+        return $delphis.getDelphis( { project_id:project_id, delphi_username:name } );
+      };
+
+      /*
+       * GET /:project_id/delphis/evaulation
+       * @return Evaluation der Delphi Methode
+       */
+       deliphiEvaluation.get( project_id )
+         .then(function (data) {
+           $log.debug(data);
+           $scope.deliphiEvaluation = data.data;
+         });
 
       /*
       * GET /delphis.json
       * @return Delphis List
       */
-      $scope.delphis = $delphis.getDelphis( { project_id:project_id } ) ;
+      $scope.getDelphis = function ( name ) {
+        $scope.delphis = $delphis.getDelphis( { project_id:project_id, delphi_username:name } ) ;
+      }
 
       /*
        * GET /delphis/{id}.json
@@ -65,7 +84,7 @@
        * @return updated Delphi
        */
       $scope.updateDelphi = function ( delphi ) {
-        $log.debug(delphi);
+        $log.debug("updateDelphi", delphi);
         delphi.$updateDelphi ( function ( data ) {
           $log.debug ( data );
           // refresh delphis
@@ -110,7 +129,7 @@
       this.$get = function ( $resource ) {
 
         return $resource (
-          "/:project_id" + endpoint + "/:delphi_id" + ".json",
+          "/:project_id" + endpoint + "/:delphi_username" + "/:delphi_id" + ".json",
           {
             delphi_id:'@id',
             project_id:'@sub_id'
@@ -125,4 +144,30 @@
         );
       }
     });
+
+    delphi.provider('deliphiEvaluation', function () {
+        var endpoint = '/delphis/evaluation.json';
+
+        this.$get = function ($http, $log, $q) {
+          return {
+
+            get : function ( id ) {
+
+              var promise = $http.get("/" + id + endpoint)
+              .success(function (data) {
+                $log.debug(data);
+              })
+              .error(function (data) {
+                $log.debug(data);
+              });
+
+              return promise;
+
+            }
+          }
+        }
+
+
+    });
+
 })();

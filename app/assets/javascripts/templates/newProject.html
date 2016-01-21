@@ -1,51 +1,38 @@
 <form>
-<md-toolbar>
-  <div class="md-toolbar-tools">
-    <h2>Neuer Eintrag</h2>
+  <md-content>
+    <div class="md-dialog-content">
+      <h2>Eintrag hinzufügen</h2>
+
+      <form name="projectForm">
+
+       <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Name </label>
+          <input ng-model="newproject.name" aria-label="Name des Projektes" md-maxlength="30"> </input>
+          <div class="hint">Wie ist der Name des Projektes</div>
+          <div ng-messages="roleForm.name.$error">
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Beschreibung*</label>
+          <input ng-model="newproject.description" aria-label="Beschreibung des Projektes"></input>
+          <div class="hint" >Optional: Geben Sie eine Beschreibung des Projektes ein.</div>
+          <div ng-messages="roleForm.descritpion.$error">
+          </div>
+        </md-input-container>
+      </div>
+
+      <pre ng-if="$root.showDebug">{{newproject}} </pre>
+
+    </div>
+  </md-dialog-content>
+  <md-actions layout="row">
     <span flex></span>
-    <md-button class="md-icon-button" ng-click="cancel()">
-      Exit
-      <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+    <md-button ng-click="newProject( newproject )">
+      Hinzufügen
     </md-button>
-  </div>
-</md-toolbar>
-<md-content>
-  <div class="md-dialog-content">
-    <h2>Eintrag hinzufügen</h2>
-
-    <form name="projectForm">
-
-     <div layout-gt-sm="row">
-      <md-input-container class="md-block" flex-gt-sm>
-        <label>Name </label>
-        <input ng-model="newproject.name" aria-label="Name des Projektes" md-maxlength="30"> </input>
-        <div class="hint">Wie ist der Name des Knoten</div>
-        <div ng-messages="roleForm.name.$error">
-        </div>
-      </md-input-container>
-    </div>
-
-    <div layout-gt-sm="row">
-      <md-input-container class="md-block" flex-gt-sm>
-        <label>Beschreibung*</label>
-        <input ng-model="newproject.description" aria-label="Beschreibung des Projektes"></input>
-        <div class="hint" >Optional: Geben Sie eine Beschreibung des Projektes ein.</div>
-        <div ng-messages="roleForm.descritpion.$error">
-        </div>
-      </md-input-container>
-    </div>
-
-    <pre ng-if="$root.showDebug">{{newproject}} </pre>
-
-  </div>
-</md-dialog-content>
-<md-actions layout="row">
-  <span flex></span>
-  <md-button ng-click="answer( newproject )">
-    Hinzufügen
-  </md-button>
-  <md-button ng-click="cancel()" style="margin-right:20px;">
-    Abbrechen
-  </md-button>
-</md-actions>
+  </md-actions>
 </form>

@@ -1,5 +1,5 @@
 <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="column">
-
+  <div flex="50" flex-xs="100" layout="column">
     <md-card>
       <figure><img ng-src="/images/projects.jpg" class="md-card-image"></figure>
       <md-card-title>
@@ -15,9 +15,9 @@
       </md-card-title>
       <md-card-content>
         <md-input-container class="md-block" flex-gt-sm>
-          <label>Name </label>
+          <label>Beschreibung </label>
           <textarea ng-model="selectedProject.description" ng-blur="updateProject(selectedProject)" aria-label="Beschreibung des Projektes" columns="1" md-maxlength="150" rows="5"> </textarea>
-          <div class="hint">Was Bedeutet das Projekts</div>
+          <div class="hint">Was Bedeutet das Projekt</div>
           <div ng-messages="roleForm.description.$error">
           </div>
         </md-input-container>
@@ -47,8 +47,35 @@
 
       </md-card-actions>
     </md-card>
+  </div>
 
+    <!-- <div org-Projectschart chart="$scope.chartData"></div> -->
 
-    <div org-Projectschart chart="$scope.chartData"></div>
-
+  <div flex="50" flex-xs="100" layout="column">
+    <md-card>
+      <md-content ng-controller="usersController">
+        <md-list>
+          <md-subheader class="md-no-sticky">Teilnahme Delphi</md-subheader>
+          <md-list-item ng-repeat="user in users">
+            <div class="md-list-item-text" layout="column">
+              <h4 class="md-subhead">{{ user.workpackagename }}</h4>
+              <ul>
+                <li ng-repeat="uname in user.usernamesarray">{{uname}}</li>
+              </ul>
+           </div>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-card>
+    <md-card ng-controller="delphiController">
+      <md-list>
+        <md-subheader class="md-no-sticky">Evaluation Delphi</md-subheader>
+        <md-list-item ng-repeat="evaluation in deliphiEvaluation">
+          <div class="md-list-item-text" layout="column">
+            <p>{{evaluation.name}} : {{evaluation.duration}}</p>
+         </div>
+        </md-list-item>
+      </md-list>
+    </md-card>
+  </div>
 </md-content>

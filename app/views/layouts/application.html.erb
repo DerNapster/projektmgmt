@@ -22,6 +22,7 @@
   <%= javascript_include_tag "works-module" %>
   <%= javascript_include_tag "roles-module" %>
   <%= javascript_include_tag "delphi-module" %>
+  <%= javascript_include_tag "user-module" %>
   <%= javascript_include_tag "app" %>
 
 
@@ -127,11 +128,17 @@
                 </h2>
                 <span flex></span>
 
-                <md-button class="md-icon-button" aria-label="New Projekt" ng-href="/new">
+                <md-button class="md-icon-button" aria-label="New Projekt" ng-href="#/new">
+                  <md-tooltip md-direction="down">
+                    Projekt hinzufügen
+                  </md-tooltip>
                   <md-icon md-font-set="material-icons">add</md-icon>
                 </md-button>
 
                 <md-button class="md-icon-button" aria-label="Home" href="#/">
+                  <md-tooltip md-direction="down">
+                    Zur Übersicht
+                  </md-tooltip>
                   <md-icon md-font-set="material-icons">home</md-icon>
                 </md-button>
 

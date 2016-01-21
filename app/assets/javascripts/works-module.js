@@ -37,6 +37,10 @@
     */
     $scope.works = $works.getWorks( { project_id:project_id } ) ;
 
+    $scope.refresh = function () {
+      return $works.getWorks( { project_id:project_id } );
+    };
+
     /*
      * GET /works/{id}.json
      * @return Work
@@ -67,7 +71,7 @@
           }
 
           // refresh works
-          $scope.works = $works.getWorks();
+          $scope.works = $scope.refresh();
         }
       );
     };
@@ -81,8 +85,6 @@
       $log.debug(work);
       work.$updateWork ( function ( data ) {
         $log.debug ( data );
-        // refresh works
-        $scope.works = $works.getWorks();
       });
     };
 
@@ -94,7 +96,7 @@
       $works.deleteWork ( { work_id:id }, function ( data ) {
         $log.debug ( data );
         // refresh works
-        $scope.works = $works.getWorks();
+        $scope.works = $scope.refresh();
       });
     };
 
@@ -106,7 +108,7 @@
       $works.remove ( function ( data ) {
         $log.debug ( data );
         // refresh works
-        $scope.works = $works.getWorks();
+        $scope.works = $scope.refresh();
       });
     };
 
@@ -137,14 +139,14 @@
             $scope.newWork ( answer.name, project_id, answer.parent  )
         } else {
             $scope.newWork ( answer.name, project_id, $scope.parent  )
-            $scope.parent = "";
+            $scope.parent = null;
         }
 
 
 
       }, function() {
         $scope.status = 'You cancelled the dialog.';
-        $scope.parent = "";
+        $scope.parent = null;
       });
       $scope.$watch(function() {
         return $mdMedia('xs') || $mdMedia('sm');

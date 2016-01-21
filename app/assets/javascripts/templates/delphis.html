@@ -6,7 +6,7 @@
 
 <md-input-container class="tableinput md-block" flex-gt-xs>
   <label>Name</label>
-  <input ng-model="delphi.name" aria-label="Name des Schätzers" ng-blur="getDelphis()"></input>
+  <input ng-model="delphi.username" aria-label="Name des Schätzers" ng-blur="getDelphis(delphi.username)"></input>
   <div class="hint">Nennen Sie uns Ihren Namen</div>
 </md-input-container>
 
@@ -21,15 +21,13 @@
         </tr>
       </thead>
       <tbody >
-        <tr ng-repeat="delphi in delphi" id="{{delphi.id}}">
+        <tr ng-repeat="delphi in delphis" id="{{delphi.id}}">
           <td class="col-xs-8">
-            <md-input-container class="tableinput md-block" flex-gt-xs>
-              <input ng-model="delphi.name" aria-label="Name des Knoten" ng-disabled></input>
-            </md-input-container>
+            <p> {{delphi.workpackagename}} </p>
           </td>
           <td class="col-xs-4">
             <md-input-container class="tableinput md-block" flex-gt-xs>
-              <input ng-model="delphi.dauer" aria-label="Name des Knoten" ng-blur="updatedelphi(delphi)"></input>
+              <input ng-model="delphi.value" aria-label="Dauer des Knoten" ng-blur="updateDelphi(delphi)"></input>
             </md-input-container>
           </td>
         </tr>
