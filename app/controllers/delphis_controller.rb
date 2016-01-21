@@ -52,7 +52,7 @@ class DelphisController < ApplicationController
       allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
       allParentIds.uniq
 
-      workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name}}
+      workpackage = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name}}
 
       workpackage.each do |item|
         workpackageid = item["id".to_sym]
@@ -91,7 +91,7 @@ class DelphisController < ApplicationController
     allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
     allParentIds.uniq
 
-    allWorkpackages = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
+    allWorkpackages = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
     @workpackages = Array.new
 
     allWorkpackages.each do  |workpackage|
@@ -111,7 +111,7 @@ class DelphisController < ApplicationController
     @names = Array.new
 
 
-    workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
+    workpackage = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
 
     workpackage.each do |item|
       workpackageid = item["id".to_sym]
@@ -193,6 +193,34 @@ class DelphisController < ApplicationController
     respond_to do |format|
       format.html { redirect_to delphis_url, notice: 'Delphi was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # DELETE /:project_id/delphis/:username
+  def deletedelphisofuser
+    username = params[:name]
+    allDelphis = Delphi.where(username: username)
+    deleted = true
+    if allDelphis.size == 0
+      allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
+      allParentIds.uniq
+
+      allDelphis.each do |delphi|
+        if allParentIds.include?(delphi.workpackage_id)
+          if delphi.destroy
+            deleted & true
+          else
+            deleted & false
+          end
+        end
+      end
+      respond_to do |format|
+        if deleted
+          format.json { render json: '200'}
+        else
+          format.json { render json: '501'}
+        end
+      end
     end
   end
 

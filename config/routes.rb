@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   match ':project_id/users/graph', to: 'delphis#variance', via: [:get],  :defaults => {:format => :json}
   match ':project_id/users', to: 'delphis#usernameswithvariance', via: [:get],  :defaults => {:format => :json}
   match ':project_id/users/:name', to: 'delphis#destroy', via: [:delete],  :defaults => {:format => :json}
+  match ':project_id/users/graph', to: 'delphis#deletedelphisofuser', via: [:delete],  :defaults => {:format => :json}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
