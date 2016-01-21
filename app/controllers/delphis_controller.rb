@@ -196,7 +196,7 @@ class DelphisController < ApplicationController
     end
   end
 
-  # DELETE /:project_id/delphis/:username
+  # DELETE /:project_id/delphis/:name
   def deletedelphisofuser
     username = params[:name]
     allDelphis = Delphi.where(username: username)
