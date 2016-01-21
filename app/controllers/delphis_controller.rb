@@ -196,6 +196,34 @@ class DelphisController < ApplicationController
     end
   end
 
+  # DELETE /:project_id/delphis/:username
+  def deletedelphisofuser
+    username = params[:name]
+    allDelphis = Delphi.where(username: username)
+    deleted = true
+    if allDelphis.size == 0
+      allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
+      allParentIds.uniq
+
+      allDelphis.each do |delphi|
+        if allParentIds.include?(delphi.workpackage_id)
+          if delphi.destroy
+            deleted & true
+          else
+            deleted & false
+          end
+        end
+      end
+      respond_to do |format|
+        if deleted
+          format.json { render json: '200'}
+        else
+          format.json { render json: '501'}
+        end
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_delphi
