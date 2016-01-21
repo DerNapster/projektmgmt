@@ -6,4 +6,10 @@ module DelphisHelper
     sum = delphis.inject(:+)
     avg = (sum/count)
   end
+
+  def update_duration_of_workpackage(workpackageid)
+    avg = get_avg_of_workpackage(workpackageid)
+    workpackage = Workpackage.find_by(id: workpackageid)
+    workpackage.update(duration: avg)
+  end
 end

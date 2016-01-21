@@ -18,7 +18,14 @@ class Workpackage < ActiveRecord::Base
   #validate :startdate_plus_duration_must_be_enddate
   validate :validate_parent
 
+  after_initialize :default_duration
+
   #before_save :default_value_for_purchaser
+
+
+  def default_duration
+    self.duration ||=0
+  end
 
   def enddate_must_be_greater_than_startdate
     if enddate < startdate

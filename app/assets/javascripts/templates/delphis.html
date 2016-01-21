@@ -23,11 +23,11 @@
       <tbody >
         <tr ng-repeat="delphi in delphis" id="{{delphi.id}}">
           <td class="col-xs-8">
-            <p> {{delphi.name}} </p>
+            <p> {{delphi.workpackagename}} </p>
           </td>
           <td class="col-xs-4">
             <md-input-container class="tableinput md-block" flex-gt-xs>
-              <input ng-model="delphi.value" aria-label="Name des Knoten" ng-blur="updateDelphi(delphi)"></input>
+              <input ng-model="delphi.value" aria-label="Dauer des Knoten" ng-blur="updateDelphi(delphi)"></input>
             </md-input-container>
           </td>
         </tr>

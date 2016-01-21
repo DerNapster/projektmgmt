@@ -15,6 +15,10 @@
 
       var project_id = $routeParams.project_id;
 
+      $scope.refresh = function () {
+        return $delphis.getDelphis( { project_id:project_id, delphi_username:name } );
+      };
+
       /*
       * GET /delphis.json
       * @return Delphis List
@@ -112,7 +116,7 @@
       this.$get = function ( $resource ) {
 
         return $resource (
-          "/:project_id" + endpoint + "/:delphi_username" + ".json",
+          "/:project_id" + endpoint + "/:delphi_username" + "/:delphi_id" + ".json",
           {
             delphi_id:'@id',
             project_id:'@sub_id'
