@@ -52,7 +52,7 @@ class DelphisController < ApplicationController
       allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
       allParentIds.uniq
 
-      workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name}}
+      workpackage = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name}}
 
       workpackage.each do |item|
         workpackageid = item["id".to_sym]
@@ -91,7 +91,7 @@ class DelphisController < ApplicationController
     allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
     allParentIds.uniq
 
-    allWorkpackages = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
+    allWorkpackages = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
     @workpackages = Array.new
 
     allWorkpackages.each do  |workpackage|
@@ -111,7 +111,7 @@ class DelphisController < ApplicationController
     @names = Array.new
 
 
-    workpackage = Workpackage.where(project_id: params[:project_id]).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
+    workpackage = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
 
     workpackage.each do |item|
       workpackageid = item["id".to_sym]
