@@ -11,13 +11,26 @@
 
     delphi.run ( function () {});
 
-    delphi.controller('delphiController', function ($scope, $delphis, $log, $routeParams) {
+    delphi.controller('delphiController', function ($scope, $delphis, deliphiEvaluation, $log, $routeParams) {
 
       var project_id = $routeParams.project_id;
 
+      /*
+       * Refreshes the object list
+       */
       $scope.refresh = function () {
         return $delphis.getDelphis( { project_id:project_id, delphi_username:name } );
       };
+
+      /*
+       * GET /:project_id/delphis/evaulation
+       * @return Evaluation der Delphi Methode
+       */
+       deliphiEvaluation.get( project_id )
+         .then(function (data) {
+           $log.debug(data);
+           $scope.deliphiEvaluation = data.data;
+         });
 
       /*
       * GET /delphis.json
@@ -131,4 +144,30 @@
         );
       }
     });
+
+    delphi.provider('deliphiEvaluation', function () {
+        var endpoint = '/delphis/evaluation.json';
+
+        this.$get = function ($http, $log, $q) {
+          return {
+
+            get : function ( id ) {
+
+              var promise = $http.get("/" + id + endpoint)
+              .success(function (data) {
+                $log.debug(data);
+              })
+              .error(function (data) {
+                $log.debug(data);
+              });
+
+              return promise;
+
+            }
+          }
+        }
+
+
+    });
+
 })();

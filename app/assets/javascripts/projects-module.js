@@ -12,7 +12,7 @@
 
   projects.run ( function (projectService, $log){
     $log.debug('app.projects', projectService.getProjects());
-    $log.debug('app.projects', projectService.getProject({project_id:1}));
+
   });
 
   projects.controller('projectsController', function ($scope, projectService, projectsGraph, $log, $mdDialog, $mdMedia, $rootScope, $routeParams) {
