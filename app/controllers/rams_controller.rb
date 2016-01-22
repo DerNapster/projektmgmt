@@ -63,13 +63,12 @@ class RamsController < ApplicationController
         index = index + 1
       end
     end
-
     respond_to do |format|
       format.json { render json: @ramobjects }
     end
   end
 
-  # GET :project_id/ram/wbs
+    # GET :project_id/ram/wbs
   def getwbsforram
     allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
     allParentIds.uniq
@@ -82,9 +81,44 @@ class RamsController < ApplicationController
         @workpackages << workpackage
       end
     end
-
     respond_to do |format|
       format.json { render json: @workpackages }
+    end
+  end
+
+  # GET :project_id/ram/wbs
+  def getpbsforram
+    allParentIds = Node.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
+    allParentIds.uniq
+
+    allNodes = Node.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name}}
+    @nodes = Array.new
+
+    allNodes.each do  |node|
+      if allParentIds.include?(node["id".to_sym]) == false
+        @nodes << node
+      end
+    end
+    respond_to do |format|
+      format.json { render json: @nodes }
+    end
+  end
+
+  # GET :project_id/ram/rbs
+  def getrbsforram
+    allParentIds = Role.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
+    allParentIds.uniq
+
+    allRoles = Role.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name}}
+    @roles = Array.new
+
+    allRoles.each do  |role|
+      if allParentIds.include?(role["id".to_sym]) == false
+        @roles << role
+      end
+    end
+    respond_to do |format|
+      format.json { render json: @roles }
     end
   end
 
