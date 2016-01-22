@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workpackage_id: 
+  node_id: 
+  project_id: 
+  level: 1
+  order: 1
+
+two:
+  workpackage_id: 
+  node_id: 
+  project_id: 
+  level: 1
+  order: 1

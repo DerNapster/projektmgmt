@@ -5,5 +5,7 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :workpackages
   has_many :roles
   accepts_nested_attributes_for :roles
+  has_many :rams
+  accepts_nested_attributes_for :rams
   validates :name, presence: true
 end

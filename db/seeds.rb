@@ -221,11 +221,28 @@ wp2 = Workpackage.create(name: 'Geschäftsplan und Architektur Aufgabe',
 
 r1 = Role.create(name: "Webshop",
                  description: "Websop Desc",
-                 project_id: project1,
+                 project: project1,
                  level: 0)
 
 r2 = Role.create(name: "Projektmanagement",
                  description: "PM",
-                 project_id: project1,
+                 project: project1,
                  level: 0,
                  parent: r1)
+
+ram1 = Ram.create(project: project1,
+                  node: node1,
+                  workpackage: wp1,
+                  level: 1,
+                  order: 1)
+
+ram2 = Ram.create(project: project1,
+                  node: node2,
+                  workpackage: wp2,
+                  level: 2,
+                  order: 2)
+
+r2.rams << ram1
+r2.rams << ram2
+
+r1.rams << ram1

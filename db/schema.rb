@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118134505) do
+ActiveRecord::Schema.define(version: 20160122210510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,30 @@ ActiveRecord::Schema.define(version: 20160118134505) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "ram_roles", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "ram_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ram_roles", ["ram_id"], name: "index_ram_roles_on_ram_id", using: :btree
+  add_index "ram_roles", ["role_id"], name: "index_ram_roles_on_role_id", using: :btree
+
+  create_table "rams", force: :cascade do |t|
+    t.integer  "workpackage_id"
+    t.integer  "node_id"
+    t.integer  "project_id"
+    t.integer  "level"
+    t.integer  "order"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "rams", ["node_id"], name: "index_rams_on_node_id", using: :btree
+  add_index "rams", ["project_id"], name: "index_rams_on_project_id", using: :btree
+  add_index "rams", ["workpackage_id"], name: "index_rams_on_workpackage_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -93,6 +117,11 @@ ActiveRecord::Schema.define(version: 20160118134505) do
 
   add_foreign_key "delphis", "workpackages"
   add_foreign_key "nodes", "projects"
+  add_foreign_key "ram_roles", "rams"
+  add_foreign_key "ram_roles", "roles"
+  add_foreign_key "rams", "nodes"
+  add_foreign_key "rams", "projects"
+  add_foreign_key "rams", "workpackages"
   add_foreign_key "roles", "projects"
   add_foreign_key "workpackages", "projects"
 end

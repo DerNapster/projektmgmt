@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
 
-  resources :rams
-  resources :rams
   resources :delphis
   resources :roles
   resources :workpackages
@@ -22,12 +20,12 @@ Rails.application.routes.draw do
 
   match ':project_id/users/graph', to: 'delphis#variance', via: [:get],  :defaults => {:format => :json}
   match ':project_id/users', to: 'delphis#usernameswithvariance', via: [:get],  :defaults => {:format => :json}
+<<<<<<< HEAD
   match ':project_id/delphis/:name', to: 'delphis#deletedelphisofuser', via: [:delete],  :defaults => {:format => :json}
-
-  match ':project_id/ram', to: 'rams#getramofproject', via: [:get],  :defaults => {:format => :json}
-  match ':project_id/ram/wbs', to: 'rams#getwbsforram', via: [:get],  :defaults => {:format => :json}
-  match ':project_id/ram/pbs', to: 'rams#getpbsforram', via: [:get],  :defaults => {:format => :json}
-  match ':project_id/ram/rbs', to: 'rams#getrbsforram', via: [:get],  :defaults => {:format => :json}
+=======
+  match ':project_id/users/:name', to: 'delphis#destroy', via: [:delete],  :defaults => {:format => :json}
+  match ':project_id/users/graph', to: 'delphis#deletedelphisofuser', via: [:delete],  :defaults => {:format => :json}
+>>>>>>> bbfc8d58cc8c78eace16dffe469951c96cf3a71c
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
