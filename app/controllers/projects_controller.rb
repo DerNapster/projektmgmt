@@ -46,6 +46,14 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        # create first entry
+        firstRole = Role.new(:name => @project.name, :level => 0, :project => @project)
+        firstRole.save
+        firstNode = Node.new(:name => @project.name, :level => 0, :project => @project)
+        firstNode.save
+        firstWorkpackage = Workpackage.new(:name => @project.name, :level => 0, :project => @project)
+        firstWorkpackage.save
+
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
