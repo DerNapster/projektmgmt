@@ -199,28 +199,9 @@ class DelphisController < ApplicationController
   # DELETE /:project_id/delphis/:name
   def deletedelphisofuser
     username = params[:name]
-    allDelphis = Delphi.where(username: username)
-    deleted = true
-    if allDelphis.size == 0
-      allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
-      allParentIds.uniq
-
-      allDelphis.each do |delphi|
-        if allParentIds.include?(delphi.workpackage_id)
-          if delphi.destroy
-            deleted & true
-          else
-            deleted & false
-          end
-        end
-      end
-      respond_to do |format|
-        if deleted
-          format.json { render json: '200'}
-        else
-          format.json { render json: '501'}
-        end
-      end
+    allDelphis = Delphi.where(username: username).destroy_all
+    respond_to do |format|
+      format.json { render json: '200'}
     end
   end
 
