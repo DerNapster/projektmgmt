@@ -30,13 +30,21 @@ class RamsController < ApplicationController
     @ramobjects = Array.new
     index = 1
     pbsObjects.each do |pbs|
+      ramHash = Hash.new
       pbsid = pbs.id
       pbsname = pbs.name
       level = pbs.level
+      ramHash["nodeid"] = pbsid
+      ramHash["nodename"] = pbsname
+      ramHash["level"] = level
+      ramHash["order"] = index
+      ramHash["projectid"] = projectId
+      ramHash["projectname"] = Project.where(id: projectId).first.name
+      ramHash["workpackageid"] = ""
+      ramHash["workpackagename"] = ""
+      ramHash["roleArray"] = Array.new
       ramObject = Ram.where(project_id: projectId, node_id: pbsid).includes(:workpackage).includes(:project).first
       if ramObject
-        puts "--" + ramObject.to_s
-        projectname = ramObject.project.name
         workpackageid = ramObject.workpackage_id
         workpackagename = ramObject.workpackage.name
         roles = Array.new
@@ -47,21 +55,12 @@ class RamsController < ApplicationController
           roles << roleHash
         end
 
-
-        ramHash = Hash.new
-        ramHash["projectid"] = projectId
-        ramHash["projectname"] = projectname
-        ramHash["nodeid"] = pbsid
-        ramHash["nodename"] = pbsname
-        ramHash["level"] = level
-        ramHash["order"] = index
         ramHash["workpackageid"] = workpackageid
         ramHash["workpackagename"] = workpackagename
         ramHash["roleArray"] = roles
-
-        @ramobjects << ramHash
-        index = index + 1
       end
+      @ramobjects << ramHash
+      index = index + 1
     end
     respond_to do |format|
       format.json { render json: @ramobjects }
