@@ -34,28 +34,32 @@ class RamsController < ApplicationController
       pbsid = pbs.id
       pbsname = pbs.name
       level = pbs.level
-      ramHash["nodeid"] = pbsid
-      ramHash["nodename"] = pbsname
+      ramHash["node"] = pbs
+      #ramHash["nodeid"] = pbsid
+      #ramHash["nodename"] = pbsname
       ramHash["level"] = level
       ramHash["order"] = index
-      ramHash["projectid"] = projectId
-      ramHash["projectname"] = Project.where(id: projectId).first.name
-      ramHash["workpackageid"] = ""
-      ramHash["workpackagename"] = ""
+      #ramHash["projectid"] = projectId
+      #ramHash["projectname"] = Project.where(id: projectId).first.name
+      ramHash["project"] = Project.where(id: projectId)
+      #ramHash["workpackageid"] = ""
+      #ramHash["workpackagename"] = ""
       ramHash["roleArray"] = Array.new
-      ramObject = Ram.where(project_id: projectId, node_id: pbsid).includes(:workpackage).includes(:project).first
+      ramObject = Ram.where(project_id: projectId, node_id: pbsid).includes(:workpackage).first
       if ramObject
         workpackageid = ramObject.workpackage_id
         workpackagename = ramObject.workpackage.name
         roles = Array.new
         ramObject.roles.each do |role|
           roleHash = Hash.new
-          roleHash["roleid"] = role.id
-          roleHash["rolename"] = role.name
-          roles << roleHash
+          #roleHash["roleid"] = role.id
+          #roleHash["rolename"] = role.name
+          #roles << roleHash
+          roles << role
         end
-        ramHash["workpackageid"] = workpackageid
-        ramHash["workpackagename"] = workpackagename
+        #ramHash["workpackageid"] = workpackageid
+        #ramHash["workpackagename"] = workpackagename
+        ramHash["workpackage"] = ramObject.workpackage
         ramHash["roleArray"] = roles
       else
         ramObject = Ram.new(:order => index, :level => level, :node_id => pbs, :project_id => projectId)
