@@ -24,7 +24,7 @@
 
     var project_id = $routeParams.project_id;
 
-    worksGraph.get( project_id )
+    $scope.getGraphData = worksGraph.get( project_id )
       .then(function (data) {
         $log.debug(data);
         $scope.chartData = data.data;
@@ -38,6 +38,13 @@
     $scope.works = $works.getWorks( { project_id:project_id } ) ;
 
     $scope.refresh = function () {
+
+      worksGraph.get( project_id )
+        .then(function (data) {
+          $log.debug(data);
+          $scope.chartData = data.data;
+        });
+
       return $works.getWorks( { project_id:project_id } );
     };
 

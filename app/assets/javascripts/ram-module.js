@@ -22,7 +22,7 @@
     $scope.rams = $rams.getRams( { project_id:project_id} );
 
     $scope.updateRam = function ( ev, ram ) {
-      $log.debug( ram );
+      $log.debug(ram );
       ram.$updateRam ( function ( data ) {
         $log.debug ( data );
         // refresh nodes
@@ -50,7 +50,7 @@
   });
 
   ram.provider('$rams', function () {
-    var endpoint = '/ram.json';
+    var endpoint = '/ram';
 
     this.setEndpoint = function ( url ) {
       endpoint = url;
@@ -59,9 +59,10 @@
     this.$get = function ( $resource ) {
 
       return $resource (
-        "/:project_id" + endpoint,
+        "/:project_id" + endpoint + "/:ram_id" + ".json",
         {
-          node_id:'@id'
+          ram_id:'@id',
+          project_id:'@sub_id'
         },
         {
          'getRam': {method:'GET'},

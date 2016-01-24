@@ -18,7 +18,7 @@
           {{ram.nodename}}
         </td>
         <td>
-          <md-select placeholder="Workpackage zuweisen" ng-model="ram.workpackage" md-on-open="loadWorkpackages()">
+          <md-select placeholder="Workpackage zuweisen" ng-model="ram.workpackagename" md-on-open="loadWorkpackages()">
             <md-option ng-value="ram.workpackage" ng-repeat="workpackage in workpackages">{{workpackage.name}}</md-option>
           </md-select>
         </td>

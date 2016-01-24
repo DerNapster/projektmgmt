@@ -149,7 +149,7 @@
       return $resource (
         endpoint + "/:project_id" + ".json",
         {
-          node_id:'@id'
+          project_id:'@id'
         },
         {
          'getProject': {method:'GET'},
