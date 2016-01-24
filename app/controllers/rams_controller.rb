@@ -54,11 +54,14 @@ class RamsController < ApplicationController
           roleHash["rolename"] = role.name
           roles << roleHash
         end
-
         ramHash["workpackageid"] = workpackageid
         ramHash["workpackagename"] = workpackagename
         ramHash["roleArray"] = roles
+      else
+        ramObject = Ram.new(:order => index, :level => level, :node_id => pbs, :project_id => projectId)
+        ramObject.save
       end
+      ramHash["id"] = ramObject.id
       @ramobjects << ramHash
       index = index + 1
     end
