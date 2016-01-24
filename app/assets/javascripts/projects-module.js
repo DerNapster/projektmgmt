@@ -119,7 +119,7 @@
           fullscreen: useFullScreen
         })
         .then(function(answer) {
-          // $scope.status = 'You said the information was "' + answer + '".';
+          $scope.status = 'You said the information was "' + answer + '".';
           $log.debug(answer);
           $scope.newProject ( answer.name, answer.description );
         }, function() {

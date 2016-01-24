@@ -1,0 +1,37 @@
+[
+  {
+    "nodeid":1,
+    "nodename":"WebShop123",
+    "level":0,
+    "order":1,
+    "projectid":"1",
+    "projectname":"Webshop",
+    "workpackageid":"",
+    "workpackagename":"",
+    "roleArray":[]
+  },
+
+  {
+    "nodeid":2,
+    "nodename":"Geschäftsplan und Architektur",
+    "level":1,
+    "order":2,
+    "projectid":"1",
+    "projectname":"Webshop",
+    "workpackageid":"",
+    "workpackagename":"",
+    "roleArray":[]
+  },
+
+  {
+    "nodeid":3,
+    "nodename":"Geschäftsplan",
+    "level":2,
+    "order":3,
+    "projectid":"1",
+    "projectname":"Webshop",
+    "workpackageid":"",
+    "workpackagename":"",
+    "roleArray":[]
+  }
+]
