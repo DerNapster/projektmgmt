@@ -23,6 +23,7 @@
   <%= javascript_include_tag "roles-module" %>
   <%= javascript_include_tag "delphi-module" %>
   <%= javascript_include_tag "user-module" %>
+  <%= javascript_include_tag "ram-module" %>
   <%= javascript_include_tag "app" %>
 
 
@@ -103,6 +104,11 @@
                   <md-icon md-font-set="material-icons">people</md-icon>
                     <p>Role Breakdown Structur</p>
                 </md-list-item>
+
+                 <md-list-item ng-href="#/{{project.id}}/rams">
+                   <md-icon md-font-set="material-icons">person outline</md-icon>
+                     <p>Resource Allocation Matrix</p>
+                 </md-list-item>
 
                 <md-list-item ng-href="#/{{project.id}}/delphis">
                   <md-icon md-font-set="material-icons">schedule</md-icon>

@@ -2,7 +2,7 @@
 
 (function () {
 
-  var app = angular.module('app', ['app.projects', 'app.nodes', 'app.works', 'app.roles', 'app.controle', 'app.delphis', 'app.users', 'ngMaterial', 'templates','ngRoute']);
+  var app = angular.module('app', ['app.projects', 'app.nodes', 'app.works', 'app.roles', 'app.controle', 'app.delphis', 'app.users', 'app.rams', 'ngMaterial', 'templates','ngRoute']);
 
   app.run(function () {
   });
@@ -57,6 +57,10 @@
       .when('/:project_id/works', {
         templateUrl: "works.html",
         controller: 'worksController',
+      })
+      .when('/:project_id/rams', {
+        templateUrl: "rams.html",
+        controller: 'ramController',
       })
       .when('/:project_id/delphis', {
         templateUrl: "delphis.html",
