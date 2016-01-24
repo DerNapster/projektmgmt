@@ -4,6 +4,7 @@
       <figure><img ng-src="/images/projects.jpg" class="md-card-image"></figure>
       <md-card-title>
         <md-card-title-text>
+
           <md-input-container class="md-block" flex-gt-sm>
             <label>Name </label>
             <input ng-model="selectedProject.name" ng-blur="updateProject(selectedProject)" aria-label="Name des Projektes" md-maxlength="30"> </input>
@@ -23,28 +24,56 @@
         </md-input-container>
       </md-card-content>
 
-      <md-card-actions layout="column" layout-align="start">
-        <md-list>
-         <md-list-item ng-href="#/{{selectedProject.id}}/nodes">
+      <md-card-actions layout="row" layout-align="center">
+
+        <div layout-gt-xs="row">
+
+         <md-button class="md-icon-button" ng-href="#/{{selectedProject.id}}/nodes">
+           <md-tooltip md-direction="down">
+             Product Breakdown Structur
+           </md-tooltip>
            <md-icon md-font-set="material-icons">extension</md-icon>
-             <p>Product Breakdown Structur</p>
-         </md-list-item>
-         <md-list-item ng-href="#/{{selectedProject.id}}/works">
+         </md-button>
+
+         <md-button class="md-icon-button" ng-href="#/{{selectedProject.id}}/works">
+           <md-tooltip md-direction="down">
+             Work Breakdown Structur
+           </md-tooltip>
            <md-icon md-font-set="material-icons">build</md-icon>
-             <p>Work Breakdown Structur</p>
-         </md-list-item>
+         </md-button>
 
-         <md-list-item ng-href="#/{{selectedProject.id}}/roles">
+         <md-button class="md-icon-button"  ng-href="#/{{selectedProject.id}}/roles">
+           <md-tooltip md-direction="down">
+             Role Breakdown Structur
+           </md-tooltip>
            <md-icon md-font-set="material-icons">people</md-icon>
-             <p>Role Breakdown Structur</p>
-         </md-list-item>
+         </md-button>
 
-         <md-list-item ng-href="#/{{selectedProject.id}}/delphis">
+         <md-button class="md-icon-button"  ng-href="#/{{selectedProject.id}}/rams">
+           <md-tooltip md-direction="down">
+             Resource Allocation Matrix
+           </md-tooltip>
+           <md-icon md-font-set="material-icons">person</md-icon>
+         </md-button>
+
+         <md-button class="md-icon-button"  ng-href="#/{{selectedProject.id}}/delphis">
+           <md-tooltip md-direction="down">
+             Delphi
+           </md-tooltip>
            <md-icon md-font-set="material-icons">schedule</md-icon>
-             <p>Delphi</p>
-         </md-list-item>
-       </md-list>
+         </md-button>
 
+       </div>
+
+         <div layout-gt-xs="row">
+           <md-button class="md-warn"  ng-click="deleteProjectDialog($event, selectedProject)">
+             <md-tooltip md-direction="down">
+               Löschen
+             </md-tooltip>
+             <md-icon md-font-set="material-icons">delete</md-icon>
+
+           </md-button>
+         </div>
       </md-card-actions>
     </md-card>
   </div>
@@ -56,13 +85,13 @@
     <md-card>
       <md-content ng-controller="usersController">
         <md-list>
-          <md-subheader class="md-no-sticky">Teilnahme Delphi</md-subheader>
+          <md-subheader class="md-no-sticky">Delphi Teilnehmer Übersicht</md-subheader>
           <md-list-item ng-repeat="user in users">
             <div class="md-list-item-text" layout="column">
               <h4 class="md-subhead">{{ user.workpackagename }}</h4>
-              <ul>
-                <li ng-repeat="uname in user.usernamesarray" ng-click="deleteUserDialog($event, uname)">{{uname}}</li>
-              </ul>
+              <md-list>
+                <md-list-item  ng-repeat="uname in user.usernamesarray" ng-click="deleteUserDialog($event, uname)">{{uname}}</md-list-item>
+              </md-list>
            </div>
           </md-list-item>
         </md-list>
@@ -70,7 +99,7 @@
     </md-card>
     <md-card ng-controller="delphiController">
       <md-list>
-        <md-subheader class="md-no-sticky">Evaluation Delphi</md-subheader>
+        <md-subheader class="md-no-sticky">Delphi Evaluation</md-subheader>
         <md-list-item ng-repeat="evaluation in deliphiEvaluation">
           <div class="md-list-item-text" layout="column">
             <p>{{evaluation.name}} : {{evaluation.duration}}</p>

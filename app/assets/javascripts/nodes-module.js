@@ -179,6 +179,7 @@
         $mdDialog.show(confirm).then(function( ) {
           $scope.deleteNodeById( node.id );
           $scope.message = 'Knoten gelöscht';
+          $scope.refresh();
         }, function() {
           $scope.message = 'Knoten behalten';
         });

@@ -133,6 +133,23 @@
 
       };
 
+      $scope.deleteProjectDialog = function(ev, project) {
+          // Appending dialog to document.body to cover sidenav in docs app
+          var confirm = $mdDialog.confirm()
+                .title('Wollen Sie wirklich das Projekt "' + project.name + '" löschen?')
+                .textContent('Es werden alle Abhängigkeiten gelöscht')
+                .targetEvent(ev)
+                .cancel('Abbrechen')
+                .ok('Löschen')
+
+          $mdDialog.show(confirm).then(function( ) {
+            $scope.deleteProjectById( project.id );
+            $scope.message = 'Knoten gelöscht';
+          }, function() {
+            $scope.message = 'Knoten behalten';
+          });
+        };
+
 
   });
 
