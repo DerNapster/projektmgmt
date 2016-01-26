@@ -102,9 +102,21 @@
         template: "<div id='chart_div'></div>",
         link: function(scope, elem, attrs){
 
+          $log.debug(scope);
+          $log.debug(elem);
+          $log.debug(attrs);
+
+          var date;
+
+          scope.$watch(attrs.startdate, function() {});
+
+          scope.$on('some-event', function(e){
+              // respond to event here
+          });
+
           var rows = new Array();
 
-          projectsGraph.get( $routeParams.project_id, '2016', '1', '26' )
+          projectsGraph.get( $routeParams.project_id, attrs.startdate.split("/")[2], attrs.startdate.split("/")[1],attrs.startdate.split("/")[0])
             .then(function (data) {
 
               $log.debug('projectsGraph', data);
@@ -142,23 +154,26 @@
           console.log("Graph directive get charData");
           // console.log(scope[attrs.chart]);
 
-            function drawChart( ) {
-              var data = new google.visualization.DataTable();
-              data.addColumn('string', 'Task ID');
-              data.addColumn('string', 'Task Name');
-              data.addColumn('date', 'Start Date');
-              data.addColumn('date', 'End Date');
-              data.addColumn('number', 'Duration');
-              data.addColumn('number', 'Percent Complete');
-              data.addColumn('string', 'Dependencies');
-              // For each orgchart box, provide the name, manager, and tooltip to show.
-              data.addRows(rows);
+          function drawChart( ) {
+            var data = new google.visualization.DataTable();
 
-              // Create the chart.
-              var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-              // Draw the chart, setting the allowHtml option to true for the tooltips.
-              chart.draw(data, option);
-            }
+            data.addColumn('string', 'Task ID');
+            data.addColumn('string', 'Task Name');
+            data.addColumn('date', 'Start Date');
+            data.addColumn('date', 'End Date');
+            data.addColumn('number', 'Duration');
+            data.addColumn('number', 'Percent Complete');
+            data.addColumn('string', 'Dependencies');
+            // For each orgchart box, provide the name, manager, and tooltip to show.
+            data.addRows(rows);
+
+            console.log(data);
+
+            // Create the chart.
+            var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+            // Draw the chart, setting the allowHtml option to true for the tooltips.
+            chart.draw(data, option);
+          }
         }
       };
     });

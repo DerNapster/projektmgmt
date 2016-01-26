@@ -25,14 +25,16 @@
 
         var project_id = $routeParams.project_id;
 
-        projectsGraph.get( project_id )
+        $scope.startDate = new Date();
+
+        /* projectsGraph.get( project_id, $scope.startDate.year, $scope.startDate.month, $scope.startDate.day )
           .then(function (data) {
             $log.debug(data);
             $scope.chartData = data.data;
-          });
-          
+          });*/
+
         $scope.getChartData = function () {
-          projectsGraph.get( project_id )
+          projectsGraph.get( project_id, $scope.startDate.getFullYear(), $scope.startDate.getMont(), $scope.startDate.getDay() )
             .then(function (data) {
               $log.debug(data);
               $scope.chartData = data.data;

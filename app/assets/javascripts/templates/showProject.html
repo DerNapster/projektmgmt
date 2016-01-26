@@ -110,6 +110,7 @@
 
 <md-content>
       <pre ng-if="showDebug">{{chartData}}</pre>
-
-  <div gantt-Projectschart chart="$scope.chartData"></div>
+      <md-datepicker ng-model="startDate" md-placeholder="Projekt Startdatum"></md-datepicker>
+  <div gantt-Projectschart startDate="{{startDate | date:'dd/MM/yyyy' }}"></div>
+  <pre>{{startDate | date:'dd/MM/yyyy' }}</pre>
 </md-content>

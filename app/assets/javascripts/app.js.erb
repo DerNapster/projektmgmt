@@ -7,7 +7,7 @@
   app.run(function () {
   });
 
-  app.config(function($routeProvider, $mdThemingProvider, $mdIconProvider){
+  app.config(function($routeProvider, $mdThemingProvider, $mdIconProvider, $mdDateLocaleProvider){
 
     $mdIconProvider
       .defaultFontSet( 'fontawesome' )
@@ -32,6 +32,7 @@
       .theme('default')
       .primaryPalette('deep-orange')
       .accentPalette('grey');
+
 
     $routeProvider
       .when('/', {
@@ -68,7 +69,8 @@
       })
       .otherwise({
         redirectTo: '/'
-      });;
+      });
+
 
     // $urlRouterProvider.otherwise('home');
 
