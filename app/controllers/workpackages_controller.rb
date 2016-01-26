@@ -1,6 +1,8 @@
 class WorkpackagesController < ApplicationController
   before_action :set_workpackage, only: [:show, :edit, :update, :destroy]
 
+  include WorkpackagesHelper
+
   # GET /workpackages
   # GET /workpackages.json
   def index
@@ -32,7 +34,7 @@ class WorkpackagesController < ApplicationController
         workpackageDescription = ''
       end
 
-      res.push([{v: workpackageId, f: workpackageName}, workpackageParentId, workpackageDescription]);
+      res.push([{v: workpackageId, f: workpackageName}, workpackageParentId, workpackageDescription])
       # data_table.add_row([{v: workpackageId, f: workpackageName}, workpackageParentId, workpackageDescription])
 
     end
@@ -42,6 +44,31 @@ class WorkpackagesController < ApplicationController
       format.json { render json: res }
     end
     #@wbsChart = generate_organisation_graph data_table
+  end
+
+  def gantt
+
+    workpackageList = Workpackage.where(project_id: params[:project_id])
+    allParentIds = getworkpackageparentids params[:project_id]
+    res= Array.new
+    startDate = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+
+    workpackageList.each do |workpackage|
+
+      if allParentIds.include?(workpackage.id) == false
+        workpackageId = workpackage.id.to_s
+        workpackageName = workpackage.name
+        duration = workpackage.duration * 24 * 60 * 60 * 1000
+
+        res.push([workpackageId, workpackageName, startDate, nil, duration, 0, nil])
+        startDate = startDate + workpackage.duration
+      end
+    end
+
+    respond_to do |format|
+      format.html { render :new }
+      format.json { render json: res }
+    end
   end
 
   # GET /workpackages/1

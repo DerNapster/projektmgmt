@@ -1,6 +1,7 @@
 class RamsController < ApplicationController
   before_action :set_ram, only: [:show, :edit, :update, :destroy]
 
+
   # GET /rams
   # GET /rams.json
   def index
@@ -76,8 +77,7 @@ class RamsController < ApplicationController
 
     # GET :project_id/ram/wbs
   def getwbsforram
-    allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
-    allParentIds.uniq
+    allParentIds = getworkpackageparentids params[:project_id]
 
     allWorkpackages = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name}}
     @workpackages = Array.new

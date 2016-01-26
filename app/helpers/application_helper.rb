@@ -24,4 +24,9 @@ module ApplicationHelper
     else
     end
   end
+
+  def getworkpackageparentids (projectid)
+    allParentIds = Workpackage.where(project_id: projectid).map { |wp| wp.parent_id }
+    allParentIds.uniq
+  end
 end

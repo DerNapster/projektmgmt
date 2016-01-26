@@ -49,8 +49,7 @@ class DelphisController < ApplicationController
     saved = true
     @delphis = nil
     if allDelphis.size == 0
-      allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
-      allParentIds.uniq
+      allParentIds = getworkpackageparentids params[:project_id]
 
       workpackage = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name}}
 
@@ -88,8 +87,7 @@ class DelphisController < ApplicationController
 
   # GET /:project_id/delphi/evaluation
   def evaluation
-    allParentIds = Workpackage.where(project_id: params[:project_id]).map { |wp| wp.parent_id }
-    allParentIds.uniq
+    allParentIds = getworkpackageparentids params[:project_id]
 
     allWorkpackages = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
     @workpackages = Array.new
