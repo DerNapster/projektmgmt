@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   match ':project_id/ram/pbs', to: 'rams#getpbsforram', via: [:get],  :defaults => {:format => :json}
   match ':project_id/ram/rbs', to: 'rams#getrbsforram', via: [:get],  :defaults => {:format => :json}
 
-  match ':project_id/gantt/:year/:month/:day', to: 'workpackages#gantt', via: [:get],  :defaults => {:format => :json}
+  match ':project_id/gantt', to: 'workpackages#gantt', via: [:get],  :defaults => {:format => :json}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

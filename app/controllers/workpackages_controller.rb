@@ -51,7 +51,7 @@ class WorkpackagesController < ApplicationController
     workpackageList = Workpackage.where(project_id: params[:project_id])
     allParentIds = getworkpackageparentids params[:project_id]
     res= Array.new
-    startDate = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    startDate = Project.where(id: params[:project_id]).first.startdate
 
     workpackageList.each do |workpackage|
 

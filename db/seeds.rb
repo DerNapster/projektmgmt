@@ -7,9 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 project1 = Project.create(name: 'Webshop',
-                          description: 'Dies ist ein Webshop')
+                          description: 'Dies ist ein Webshop',
+                          startdate: Date.new(2016, 1, 7))
 project2 = Project.create(name: 'Brücke',
-                          description: 'Dies ist eine Brücke')
+                          description: 'Dies ist eine Brücke',
+                          startdate: Date.new(2016, 1, 7))
 
 node1 = Node.create(name: 'WebShop',
                     description: 'Dies ist ein Webshop',
