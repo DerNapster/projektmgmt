@@ -63,7 +63,8 @@
           projectService.createProject(
             {
               name: newproject.name,
-              description: newproject.description
+              description: newproject.description,
+              startdate: newproject.startdate
             }, function ( data )
             {
               $log.debug ( data );
