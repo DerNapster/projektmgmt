@@ -33,6 +33,16 @@
         $scope.chartData = data.data;
       });
 
+    $scope.getChartData = function () {
+      nodesGraph.get( project_id )
+        .then(function (data) {
+          $log.debug(data);
+          $scope.chartData = data.data;
+        });
+
+      return $scope.chartData;
+    };
+
   /*  [
       ['Mike', ''],
       ['Jim', 'Mike'],

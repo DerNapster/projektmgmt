@@ -30,6 +30,14 @@
             $log.debug(data);
             $scope.chartData = data.data;
           });
+          
+        $scope.getChartData = function () {
+          projectsGraph.get( project_id )
+            .then(function (data) {
+              $log.debug(data);
+              $scope.chartData = data.data;
+            });
+        }
 
         $scope.selectedProject = projectService.getProject(  { project_id:$routeParams.project_id } );
 
@@ -180,14 +188,14 @@
   });
 
   projects.provider('projectsGraph', function () {
-      var endpoint = '/projects/graph.json';
+      var endpoint = 'gantt';
 
       this.$get = function ($http, $log, $q) {
         return {
 
-          get : function ( id ) {
+          get : function ( id, year, month, day ) {
 
-            var promise = $http.get("/" + id + endpoint)
+            var promise = $http.get( id + "/" + endpoint + "/" + year + "/" + month + "/" + day + ".json")
             .success(function (data) {
               $log.debug(data);
             })

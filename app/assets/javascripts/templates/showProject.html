@@ -78,8 +78,6 @@
     </md-card>
   </div>
 
-    <!-- <div org-Projectschart chart="$scope.chartData"></div> -->
-
   <div flex="50" flex-xs="100" layout="column">
     <pre ng-if="showDebug">{{users}}</pre>
     <md-card>
@@ -108,4 +106,10 @@
       </md-list>
     </md-card>
   </div>
+</md-content>
+
+<md-content>
+      <pre ng-if="showDebug">{{chartData}}</pre>
+
+  <div gantt-Projectschart chart="$scope.chartData"></div>
 </md-content>
