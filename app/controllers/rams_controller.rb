@@ -35,14 +35,14 @@ class RamsController < ApplicationController
       pbsid = pbs.id
       pbsname = pbs.name
       level = pbs.level
-      ramHash["node"] = pbs
-      #ramHash["nodeid"] = pbsid
-      #ramHash["nodename"] = pbsname
+      #ramHash["node"] = pbs
+      ramHash["node_id"] = pbsid
+      ramHash["nodename"] = pbsname
       ramHash["level"] = level
       ramHash["order"] = index
-      #ramHash["projectid"] = projectId
-      #ramHash["projectname"] = Project.where(id: projectId).first.name
-      ramHash["project"] = Project.where(id: projectId)
+      ramHash["project_id"] = projectId
+      ramHash["projectname"] = Project.where(id: projectId).first.name
+      #ramHash["project"] = Project.where(id: projectId)
       #ramHash["workpackageid"] = ""
       #ramHash["workpackagename"] = ""
       ramHash["roleArray"] = Array.new
@@ -54,14 +54,14 @@ class RamsController < ApplicationController
         roles = Array.new
         ramObject.roles.each do |role|
           roleHash = Hash.new
-          #roleHash["roleid"] = role.id
-          #roleHash["rolename"] = role.name
-          #roles << roleHash
-          roles << role
+          roleHash["roleid"] = role.id
+          roleHash["rolename"] = role.name
+          roles << roleHash
+          #roles << role
         end
-        #ramHash["workpackageid"] = workpackageid
-        #ramHash["workpackagename"] = workpackagename
-        ramHash["workpackage"] = ramObject.workpackage
+        ramHash["workpackage_id"] = workpackageid
+        ramHash["workpackagename"] = workpackagename
+        #ramHash["workpackage"] = ramObject.workpackage
         ramHash["roleArray"] = roles
         ramHash["allocatable"] = true
       else
@@ -151,6 +151,14 @@ class RamsController < ApplicationController
   def update
     respond_to do |format|
       if @ram.update(ram_params)
+        roleArray = params[:roleArray]
+        if roleArray != nil
+          roleArray.each do |roleParam|
+            @ram.roles << Role.find(roleParam["id"])
+          end
+        end
+        @ram.workpackage_id = params[:workpackage_id]
+        @ram.save
         format.html { redirect_to @ram, notice: 'Ram was successfully updated.' }
         format.json { render :show, status: :ok, location: @ram }
       else
@@ -178,6 +186,7 @@ class RamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ram_params
-      params.require(:ram).permit(:workpackage_id, :node_id, :project_id, :level, :order, :allocatable)
+      params.require(:ram).permit(:workpackage_id, :node_id, :project_id, :level, :order, :allocatable, :roleArray)
     end
+
 end
