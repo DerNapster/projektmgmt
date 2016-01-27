@@ -46,6 +46,7 @@ class RamsController < ApplicationController
       #ramHash["workpackageid"] = ""
       #ramHash["workpackagename"] = ""
       ramHash["roleArray"] = Array.new
+      ramHash["allocatable"] = false
       ramObject = Ram.where(project_id: projectId, node_id: pbsid).includes(:workpackage).first
       if ramObject
         workpackageid = ramObject.workpackage_id
@@ -62,6 +63,7 @@ class RamsController < ApplicationController
         #ramHash["workpackagename"] = workpackagename
         ramHash["workpackage"] = ramObject.workpackage
         ramHash["roleArray"] = roles
+        ramHash["allocatable"] = true
       else
         ramObject = Ram.new(:order => index, :level => level, :node_id => pbs, :project_id => projectId)
         ramObject.save
@@ -176,6 +178,6 @@ class RamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ram_params
-      params.require(:ram).permit(:workpackage_id, :node_id, :project_id, :level, :order)
+      params.require(:ram).permit(:workpackage_id, :node_id, :project_id, :level, :order, :allocatable)
     end
 end

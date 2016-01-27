@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160122210510) do
     t.integer  "project_id"
     t.integer  "level"
     t.integer  "order"
+    t.boolean  "allocatable"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

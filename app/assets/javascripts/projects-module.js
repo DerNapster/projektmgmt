@@ -191,14 +191,14 @@
   });
 
   projects.provider('projectsGraph', function () {
-      var endpoint = 'gantt';
+      var endpoint = 'gantt.json';
 
       this.$get = function ($http, $log, $q) {
         return {
 
           get : function ( id, year, month, day ) {
 
-            var promise = $http.get( id + "/" + endpoint + "/" + year + "/" + month + "/" + day + ".json")
+            var promise = $http.get( id + "/" + endpoint)
             .success(function (data) {
               $log.debug(data);
             })

@@ -7,9 +7,6 @@
     return{
       restrict: "EA",
       template: "<div id='chart_div'></div>",
-      scope: {
-        chartData: '=chart',
-      },
       link: function(scope, elem, attrs){
 
         var rows;
@@ -26,7 +23,6 @@
         console.log(scope);
         console.log(elem);
         console.log(attrs);
-        console.log(chartData);
 
         // google.charts.load('current', {packages:['orgchart']});
         google.charts.setOnLoadCallback(drawChart);
@@ -61,6 +57,7 @@
 
           var rows;
 
+
           worksGraph.get( $routeParams.project_id )
             .then(function (data) {
               console.log(data);
@@ -79,6 +76,7 @@
           // console.log(scope[attrs.chart]);
 
             function drawChart( ) {
+
               var data = new google.visualization.DataTable();
               data.addColumn('string', 'Name');
               data.addColumn('string', 'Parent');
@@ -116,7 +114,8 @@
 
           var rows = new Array();
 
-          projectsGraph.get( $routeParams.project_id, attrs.startdate.split("/")[2], attrs.startdate.split("/")[1],attrs.startdate.split("/")[0])
+
+          projectsGraph.get( $routeParams.project_id)
             .then(function (data) {
 
               $log.debug('projectsGraph', data);

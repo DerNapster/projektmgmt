@@ -9,16 +9,16 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="col-lg-1"></th>
-            <th class="col-lg-8">Name</th>
+            <th></th>
+            <th class="col-lg-9">Name</th>
             <th class="col-lg-1">Meilenstein</th>
             <th class="col-lg-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="node in nodes" id="{{node.id}}">
-            <th class="col-lg-1 col-xs-1"></th>
-            <td class="col-lg-8 col-xs-7" style="padding-left: {{node.level * 10}}px;">
+            <td></td>
+            <td class="col-lg-9 col-xs-7" style="padding-left: {{node.level * 30}}px;">
               <md-input-container class="tableinput md-block" flex-gt-xs>
                 <input ng-model="node.name" aria-label="Name des Knoten" ng-blur="updateNode(node)"></input>
                 <div class="hint">{{node.description}}</div>

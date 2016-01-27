@@ -12,23 +12,24 @@
         <th class="col-lg-2">Actions</th>
       </tr>
     </thead>
-    <tbody >
+    <tbody>
       <tr ng-repeat="ram in rams">
+
         <td class="col-lg-4 col-xs-4">
-          {{ram.nodename}}
+          {{ram.node.name}}
         </td>
         <td>
-          <md-select placeholder="Workpackage zuweisen" ng-model="ram.workpackagename" md-on-open="loadWorkpackages()">
-            <md-option ng-value="ram.workpackage" ng-repeat="workpackage in workpackages">{{workpackage.name}}</md-option>
+          <md-select ng-disabled="ram.allocatable" placeholder="Workpackage zuweisen" ng-model="ram.node.workpackagename" md-on-open="loadWorkpackages()">
+            <md-option ng-value="workpackage" ng-repeat="workpackage in workpackages">{{workpackage.name}}</md-option>
           </md-select>
         </td>
         <td>
-          <md-select placeholder="Rolle zuweisen" ng-model="ram.roleArray[0]" md-on-open="loadRoles()" >
-            <md-option ng-value="ram.role" ng-repeat="role in roles">{{role.name}}</md-option>
+          <md-select ng-disabled="ram.allocatable" placeholder="Rolle zuweisen" ng-model="ram.node.roleArray[0]" md-on-open="loadRoles()" >
+            <md-option ng-value="role" ng-repeat="role in roles">{{role.name}}</md-option>
           </md-select>
         </td>
         <td>
-          <md-button class="md-icon-button" aria-label="Speichern" ng-click="updateRam($event, ram)" >
+          <md-button ng-if="!ram.allocatable" class="md-icon-button" aria-label="Speichern" ng-click="updateRam($event, ram)" >
             <md-tooltip md-direction="left">
               Speichern
             </md-tooltip>
