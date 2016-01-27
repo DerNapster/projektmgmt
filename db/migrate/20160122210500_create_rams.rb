@@ -6,6 +6,7 @@ class CreateRams < ActiveRecord::Migration
       t.references :project, index: true, foreign_key: true
       t.integer :level
       t.integer :order
+      t.boolean :allocatable
 
       t.timestamps null: false
     end
