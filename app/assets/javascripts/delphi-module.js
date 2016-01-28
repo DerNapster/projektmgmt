@@ -155,10 +155,8 @@
 
               var promise = $http.get("/" + id + endpoint)
               .success(function (data) {
-                $log.debug(data);
               })
               .error(function (data) {
-                $log.debug(data);
               });
 
               return promise;

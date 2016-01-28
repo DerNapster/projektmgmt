@@ -9,12 +9,7 @@
   });
 
 
-  nodes.run ( function ($nodes, nodesGraph, $log, $routeParams){
-    $log.debug('app.nodes');
-    $log.debug($nodes.getNode({node_id:1}));
-    $log.debug("nodes Graph");
-    $log.debug(nodesGraph.get(1));
-  });
+  nodes.run ( function (){ });
 
   ///
   /// Datalogic
@@ -238,10 +233,8 @@
 
             var promise = $http.get("/" + id + endpoint)
             .success(function (data) {
-              $log.debug(data);
             })
             .error(function (data) {
-              $log.debug(data);
             });
 
             return promise;

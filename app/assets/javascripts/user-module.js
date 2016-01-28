@@ -12,13 +12,6 @@
 
         var project_id = $routeParams.project_id;
 
-        // usersGraph.get( project_id )
-        //   .then(function (data) {
-        //     $log.debug(data);
-        //     $scope.chartData = data.data;
-        //   });
-
-
         /*
         * GET /users.json
         * @return Users List

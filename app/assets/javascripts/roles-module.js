@@ -9,9 +9,7 @@
   });
 
 
-  roles.run ( function ($roles, $log, $routeParams){
- 
-  });
+  roles.run ( function (){  });
 
 
   ///
