@@ -11,37 +11,38 @@
     <table class="table">
       <thead>
         <tr>
-          <th class="col-lg-1"></th>
-          <th class="col-lg-2">Name</th>
-          <th class="col-lg-1">Qualification</th>
-          <th class="col-lg-1">Experience</th>
-          <th class="col-lg-1">Quantity</th>
+          <th ></th>
+          <th class="col-lg-4">Name</th>
+          <th class="col-lg-2">Qualification</th>
+          <th class="col-lg-2">Experience</th>
+          <th class="col-lg-2">Quantity</th>
           <th class="col-lg-2">Actions</th>
         </tr>
       </thead>
       <tbody >
         <tr ng-repeat="role in roles" id="{{role.id}}">
-          <td class="col-lg-2 col-xs-2">
+          <td></td>
+          <td class="col-lg-2">
             <md-input-container class="tableinput md-block" flex-gt-xs>
               <input ng-model="role.name" aria-label="Name des Knoten" ng-blur="updateRole(role)"></input>
             </md-input-container>
           </td>
-          <td class="col-lg-1 col-xs-2">
+          <td class="col-lg-1">
             <md-input-container class="tableinput md-block" flex-gt-xs>
               <input ng-model="role.qualification" aria-label="Name des Knoten" ng-blur="updateRole(role)"></input>
             </md-input-container>
           </td>
-          <td class="col-lg-1 col-xs-2">
+          <td class="col-lg-1">
             <md-input-container class="tableinput md-block" flex-gt-xs>
               <input ng-model="role.experience" aria-label="Name des Knoten" ng-blur="updateRole(role)"></input>
             </md-input-container>
           </td>
-          <td class="col-lg-1 col-xs-2">
+          <td class="col-lg-1">
             <md-input-container class="tableinput md-block" flex-gt-xs>
               <input ng-model="role.quantity" aria-label="Verfügbarkeit" input="number" ng-blur="updateRole(role)"></input>
             </md-input-container>
           </td>
-          <td class="col-lg-2 col-xs-2">
+          <td class="col-lg-2">
             <md-button class="md-icon-button" aria-label="Knoten hinzufügen" ng-click="addRoleDialog($event, role, null)" flex-gt-md="auto">
                   <md-icon md-font-set="material-icons"> add </md-icon>
              </md-button>

@@ -1,4 +1,3 @@
-
 <div class="container" >
  <pre ng-if="$root.showDebug">{{roles}}</pre>
  <pre ng-if="$root.showDebug"> {{chartData}} </pre>
@@ -11,19 +10,22 @@
     <table class="table">
       <thead>
         <tr>
-          <th class="col-lg-1"></th>
-          <th class="col-lg-8">Name</th>
+          <th></th>
+          <th class="col-lg-9">Name</th>
           <th class="col-lg-3">Actions</th>
         </tr>
       </thead>
       <tbody >
         <tr ng-repeat="work in works" id="{{work.id}}">
-          <th class="col-lg-1 col-xs-1"></th>
-          <td class="col-lg-8 col-xs-7" style="padding-left: {{work.level * 10}}px;">
-            <md-input-container class="tableinput md-block" flex-gt-xs>
-              <input ng-model="work.name" aria-label="Name des Knoten" ng-blur="updateWork(work)"></input>
-              <div class="hint">{{work.description}}</div>
-            </md-input-container>
+          <td></td>
+          <td class="col-lg-9 col-xs-7">
+            <div layout="row">
+              <span style="padding-left: {{work.level * 20}}px; border-right: 1px solid #dddddd; margin-right: 5px;" ></span>
+              <md-input-container class="tableinput md-block" flex-gt-xs>
+                <input ng-model="work.name" aria-label="Name des Knoten" ng-blur="updateWork(work)"></input>
+                <div class="hint">{{work.description}}</div>
+              </md-input-container>
+            </div>
           </td>
           <td class="col-lg-3 col-xs-3">
             <md-button class="md-icon-button" aria-label="Knoten hinzufügen" ng-click="addWorkDialog($event, work, null)" flex-gt-md="auto">

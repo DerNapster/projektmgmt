@@ -14,10 +14,16 @@
     </thead>
     <tbody>
       <tr ng-repeat="ram in rams">
-
         <td class="col-lg-4 col-xs-4">
-          {{ram.node.name}}
+          <div layout-gt-xs="row">
+            <span style="padding-left:{{ram.node.level * 20}}px; border-right: 1px solid #dddddd; margin-right: 5px;" ></span>
+            <md-input-container class="tableinput md-block" flex-gt-xs>
+              <input ng-model="ram.node.name" aria-label="Name des Knoten" disabled></input>
+              <div class="hint">{{work.description}}</div>
+            </md-input-container>
+          </div>
         </td>
+
         <td>
           <md-select ng-disabled="ram.allocatable" placeholder="Workpackage zuweisen" ng-model="ram.node.workpackagename" md-on-open="loadWorkpackages()">
             <md-option ng-value="workpackage" ng-repeat="workpackage in workpackages">{{workpackage.name}}</md-option>
