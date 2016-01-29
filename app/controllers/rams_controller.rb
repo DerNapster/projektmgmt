@@ -151,11 +151,18 @@ class RamsController < ApplicationController
   def update
     respond_to do |format|
       if @ram.update(ram_params)
+        @ram.roles.each do |role|
+          @ram.roles.delete(role)
+        end
         roleArray = params[:roleArray]
         if roleArray != nil
+
           roleArray.each do |roleParam|
+
             puts "--------" + roleParam["roleid".to_sym].to_s
-            @ram.roles << Role.find(roleParam["roleid"])
+            role = Role.find(roleParam["roleid"])
+            @ram.roles << role
+
           end
         end
         @ram.workpackage_id = params[:workpackage_id]
