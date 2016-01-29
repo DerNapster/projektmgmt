@@ -24,10 +24,10 @@ Rails.application.routes.draw do
   match ':project_id/users', to: 'delphis#usernameswithvariance', via: [:get],  :defaults => {:format => :json}
   match ':project_id/delphis/:name', to: 'delphis#deletedelphisofuser', via: [:delete],  :defaults => {:format => :json}
 
-  match ':project_id/ram', to: 'rams#getramofproject', via: [:get],  :defaults => {:format => :json}
-  match ':project_id/ram/wbs', to: 'rams#getwbsforram', via: [:get],  :defaults => {:format => :json}
-  match ':project_id/ram/pbs', to: 'rams#getpbsforram', via: [:get],  :defaults => {:format => :json}
-  match ':project_id/ram/rbs', to: 'rams#getrbsforram', via: [:get],  :defaults => {:format => :json}
+  match ':project_id/rams', to: 'rams#getramofproject', via: [:get],  :defaults => {:format => :json}
+  match ':project_id/rams/wbs', to: 'rams#getwbsforram', via: [:get],  :defaults => {:format => :json}
+  match ':project_id/rams/pbs', to: 'rams#getpbsforram', via: [:get],  :defaults => {:format => :json}
+  match ':project_id/rams/rbs', to: 'rams#getrbsforram', via: [:get],  :defaults => {:format => :json}
 
   match ':project_id/gantt', to: 'workpackages#gantt', via: [:get],  :defaults => {:format => :json}
 
