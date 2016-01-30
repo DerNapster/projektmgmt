@@ -13,6 +13,14 @@ project2 = Project.create(name: 'Brücke',
                           description: 'Dies ist eine Brücke',
                           startdate: Date.new(2016, 1, 7))
 
+node100 = Node.create(name: 'Brücke',
+                    description: 'Dies ist eine Brücke',
+                    level: 0,
+                    duration: 200,
+                    startdate: Date.new(2016,1,7),
+                    enddate: Date.new(2016,7,25),
+                    milestone: true,
+                    project: project2)
 node1 = Node.create(name: 'WebShop',
                     description: 'Dies ist ein Webshop',
                     level: 0,
@@ -256,7 +264,11 @@ node27 = Node.create(name: 'Schnittstelle Finanzbuchhaltung',
                      project: project1,
                      parent: node24)
 
-
+wp100 = Workpackage.create(name: 'Brücke',
+                         description: '',
+                         level: 0,
+                         duration: 0,
+                         project: project2)
 wp1 = Workpackage.create(name: 'WebShop',
                          description: 'Dies ist eine Aufgabe für den Webshop',
                          level: 0,
@@ -425,18 +437,164 @@ wp28 = Workpackage.create(name: 'Lasttest',
                           project: project1,
                           parent: wp26)
 
-
+r100 = Role.create(name: "Brücke",
+                 description: "",
+                 project: project2,
+                 level: 0)
 r1 = Role.create(name: "Webshop",
-                 description: "Websop Desc",
+                 description: "",
                  project: project1,
                  level: 0)
-
-r2 = Role.create(name: "Projektmanagement",
-                 description: "PM",
+r2 = Role.create(name: "Intern",
+                 description: "",
                  project: project1,
-                 level: 0,
+                 level: 1,
                  parent: r1)
-
+r3 = Role.create(name: "Projektleiter",
+                 description: "",
+                 quantity: 1,
+                 qualification: "PMP",
+                 experience: ">3 Projektleitungen",
+                 project: project1,
+                 level: 2,
+                 parent: r2)
+r4 = Role.create(name: "projektcontroller",
+                 description: "",
+                 qualification: "Project Mgmt. Certificate",
+                 experience: "Junior",
+                 quantity: 1,
+                 project: project1,
+                 level: 2,
+                 parent: r2)
+r5 = Role.create(name: "Geschäftsanalytiker",
+                 description: "",
+                 qualification: "Business Analyst Certificate",
+                 experience: ">3 Jahre Product Management",
+                 project: project1,
+                 quantity: 1,
+                 level: 2,
+                 parent: r2)
+r6 = Role.create(name: "Systemanalytiker",
+                 description: "",
+                 qualification: "System Analyst Certificate",
+                 experience: ">3 Jahre Software Engineering",
+                 project: project1,
+                 quantity: 1,
+                 level: 2,
+                 parent: r2)
+r7 = Role.create(name: "Extern",
+                 description: "",
+                 project: project1,
+                 level: 1,
+                 parent: r1)
+r8 = Role.create(name: "Entwicklungsleiter",
+                 description: "",
+                 qualification: "Level 400 Softw. Eng. Cert.",
+                 experience: ">6 Jahre",
+                 quantity: 1,
+                 project: project1,
+                 level: 2,
+                 parent: r7)
+r9 = Role.create(name: "Technischer Architekt",
+                 description: "",
+                 qualification: "Level 400 Softw. Eng. Cert.",
+                 experience: ">6 Jahre",
+                 quantity: 1,
+                 project: project1,
+                 level: 2,
+                 parent: r7)
+r10 = Role.create(name: "Datenbankentwickler",
+                 description: "",
+                 project: project1,
+                 level: 2,
+                 parent: r7)
+r11 = Role.create(name: "Datenbankentwickler",
+                 description: "",
+                 qualification: "Level 200 Database Eng. C.",
+                 experience: "",
+                 quantity: 2,
+                 project: project1,
+                 level: 3,
+                 parent: r10)
+r12 = Role.create(name: "Datenbankentwickler",
+                  description: "",
+                  qualification: "Level 300 Database Eng. C.",
+                  experience: ">3 Jahre",
+                  quantity: 2,
+                  project: project1,
+                  level: 3,
+                  parent: r10)
+r13 = Role.create(name: "Softwareentwickler",
+                  description: "",
+                  project: project1,
+                  level: 2,
+                  parent: r7)
+r14 = Role.create(name: "Softwareentwickler",
+                  description: "",
+                  qualification: "Level 200 Software Eng. Cert.",
+                  experience: "",
+                  quantity: 1,
+                  project: project1,
+                  level: 3,
+                  parent: r13)
+r15 = Role.create(name: "Softwareentwickler",
+                  description: "",
+                  qualification: "Level 300 Software Eng. Cert.",
+                  experience: ">3 Jahre",
+                  quantity: 3,
+                  project: project1,
+                  level: 3,
+                  parent: r13)
+r16 = Role.create(name: "Softwareentwickler",
+                  description: "",
+                  qualification: "Level 400 Software Eng. Cert.",
+                  experience: ">6 Jahre",
+                  quantity: 3,
+                  project: project1,
+                  level: 3,
+                  parent: r13)
+r17 = Role.create(name: "Netzwerkentwickler",
+                  description: "",
+                  project: project1,
+                  level: 2,
+                  parent: r7)
+r18 = Role.create(name: "Netzwerkentwickler",
+                  description: "",
+                  qualification: "Level 200 Network Admin C.",
+                  experience: "",
+                  quantity: 1,
+                  project: project1,
+                  level: 3,
+                  parent: r17)
+r19 = Role.create(name: "Netzwerkentwickler",
+                  description: "",
+                  qualification: "Level 300 Network Admin C.",
+                  experience: ">3 Jahre",
+                  quantity: 1,
+                  project: project1,
+                  level: 3,
+                  parent: r17)
+r20 = Role.create(name: "Operator",
+                  description: "",
+                  project: project1,
+                  level: 2,
+                  parent: r7)
+r21 = Role.create(name: "Operator",
+                  description: "",
+                  qualification: "Level 300 Data Center Ops C.",
+                  experience: ">3 Jahre",
+                  quantity: 1,
+                  project: project1,
+                  level: 3,
+                  parent: r20)
+r22 = Role.create(name: "Operator",
+                  description: "",
+                  qualification: "Level 400 Data Center Ops C.",
+                  experience: ">6 Jahre",
+                  quantity: 1,
+                  project: project1,
+                  level: 3,
+                  parent: r20)
 
 
 ram1 = Ram.create(project: project1,
@@ -604,7 +762,23 @@ ram27 = Ram.create(project: project1,
 
 
 
-r2.rams << ram1
-r2.rams << ram2
-
-r1.rams << ram1
+ram4.roles << r5
+ram5.roles << r5
+ram6.roles << r3
+ram6.roles << r4
+ram8.roles << r6
+ram9.roles << r8
+ram12.roles << r9
+ram13.roles << r11
+ram15.roles << r11
+ram15.roles << r12
+ram16.roles << r14
+ram16.roles << r15
+ram16.roles << r16
+ram19.roles << r18
+ram20.roles << r18
+ram22.roles << r19
+ram23.roles << r19
+ram25.roles << r19
+ram26.roles << r21
+ram27.roles << r22
