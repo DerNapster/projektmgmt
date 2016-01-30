@@ -11,7 +11,7 @@
 
   projects.run ( function (){});
 
-  projects.controller('projectsController', function ($scope, projectService, projectsGraph, $log, $mdDialog, $mdMedia, $rootScope, $routeParams) {
+  projects.controller('projectsController', function ($scope, projectService, projectsGraph, $log, $mdDialog, $mdMedia, $rootScope, $routeParams, $location) {
 
         /*
         * GET /nodes.json
@@ -65,6 +65,8 @@
               if (data.status == 500 ) {
                 $log.debug( '500');
               }
+
+              $location.path("/" + data.id)
 
               // refresh works
               $scope.projects = $scope.refresh();
