@@ -65,7 +65,11 @@ class NodesController < ApplicationController
   def create
     @node = Node.new(node_params)
 
-    @node.level = @node.parent.level+1
+    if @node.parent
+      @node.level = @node.parent.level+1
+    else
+      @node.level = 0
+    end
 
     respond_to do |format|
       if @node.save
