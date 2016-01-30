@@ -20,9 +20,12 @@
       <tr ng-repeat="role in roles" id="{{role.id}}">
         <td></td>
         <td class="col-lg-2">
-          <md-input-container class="tableinput md-block" flex-gt-xs>
-            <input ng-model="role.name" aria-label="Name des Knoten" ng-blur="updateRole(role)"></input>
-          </md-input-container>
+          <div layout="row">
+            <span style="padding-left: {{role.level * 20}}px; border-right: 1px solid #dddddd; margin-right: 5px;" ></span>
+            <md-input-container class="tableinput md-block" flex-gt-xs>
+              <input ng-model="role.name" aria-label="Name des Knoten" ng-blur="updateRole(role)"></input>
+            </md-input-container>
+          </div>
         </td>
         <td class="col-lg-1">
           <md-input-container class="tableinput md-block" flex-gt-xs>

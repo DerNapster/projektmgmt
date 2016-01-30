@@ -7,7 +7,7 @@
   app.run(function () {
   });
 
-  app.config(function($routeProvider, $mdThemingProvider, $mdIconProvider, $mdDateLocaleProvider){
+  app.config(function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, $mdDateLocaleProvider){
 
     $mdIconProvider
       .defaultFontSet( 'fontawesome' )
@@ -32,7 +32,6 @@
       .theme('default')
       .primaryPalette('deep-orange')
       .accentPalette('grey');
-
 
     $routeProvider
       .when('/', {

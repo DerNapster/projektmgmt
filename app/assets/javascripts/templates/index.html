@@ -1,28 +1,25 @@
+<md-content layout="row" layout-wrap layout-align="center start" >
+  <div flex="50" flex-xs="100" layout="column" ng-repeat="project in projects">
+    <pre ng-if="$root.showDebug">{{project}}</pre>
+    <md-card >
+      <figure><img ng-src="/images/projects.jpg" class="md-card-image"></figure>
+      <md-card-title>
+        <md-card-title-text>
+          <md-button ng-href="#/{{project.id}}" class="md-primary md-hue-1">{{project.name}}</md-button>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>
+          {{project.description}}
+        </p>
+      </md-card-content>
 
-<div class="container">
-  <pre ng-if="$root.showDebug">{{projects}}</pre>
-  <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="column">
-    <div flex="50" flex-xs="100" layout="column" ng-repeat="project in projects">
-      <md-card >
-        <figure><img ng-src="/images/projects.jpg" class="md-card-image"></figure>
-        <md-card-title>
-          <md-card-title-text>
-            <md-button ng-href="#/{{project.id}}" class="md-primary md-hue-1">{{project.name}}</md-button>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <p>
-            {{project.description}}
-          </p>
-        </md-card-content>
+      <md-card-actions layout="column" layout-align="start">
+        <md-list>
+          <div ng-include="'_navigation.html'"></div>
+       </md-list>
 
-        <md-card-actions layout="column" layout-align="start">
-          <md-list>
-            <div ng-include="'_navigation.html'"></div>
-         </md-list>
-
-        </md-card-actions>
-      </md-card>
-    </div>
-  </md-content>
-</div>
+      </md-card-actions>
+    </md-card>
+  </div>
+</md-content>

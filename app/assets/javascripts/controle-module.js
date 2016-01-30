@@ -13,7 +13,7 @@
   });
 
 
-  controle.controller ('controleController', function($scope, $timeout, $mdSidenav, $mdComponentRegistry, $mdDialog, $log, projectService, $rootScope, $q) {
+  controle.controller ('controleController', function($scope, $timeout, $mdSidenav, $mdComponentRegistry, $mdDialog, $log, projectService, $rootScope, $q, $location) {
 
     var originatorEv;
     $scope.openMenu = function($mdOpenMenu, ev) {
@@ -82,6 +82,8 @@
     }
     function selectedItemChange(item) {
       $log.debug('Item changed to ' + JSON.stringify(item));
+      $log.debug(item.id);
+      $location.path('/' + item.id);
     }
     /**
      * Build `components` list of key/value pairs
