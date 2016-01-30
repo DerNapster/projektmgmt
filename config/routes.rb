@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   match ':project_id/users/graph', to: 'delphis#variance', via: [:get],  :defaults => {:format => :json}
   match ':project_id/users', to: 'delphis#usernameswithvariance', via: [:get],  :defaults => {:format => :json}
   match ':project_id/delphis/:name', to: 'delphis#deletedelphisofuser', via: [:delete],  :defaults => {:format => :json}
+  match ':project_id/users/:name', to: 'delphis#deletedelphisofuser', via: [:delete],  :defaults => {:format => :json}
 
   match ':project_id/rams', to: 'rams#getramofproject', via: [:get],  :defaults => {:format => :json}
   match ':project_id/rams/wbs', to: 'rams#getwbsforram', via: [:get],  :defaults => {:format => :json}

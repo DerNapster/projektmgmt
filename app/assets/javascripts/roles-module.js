@@ -47,13 +47,16 @@
      * @param name, description, level, duration, startdate, enddate, milestone, pbstable_id, parent_id
      * @return created Role
      */
-    $scope.newRole = function ( name, description, parent_id, project_id  ) {
+    $scope.newRole = function ( name, description, qualification, experience, quantity, parent_id, project_id  ) {
       // $roles.save(
       $roles.createRole(
         {
           name: name,
           description: description,
-            parent_id: parent_id,
+          qualification: qualification,
+          experience: experience,
+          quantity: quantity,
+          parent_id: parent_id,
           project_id: project_id
 
         }, function ( data )
@@ -132,9 +135,9 @@
         $log.debug(answer);
 
         if (answer.parent_id) {
-            $scope.newRole ( answer.name, answer.description, project_id, answer.parent  )
+            $scope.newRole ( answer.name, answer.description, answer.qualification, answer.experience, answer.quantity, project_id, answer.parent  )
         } else {
-            $scope.newRole ( answer.name, answer.description, project_id, $scope.parent  )
+            $scope.newRole ( answer.name, answer.description, answer.qualification, answer.experience, answer.quantity, project_id, $scope.parent  )
             $scope.parent = "";
         }
 

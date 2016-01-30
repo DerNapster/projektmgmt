@@ -18,7 +18,7 @@
 
         <form name="roleForm">
 
-        <pre>{{role}} </pre>
+        <pre ng-if="$root.showDebug">{{role}} </pre>
 
          <div layout-gt-xs="row" ng-show="roles != null">
           <md-input-container class="md-block" flex-gt-sm>
@@ -33,7 +33,7 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>Name </label>
             <input ng-model="newrole.name" aria-label="Name des Knoten" md-maxlength="30"> </input>
-            <div class="hint">Wie ist der Name des Knoten</div>
+            <div class="hint">Wie ist der Name der Rolle</div>
             <div ng-messages="roleForm.name.$error" ng-hide="showHints">
             </div>
           </md-input-container>
@@ -42,14 +42,44 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Beschreibung*</label>
-            <input ng-model="newrole.description" aria-label="Name des Knoten"></input>
-            <div class="hint" >Optional: Geben Sie eine Beschreibung des Knoten ein.</div>
+            <input ng-model="newrole.description" aria-label="Name der Rolle"></input>
+            <div class="hint" >Optional: Geben Sie eine Beschreibung der Rolle ein.</div>
             <div ng-messages="roleForm.descritpion.$error" ng-hide="showHints">
             </div>
           </md-input-container>
         </div>
 
-        <pre>"parent_id":{{role.id}}{{newrole}} </pre>
+        <div layout-gt-sm="row">
+         <md-input-container class="md-block" flex-gt-sm>
+           <label>Qualifikation </label>
+           <input ng-model="newrole.qualification" aria-label="Qualifikation der Rolle" md-maxlength="30"> </input>
+           <div class="hint">Wie ist der Qualifikaion der Rolle</div>
+           <div ng-messages="roleForm.qualification.$error" ng-hide="showHints">
+           </div>
+         </md-input-container>
+       </div>
+
+       <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Erfahrung </label>
+          <input ng-model="newrole.experience" aria-label="Erfahrung der Rolle" md-maxlength="30"> </input>
+          <div class="hint">Wie hoch ist die Erfahrung?</div>
+          <div ng-messages="roleForm.experience.$error" ng-hide="showHints">
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout-gt-sm="row">
+       <md-input-container class="md-block" flex-gt-sm>
+         <label>Anzahl </label>
+         <input ng-model="newrole.quantity" input="number" aria-label="Verfügbarkeit" > </input>
+         <div class="hint">Wie viele Personen sind verfügbar?</div>
+         <div ng-messages="roleForm.quantity.$error" ng-hide="showHints">
+         </div>
+       </md-input-container>
+     </div>
+
+        <pre ng-if="$root.showDebug">"parent_id":{{role.id}}{{newrole}} </pre>
 
       </div>
     </md-dialog-content>
