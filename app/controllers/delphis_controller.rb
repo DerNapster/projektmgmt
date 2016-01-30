@@ -88,7 +88,6 @@ class DelphisController < ApplicationController
   # GET /:project_id/delphi/evaluation
   def evaluation
     allParentIds = getworkpackageparentids params[:project_id]
-
     allWorkpackages = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
     @workpackages = Array.new
 
