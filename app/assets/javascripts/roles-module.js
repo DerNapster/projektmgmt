@@ -36,18 +36,26 @@
       $roles.getRole( { role_id:id } );
     };
 
+
+    $scope.refresh = function () {
+      return $scope.getRoles();
+    };
+
+
     /*
      * POST /roles
      * @param name, description, level, duration, startdate, enddate, milestone, pbstable_id, parent_id
      * @return created Role
      */
-    $scope.newRole = function ( name, description ) {
+    $scope.newRole = function ( name, description, parent_id, project_id  ) {
       // $roles.save(
       $roles.createRole(
         {
           name: name,
           description: description,
+            parent_id: parent_id,
           project_id: project_id
+
         }, function ( data )
         {
           $log.debug ( data );
@@ -57,7 +65,7 @@
           }
 
           // refresh roles
-          $scope.roles = $roles.getRoles();
+          $scope.roles = $roles.refresh();
         }
       );
     };
@@ -72,7 +80,7 @@
       role.$updateRole ( function ( data ) {
         $log.debug ( data );
         // refresh roles
-        $scope.roles = $roles.getRoles();
+        $scope.roles = $roles.refresh();
       });
     };
 
@@ -84,7 +92,7 @@
       $roles.deleteRole ( { role_id:id }, function ( data ) {
         $log.debug ( data );
         // refresh roles
-        $scope.roles = $roles.getRoles();
+        $scope.roles = $roles.refresh();
       });
     };
 
@@ -96,7 +104,7 @@
       $roles.remove ( function ( data ) {
         $log.debug ( data );
         // refresh roles
-        $scope.roles = $roles.getRoles();
+        $scope.roles = $roles.refresh();
       });
     };
 
@@ -124,9 +132,9 @@
         $log.debug(answer);
 
         if (answer.parent_id) {
-            $scope.newRole ( answer.name, project_id, answer.parent  )
+            $scope.newRole ( answer.name, answer.description, project_id, answer.parent  )
         } else {
-            $scope.newRole ( answer.name, project_id, $scope.parent  )
+            $scope.newRole ( answer.name, answer.description, project_id, $scope.parent  )
             $scope.parent = "";
         }
 

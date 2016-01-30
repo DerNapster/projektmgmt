@@ -34,14 +34,17 @@
         $scope.selectedProject = projectService.getProject(  { project_id:$routeParams.project_id } );
 
         $scope.refresh = function () {
-          return $scope.getProjects( );
+          return projectService.getProjects( );
         };
 
         /*
          * GET /nodes/{id}.json
          * @return Node
          */
-        $scope.getProject = projectService.getProject( { project_id:$routeParams.project_id } );
+        $scope.getProject = function ( id ) {
+          projectService.getProject( { project_id:id } );
+        };
+
 
         /*
          * POST /nodes
