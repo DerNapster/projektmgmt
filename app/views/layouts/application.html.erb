@@ -89,7 +89,7 @@
           <md-list>
             <div ng-repeat="project in projects">
               <md-subheader class="md-no-sticky">
-                {{project.name}}
+                <a href="#/{{project.id}}"> {{project.name}} </a>
               </md-subheader>
               <div ng-include="'_navigation.html'"></div>
               <md-divider ></md-divider>
@@ -152,6 +152,9 @@
 
         </div>
       </md-content>
+
+      <div ng-include="_fab.html"></div>
+
     </section>
   </div>
 </body>
