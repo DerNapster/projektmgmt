@@ -1,5 +1,5 @@
 <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" layout-xs="column">
-  <div flex="50" flex-xs="100" layout="column">
+  <div layout-fill layout="column">
     <md-card>
       <figure><img ng-src="/images/projects.jpg" class="md-card-image"></figure>
       <md-card-title>
@@ -78,7 +78,7 @@
     </md-card>
   </div>
 
-  <div flex="50" flex-xs="100" layout="column">
+  <div layout-fill layout="column">
     <pre ng-if="showDebug">{{users}}</pre>
     <md-card>
       <md-content ng-controller="usersController">
