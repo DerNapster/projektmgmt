@@ -97,6 +97,7 @@
             $log.debug ( data );
             // refresh nodes
             $scope.projects = $scope.refresh();
+            $location.path("/");
           });
         };
 

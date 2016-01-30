@@ -17,6 +17,7 @@
 
   <%= javascript_include_tag "graph-module" %>
   <%= javascript_include_tag "controle-module" %>
+  <%= javascript_include_tag "fab-module" %>
   <%= javascript_include_tag "nodes-module" %>
   <%= javascript_include_tag "projects-module" %>
   <%= javascript_include_tag "works-module" %>
@@ -153,7 +154,7 @@
         </div>
       </md-content>
 
-      <div ng-include="_fab.html"></div>
+      <div ng-controller="fabController as fab"  ng-include="'_fab.html'"></div>
 
     </section>
   </div>

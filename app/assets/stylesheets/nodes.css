@@ -30,3 +30,9 @@ td md-checkbox {
     left: 28%;
     height: 80%;
 }
+
+md-fab-speed-dial {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+}

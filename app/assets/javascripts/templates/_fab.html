@@ -1,19 +1,46 @@
-<md-fab-speed-dial md-open="demo.isOpen" md-direction="{{demo.selectedDirection}}"
-                        ng-class="demo.selectedMode">
+<pre ng-if="$root.showDebug">{{fab.isVisible()}}</pre>
+<md-fab-speed-dial ng-if="fab.isVisible()" md-open="fab.isOpen" md-direction="{{fab.selectedDirection}}"
+                        ng-class="fab.selectedMode" ng-mouseenter="fab.isOpen=true" ng-mouseleave="fab.isOpen=false">
  <md-fab-trigger>
    <md-button aria-label="menu" class="md-fab md-warn">
-     <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+      <md-icon md-font-set="material-icons">menu</md-icon>
    </md-button>
  </md-fab-trigger>
  <md-fab-actions>
-   <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-     <md-icon md-svg-src="img/icons/twitter.svg" aria-label="Twitter"></md-icon>
+   <md-button class="md-icon-button" ng-click="fab.pbs()">
+     <md-tooltip md-direction="down">
+       Product Breakdown Structur
+     </md-tooltip>
+     <md-icon md-font-set="material-icons">extension</md-icon>
    </md-button>
-   <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-     <md-icon md-svg-src="img/icons/facebook.svg" aria-label="Facebook"></md-icon>
+
+   <md-button class="md-icon-button" ng-click="fab.wbs()">
+     <md-tooltip md-direction="down">
+       Work Breakdown Structur
+     </md-tooltip>
+     <md-icon md-font-set="material-icons">build</md-icon>
    </md-button>
-   <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-     <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+
+   <md-button class="md-icon-button"  ng-click="fab.rbs()">
+     <md-tooltip md-direction="down">
+       Role Breakdown Structur
+     </md-tooltip>
+     <md-icon md-font-set="material-icons">people</md-icon>
    </md-button>
+
+   <md-button class="md-icon-button"  ng-click="fab.ram()">
+     <md-tooltip md-direction="down">
+       Resource Allocation Matrix
+     </md-tooltip>
+     <md-icon md-font-set="material-icons">person</md-icon>
+   </md-button>
+
+   <md-button class="md-icon-button"  ng-click="fab.delphi()">
+     <md-tooltip md-direction="down">
+       Delphi
+     </md-tooltip>
+     <md-icon md-font-set="material-icons">schedule</md-icon>
+   </md-button>
+
  </md-fab-actions>
 </md-fab-speed-dial>
