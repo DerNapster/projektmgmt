@@ -66,13 +66,14 @@ class RamsController < ApplicationController
         end
       else
         allNodeParentIds = getnodeparentids(projectId)
-        if allNodeParentIds.inculde?(pbsid)
+        if allNodeParentIds.include?(pbsid)
           ramObject = Ram.new(:order => index, :level => level, :node_id => pbs, :project_id => projectId, :allocatable => false)
         else
           ramObject = Ram.new(:order => index, :level => level, :node_id => pbs, :project_id => projectId, :allocatable => true)
         end
         ramObject.save
         # Leeres Feld im Array mitgeben, für Update
+        roles = Array.new
         roleHash = Hash.new
         roleHash["roleid"] = ''
         roleHash["rolename"] = ''
