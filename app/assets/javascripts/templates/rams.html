@@ -32,7 +32,7 @@
         </td>
         <td>
           <pre ng-if="$root.showDebug" ng-repeat="rroles in ram.roleArray">{{rroles.roleid}} : {{rroles.rolename}}</pre>
-          <md-select ng-repeat="rroles in ram.roleArray" ng-if="ram.allocatable" placeholder="{{rroles.rolename || 'Rolle zuweisen'}}" ng-model="rroles.id" md-on-open="loadRoles()" >
+          <md-select ng-repeat="rroles in ram.roleArray" ng-if="ram.allocatable" placeholder="{{rroles.rolename || 'Rolle zuweisen'}}" ng-model="rroles.roleid" md-on-open="loadRoles()" >
             <md-option ng-repeat="role in roles" ng-value="role.id" >{{role.name}}</md-option>
           </md-select>
         </td>

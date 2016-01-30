@@ -38,7 +38,7 @@
 
 
     $scope.refresh = function () {
-      return $scope.getRoles();
+      return $roles.getRoles();
     };
 
 
