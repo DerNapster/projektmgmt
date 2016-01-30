@@ -1,42 +1,48 @@
-<form>
-  <md-content>
-    <div class="md-dialog-content">
-      <h2>Eintrag hinzufügen</h2>
-
+<md-content layout="row" flex layout-align="center start" >
+  <md-card>
+    <figure><img ng-src="/images/projects.jpg" class="md-card-image"></figure>
+    <md-card-title>
+      <md-card-title-text>
+          <h2>Projekt hinzufügen</h2>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
       <form name="projectForm">
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Name </label>
+            <input ng-model="newproject.name" aria-label="Name des Projektes" md-maxlength="30"> </input>
+            <div class="hint">Wie ist der Name des Projektes</div>
+            <div ng-messages="roleForm.name.$error">
+            </div>
+          </md-input-container>
+        </div>
 
-       <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Name </label>
-          <input ng-model="newproject.name" aria-label="Name des Projektes" md-maxlength="30"> </input>
-          <div class="hint">Wie ist der Name des Projektes</div>
-          <div ng-messages="roleForm.name.$error">
-          </div>
-        </md-input-container>
-      </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Beschreibung*</label>
+            <input ng-model="newproject.description" aria-label="Beschreibung des Projektes"></input>
+            <div class="hint" >Optional: Geben Sie eine Beschreibung des Projektes ein.</div>
+            <div ng-messages="roleForm.descritpion.$error">
+            </div>
+          </md-input-container>
+        </div>
 
-      <div layout-gt-sm="row">
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Beschreibung*</label>
-          <input ng-model="newproject.description" aria-label="Beschreibung des Projektes"></input>
-          <div class="hint" >Optional: Geben Sie eine Beschreibung des Projektes ein.</div>
-          <div ng-messages="roleForm.descritpion.$error">
-          </div>
-        </md-input-container>
-      </div>
+        <div layout-gt-sm="row">
+          <md-datepicker ng-model="newproject.startdate" md-placeholder="Start Datum"></md-datepicker>
+        </div>
 
-      <div layout-gt-sm="row">
-        <md-datepicker ng-model="newproject.startdate" md-placeholder="Start Datum"></md-datepicker>
-      </div>
+        <pre ng-if="$root.showDebug">{{newproject}} </pre>
 
-      <pre ng-if="$root.showDebug">{{newproject}} </pre>
+        </div>
+      </form>
+    </md-card-content>
 
-    </div>
-  </md-dialog-content>
-  <md-actions layout="row">
-    <span flex></span>
-    <md-button ng-click="newProject( newproject )">
-      Hinzufügen
-    </md-button>
-  </md-actions>
-</form>
+    <md-card-actions layout="column" layout-align="start">
+      <span flex></span>
+      <md-button ng-click="newProject( newproject )">
+        Hinzufügen
+      </md-button>
+    </md-card-actions>
+  </md-card>
+</md-content>

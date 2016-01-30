@@ -32,7 +32,7 @@
   <%= google_webfonts_init({  google: ['Roboto', 'Material+Icons']  })  %>
 
   <script>
-    google.charts.load('current', {packages:['orgchart', 'gantt']});
+  google.charts.load('current', {packages:['orgchart', 'gantt']});
   </script>
 
 
@@ -59,15 +59,13 @@
         <md-toolbar class="md-theme-indigo" layout="row">
           <h1 class="md-toolbar-tools">Navigation</h1>
           <span flex>
-
-            <md-button ng-click="close()" class="md-icon-button" hide-gt-md>
-              <md-icon md-font-set="material-icons">close</md-icon>
-            </md-button>
-
+          <md-button ng-click="close()" class="md-icon-button" hide-gt-md>
+            <md-icon md-font-set="material-icons">close</md-icon>
+          </md-button>
         </md-toolbar>
 
-        <form ng-submit="$event.preventDefault()">
-          <md-autocomplete
+          <form ng-submit="$event.preventDefault()">
+            <md-autocomplete
             ng-disabled="ctrl.isDisabled"
             md-no-cache="ctrl.noCache"
             md-selected-item="ctrl.selectedItem"
@@ -75,111 +73,86 @@
             md-search-text="ctrl.searchText"
             md-selected-item-change="ctrl.selectedItemChange(item)"
             md-items="item in ctrl.querySearch(ctrl.searchText)"
-            md-item-text="item.display"
+            md-item-text="item.name"
             md-min-length="0"
             placeholder="Projekt suchen...">
-          <md-item-template>
-            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.name}}</span>
-          </md-item-template>
-          <md-not-found>
-            Kein Projekt "{{ctrl.searchText}}" gefunden.
-          </md-not-found>
-        </md-autocomplete>
+            <md-item-template>
+              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.name}}</span>
+            </md-item-template>
+            <md-not-found>
+              Kein Projekt "{{ctrl.searchText}}" gefunden.
+            </md-not-found>
+          </md-autocomplete>
         </form>
-
-
 
         <md-content class="md-padding" ng-controller="projectsController">
           <md-list>
             <div ng-repeat="project in projects">
-                <md-subheader class="md-no-sticky">
-                  {{project.name}}
-                </md-subheader>
-                <div ng-include="'_navigation.html'"></div>
-                <!--<md-list-item ng-href="#/{{project.id}}/nodes">
-                  <md-icon md-font-set="material-icons">extension</md-icon>
-                    <p>Product Breakdown Structur</p>
-                </md-list-item>
-                <md-list-item ng-href="#/{{project.id}}/works">
-                  <md-icon md-font-set="material-icons">build</md-icon>
-                    <p>Work Breakdown Structur</p>
-                </md-list-item>
-
-                <md-list-item ng-href="#/{{project.id}}/roles">
-                  <md-icon md-font-set="material-icons">people</md-icon>
-                    <p>Role Breakdown Structur</p>
-                </md-list-item>
-
-                 <md-list-item ng-href="#/{{project.id}}/rams">
-                   <md-icon md-font-set="material-icons">person outline</md-icon>
-                     <p>Resource Allocation Matrix</p>
-                 </md-list-item>
-
-                <md-list-item ng-href="#/{{project.id}}/delphis">
-                  <md-icon md-font-set="material-icons">schedule</md-icon>
-                    <p>Delphi</p>
-                </md-list-item>-->
-                <md-divider ></md-divider>
+              <md-subheader class="md-no-sticky">
+                {{project.name}}
+              </md-subheader>
+              <div ng-include="'_navigation.html'"></div>
+              <md-divider ></md-divider>
             </div>
           </md-list>
         </md-content>
 
       </md-sidenav>
 
-        <md-content flex class="md-whiteframe-z2">
-          <div layout="column" layout-fill layout-align="center center" class="view-container">
+      <md-content flex class="md-whiteframe-z2">
+        <div layout="column" layout-fill layout-align="center center" class="view-container">
 
-            <md-toolbar>
-              <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Navigation" ng-click="toggleLeft()">
-                  <md-icon md-font-set="material-icons">menu</md-icon>
+          <md-toolbar>
+            <div class="md-toolbar-tools">
+              <md-button class="md-icon-button" aria-label="Navigation" ng-click="toggleLeft()">
+                <md-icon md-font-set="material-icons">menu</md-icon>
+              </md-button>
+              <h2>
+                <span>Projektmanagement</span>
+              </h2>
+              <span flex></span>
+
+              <md-button class="md-icon-button" aria-label="New Projekt" ng-href="#/new">
+                <md-tooltip md-direction="down">
+                  Projekt hinzufügen
+                </md-tooltip>
+                <md-icon md-font-set="material-icons">add</md-icon>
+              </md-button>
+
+              <md-button class="md-icon-button" aria-label="Home" href="#/">
+                <md-tooltip md-direction="down">
+                  Zur Übersicht
+                </md-tooltip>
+                <md-icon md-font-set="material-icons">home</md-icon>
+              </md-button>
+
+              <md-menu>
+                <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
+                  <md-icon md-font-set="material-icons">more_vert</md-icon>
                 </md-button>
-                <h2>
-                  <span>Projektmanagement</span>
-                </h2>
-                <span flex></span>
 
-                <md-button class="md-icon-button" aria-label="New Projekt" ng-href="#/new">
-                  <md-tooltip md-direction="down">
-                    Projekt hinzufügen
-                  </md-tooltip>
-                  <md-icon md-font-set="material-icons">add</md-icon>
-                </md-button>
+                <md-menu-content width="4">
+                  <md-menu-item>
+                    <md-switch ng-model="$root.showDebug">
+                      Debug {{$root.showDebug}}
+                    </md-switch>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <md-button>
+                      <md-icon md-font-set="material-icons">test</md-icon>
+                      Test
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </div>
+          </md-toolbar>
 
-                <md-button class="md-icon-button" aria-label="Home" href="#/">
-                  <md-tooltip md-direction="down">
-                    Zur Übersicht
-                  </md-tooltip>
-                  <md-icon md-font-set="material-icons">home</md-icon>
-                </md-button>
+          <ng-view></ng-view>
 
-                <md-menu>
-                  <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
-                    <md-icon md-font-set="material-icons">more_vert</md-icon>
-                  </md-button>
-
-                  <md-menu-content width="4">
-                    <md-menu-item>
-                      <md-switch ng-model="$root.showDebug">
-                          <md-icon md-font-set="material-icons">live help</md-icon>
-                          Debug {{$root.showDebug}}
-                      </md-switch>
-                    </md-menu-item>
-                  </md-menu-content>
-                </md-menu>
-              </div>
-            </md-toolbar>
-
-
-
-
-            <div ng-view class="view-frame animate-view"></div>
-          </div>
-        </md-content>
-
+        </div>
+      </md-content>
     </section>
-
   </div>
-
 </body>
 </html>
