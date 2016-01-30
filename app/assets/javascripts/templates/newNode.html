@@ -18,7 +18,7 @@
 
         <form name="nodeForm">
 
-        <pre>{{node}} </pre>
+        <pre ng-if="$root.showDebug">{{node}} </pre>
 
          <div layout-gt-xs="row" ng-show="nodes != null">
           <md-input-container class="md-block" flex-gt-sm>
@@ -52,10 +52,10 @@
         <div layout-gt-sm="row">
           <md-checkbox aria-label="Meilenstein" ng-model="newNode.milestone" aria-label="Meilenstein"> <label> Meilenstein </label>
         </div>
-
-        <pre>Parent: {{node.id}}</pre>
-        <pre>{{newNode}} </pre>
-
+        <div ng-if="$root.showDebug">
+          <pre>Parent: {{node.id}}</pre>
+          <pre>{{newNode}} </pre>
+        </div>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">

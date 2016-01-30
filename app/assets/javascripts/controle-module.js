@@ -49,6 +49,7 @@
                         });
     };
 
+
     var self = this;
     self.simulateQuery = false;
     self.isDisabled    = false;

@@ -11,7 +11,7 @@
 
   projects.run ( function (){});
 
-  projects.controller('projectsController', function ($scope, projectService, projectsGraph, $log, $mdDialog, $mdMedia, $rootScope, $routeParams) {
+  projects.controller('projectsController', function ($scope, projectService, projectsGraph, $log, $mdDialog, $mdMedia, $rootScope, $routeParams, $location) {
 
         /*
         * GET /nodes.json
@@ -66,6 +66,8 @@
                 $log.debug( '500');
               }
 
+              $location.path("/" + data.id)
+
               // refresh works
               $scope.projects = $scope.refresh();
             }
@@ -95,6 +97,7 @@
             $log.debug ( data );
             // refresh nodes
             $scope.projects = $scope.refresh();
+            $location.path("/");
           });
         };
 
