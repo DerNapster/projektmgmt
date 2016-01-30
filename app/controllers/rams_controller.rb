@@ -163,10 +163,18 @@ class RamsController < ApplicationController
   def update
     respond_to do |format|
       if @ram.update(ram_params)
+        @ram.roles.each do |role|
+          @ram.roles.delete(role)
+        end
         roleArray = params[:roleArray]
         if roleArray != nil
+
           roleArray.each do |roleParam|
-            @ram.roles << Role.find(roleParam["id"])
+
+            puts "--------" + roleParam["roleid".to_sym].to_s
+            role = Role.find(roleParam["roleid"])
+            @ram.roles << role
+
           end
         end
         @ram.workpackage_id = params[:workpackage_id]
@@ -198,7 +206,7 @@ class RamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ram_params
-      params.require(:ram).permit(:workpackage_id, :node_id, :project_id, :level, :order, :allocatable, :roleArray)
+      params.require(:ram).permit(:workpackage_id, :node_id, :project_id, :level, :order, :allocatable, :roleArray, :nodename, :workpackagename, :projectname)
     end
 
 end

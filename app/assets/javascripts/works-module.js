@@ -9,9 +9,7 @@
   });
 
 
-  works.run ( function ($works, $log, $routeParams){
-    $log.debug($works.getWork({work_id:1}));
-  });
+  works.run ( function (){});
 
 
   ///
@@ -26,7 +24,6 @@
 
     $scope.getGraphData = worksGraph.get( project_id )
       .then(function (data) {
-        $log.debug(data);
         $scope.chartData = data.data;
       });
 
@@ -41,7 +38,6 @@
 
       worksGraph.get( project_id )
         .then(function (data) {
-          $log.debug(data);
           $scope.chartData = data.data;
         });
 
@@ -223,10 +219,8 @@
 
             var promise = $http.get("/" + id + endpoint)
             .success(function (data) {
-              $log.debug(data);
             })
             .error(function (data) {
-              $log.debug(data);
             });
 
             return promise;

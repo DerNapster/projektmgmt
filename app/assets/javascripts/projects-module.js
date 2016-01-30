@@ -9,11 +9,7 @@
       $('meta[name=csrf-token]').attr('content');
   });
 
-
-  projects.run ( function (projectService, $log){
-    $log.debug('app.projects', projectService.getProjects());
-
-  });
+  projects.run ( function (){});
 
   projects.controller('projectsController', function ($scope, projectService, projectsGraph, $log, $mdDialog, $mdMedia, $rootScope, $routeParams) {
 
@@ -27,16 +23,10 @@
 
         $scope.startDate = new Date();
 
-        /* projectsGraph.get( project_id, $scope.startDate.year, $scope.startDate.month, $scope.startDate.day )
-          .then(function (data) {
-            $log.debug(data);
-            $scope.chartData = data.data;
-          });*/
 
         $scope.getChartData = function () {
           projectsGraph.get( project_id, $scope.startDate.getFullYear(), $scope.startDate.getMont(), $scope.startDate.getDay() )
             .then(function (data) {
-              $log.debug(data);
               $scope.chartData = data.data;
             });
         }
@@ -200,10 +190,10 @@
 
             var promise = $http.get( id + "/" + endpoint)
             .success(function (data) {
-              $log.debug(data);
+
             })
             .error(function (data) {
-              $log.debug(data);
+
             });
 
             return promise;

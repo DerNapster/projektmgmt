@@ -14,22 +14,30 @@
     </thead>
     <tbody>
       <tr ng-repeat="ram in rams">
-
         <td class="col-lg-4 col-xs-4">
-          {{ram.node.name}}
+          <div layout-gt-xs="row">
+            <span style="padding-left:{{ram.level * 20}}px; border-right: 1px solid #dddddd; margin-right: 5px;" ></span>
+            <md-input-container class="tableinput md-block" flex-gt-xs>
+              <input ng-model="ram.nodename" aria-label="Name des Knoten" disabled></input>
+              <div class="hint">{{work.description}}</div>
+            </md-input-container>
+          </div>
         </td>
+
         <td>
-          <md-select ng-disabled="ram.allocatable" placeholder="Workpackage zuweisen" ng-model="ram.node.workpackagename" md-on-open="loadWorkpackages()">
-            <md-option ng-value="workpackage" ng-repeat="workpackage in workpackages">{{workpackage.name}}</md-option>
+          <pre ng-if="$root.showDebug">{{ram.workpackage_id}} : {{ram.workpackagename}}</pre>
+          <md-select ng-if="ram.allocatable" placeholder="{{ram.workpackagename || 'Workpackage zuweisen'}}" ng-model="ram.workpackage_id" md-on-open="loadWorkpackages()">
+            <md-option ng-repeat="workpackage in workpackages" ng-value="workpackage.id" >{{workpackage.name}}</md-option>
           </md-select>
         </td>
         <td>
-          <md-select ng-disabled="ram.allocatable" placeholder="Rolle zuweisen" ng-model="ram.node.roleArray[0]" md-on-open="loadRoles()" >
-            <md-option ng-value="role" ng-repeat="role in roles">{{role.name}}</md-option>
+          <pre ng-if="$root.showDebug" ng-repeat="rroles in ram.roleArray">{{rroles.roleid}} : {{rroles.rolename}}</pre>
+          <md-select ng-repeat="rroles in ram.roleArray" ng-if="ram.allocatable" placeholder="{{rroles.rolename || 'Rolle zuweisen'}}" ng-model="rroles.id" md-on-open="loadRoles()" >
+            <md-option ng-repeat="role in roles" ng-value="role.id" >{{role.name}}</md-option>
           </md-select>
         </td>
         <td>
-          <md-button ng-if="!ram.allocatable" class="md-icon-button" aria-label="Speichern" ng-click="updateRam($event, ram)" >
+          <md-button ng-if="ram.allocatable" class="md-icon-button" aria-label="Speichern" ng-click="updateRam($event, ram)" >
             <md-tooltip md-direction="left">
               Speichern
             </md-tooltip>

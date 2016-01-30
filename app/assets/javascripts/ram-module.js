@@ -47,12 +47,12 @@
             });
     };
 
-  
+
 
   });
 
   ram.provider('$rams', function () {
-    var endpoint = '/ram';
+    var endpoint = '/rams';
 
     this.setEndpoint = function ( url ) {
       endpoint = url;
@@ -79,7 +79,7 @@
 
 
   ram.provider('ramService', function () {
-    var endpoint = '/ram';
+    var endpoint = '/rams';
 
     this.$get = function ($http, $log, $q) {
       return {

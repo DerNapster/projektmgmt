@@ -1,0 +1,48 @@
+[
+  { "node_id":1,
+    "nodename":"WebShop",
+    "level":0,
+    "order":1,
+    "project_id":"1",
+    "projectname":"Webshop",
+    "roleArray":[
+      {"roleid":1,"rolename":"Webshop"},
+      {"roleid":2,"rolename":"Projektmanagement"}
+    ],
+    "allocatable":true,
+    "workpackage_id":1,
+    "workpackagename":"WebShop Gesamtaufgabe",
+    "id":1
+  },
+  { "node_id":2,
+    "nodename":"Geschäftsplan und Architektur",
+    "level":1,
+    "order":2,
+    "project_id":"1",
+    "projectname":"Webshop",
+    "roleArray":[{"roleid":2,"rolename":"Projektmanagement"}],
+    "allocatable":true,
+    "workpackage_id":2,
+    "workpackagename":"Geschäftsplan und Architektur Aufgabe",
+    "id":2
+  },
+  { "node_id":3,
+    "nodename":"Geschäftsplan",
+    "level":2,
+    "order":3,
+    "project_id":"1",
+    "projectname":"Webshop",
+    "roleArray":[],
+    "allocatable":false,
+    "id":993},
+  { "node_id":4,
+    "nodename":"Business Case",
+    "level":3,
+    "order":4,
+    "project_id":"1",
+    "projectname":"Webshop",
+    "roleArray":[],
+    "allocatable":false,
+    "id":994
+  }
+]
