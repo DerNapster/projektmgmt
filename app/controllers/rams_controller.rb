@@ -35,40 +35,52 @@ class RamsController < ApplicationController
       pbsid = pbs.id
       pbsname = pbs.name
       level = pbs.level
-      #ramHash["node"] = pbs
       ramHash["node_id"] = pbsid
       ramHash["nodename"] = pbsname
       ramHash["level"] = level
       ramHash["order"] = index
       ramHash["project_id"] = projectId
       ramHash["projectname"] = Project.where(id: projectId).first.name
-      #ramHash["project"] = Project.where(id: projectId)
-      #ramHash["workpackageid"] = ""
-      #ramHash["workpackagename"] = ""
       ramHash["roleArray"] = Array.new
-      ramHash["allocatable"] = false
       ramObject = Ram.where(project_id: projectId, node_id: pbsid).includes(:workpackage).first
+
       if ramObject
-        workpackageid = ramObject.workpackage_id
-        workpackagename = ramObject.workpackage.name
-        roles = Array.new
-        ramObject.roles.each do |role|
+        if ramObject.allocatable == true
+          workpackageid = ramObject.workpackage_id
+          workpackagename = ramObject.workpackage.name
+          roles = Array.new
+          ramObject.roles.each do |role|
+            roleHash = Hash.new
+            roleHash["roleid"] = role.id
+            roleHash["rolename"] = role.name
+            roles << roleHash
+          end
+          # Leeres Feld im Array mitgeben, für Update
           roleHash = Hash.new
-          roleHash["roleid"] = role.id
-          roleHash["rolename"] = role.name
+          roleHash["roleid"] = ''
+          roleHash["rolename"] = ''
           roles << roleHash
-          #roles << role
+          ramHash["workpackage_id"] = workpackageid
+          ramHash["workpackagename"] = workpackagename
+          ramHash["roleArray"] = roles
         end
-        ramHash["workpackage_id"] = workpackageid
-        ramHash["workpackagename"] = workpackagename
-        #ramHash["workpackage"] = ramObject.workpackage
-        ramHash["roleArray"] = roles
-        ramHash["allocatable"] = true
       else
-        ramObject = Ram.new(:order => index, :level => level, :node_id => pbs, :project_id => projectId)
+        allNodeParentIds = getnodeparentids(projectId)
+        if allNodeParentIds.inculde?(pbsid)
+          ramObject = Ram.new(:order => index, :level => level, :node_id => pbs, :project_id => projectId, :allocatable => false)
+        else
+          ramObject = Ram.new(:order => index, :level => level, :node_id => pbs, :project_id => projectId, :allocatable => true)
+        end
         ramObject.save
+        # Leeres Feld im Array mitgeben, für Update
+        roleHash = Hash.new
+        roleHash["roleid"] = ''
+        roleHash["rolename"] = ''
+        roles << roleHash
+        ramHash["roleArray"] = roles
       end
       ramHash["id"] = ramObject.id
+      ramHash["allocatable"] = ramObject.allocatable
       @ramobjects << ramHash
       index = index + 1
     end

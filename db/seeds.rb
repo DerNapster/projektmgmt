@@ -437,17 +437,172 @@ r2 = Role.create(name: "Projektmanagement",
                  level: 0,
                  parent: r1)
 
+
+
 ram1 = Ram.create(project: project1,
                   node: node1,
-                  workpackage: wp1,
-                  level: 1,
+                  workpackage: nil,
+                  allocatable: false,
+                  level: 0,
                   order: 1)
-
 ram2 = Ram.create(project: project1,
                   node: node2,
-                  workpackage: wp2,
-                  level: 2,
+                  workpackage: nil,
+                  allocatable: false,
+                  level: 1,
                   order: 2)
+ram3 = Ram.create(project: project1,
+                  node: node3,
+                  workpackage: nil,
+                  allocatable: false,
+                  level: 2,
+                  order: 3)
+ram4 = Ram.create(project: project1,
+                  node: node4,
+                  workpackage: wp4,
+                  allocatable: true,
+                  level: 3,
+                  order: 4)
+ram5 = Ram.create(project: project1,
+                  node: node5,
+                  workpackage: wp7,
+                  allocatable: true,
+                  level: 3,
+                  order: 5)
+ram6 = Ram.create(project: project1,
+                  node: node6,
+                  workpackage: wp5,
+                  allocatable: true,
+                  level: 3,
+                  order: 6)
+ram7 = Ram.create(project: project1,
+                  node: node7,
+                  workpackage: nil,
+                  allocatable: false,
+                  level: 2,
+                  order: 7)
+ram8 = Ram.create(project: project1,
+                  node: node8,
+                  workpackage: wp17,
+                  allocatable: true,
+                  level: 3,
+                  order: 8)
+ram9 = Ram.create(project: project1,
+                  node: node9,
+                  workpackage: wp18,
+                  allocatable: true,
+                  level: 3,
+                  order: 9)
+ram10 = Ram.create(project: project1,
+                  node: node10,
+                  workpackage: nil,
+                  allocatable: false,
+                  level: 1,
+                  order: 10)
+ram11 = Ram.create(project: project1,
+                  node: node11,
+                  workpackage: nil,
+                  allocatable: false,
+                  level: 2,
+                  order: 11)
+ram12 = Ram.create(project: project1,
+                  node: node12,
+                  workpackage: wp21,
+                  allocatable: true,
+                  level: 3,
+                  order: 12)
+ram13 = Ram.create(project: project1,
+                  node: node13,
+                  workpackage: wp22,
+                  allocatable: true,
+                  level: 3,
+                  order: 13)
+ram14 = Ram.create(project: project1,
+                  node: node14,
+                  workpackage: nil,
+                  allocatable: false,
+                  level: 2,
+                  order: 14)
+ram15 = Ram.create(project: project1,
+                  node: node15,
+                  workpackage: wp8,
+                  allocatable: true,
+                  level: 3,
+                  order: 15)
+ram16 = Ram.create(project: project1,
+                   node: node16,
+                   workpackage: wp10,
+                   allocatable: true,
+                   level: 3,
+                   order: 16)
+ram17 = Ram.create(project: project1,
+                   node: node17,
+                   workpackage: nil,
+                   allocatable: false,
+                   level: 1,
+                   order: 17)
+ram18 = Ram.create(project: project1,
+                   node: node18,
+                   workpackage: nil,
+                   allocatable: false,
+                   level: 2,
+                   order: 18)
+ram19 = Ram.create(project: project1,
+                   node: node19,
+                   workpackage: wp14,
+                   allocatable: true,
+                   level: 3,
+                   order: 19)
+ram20 = Ram.create(project: project1,
+                   node: node20,
+                   workpackage: wp11,
+                   allocatable: true,
+                   level: 3,
+                   order: 20)
+ram21 = Ram.create(project: project1,
+                   node: node21,
+                   workpackage: nil,
+                   allocatable: false,
+                   level: 2,
+                   order: 21)
+ram22 = Ram.create(project: project1,
+                   node: node22,
+                   workpackage: wp24,
+                   allocatable: true,
+                   level: 3,
+                   order: 22)
+ram23 = Ram.create(project: project1,
+                   node: node23,
+                   workpackage: wp25,
+                   allocatable: true,
+                   level: 3,
+                   order: 23)
+ram24 = Ram.create(project: project1,
+                   node: node24,
+                   workpackage: nil,
+                   allocatable: false,
+                   level: 2,
+                   order: 24)
+ram25 = Ram.create(project: project1,
+                   node: node25,
+                   workpackage: wp15,
+                   allocatable: true,
+                   level: 3,
+                   order: 25)
+ram26 = Ram.create(project: project1,
+                   node: node26,
+                   workpackage: wp27,
+                   allocatable: true,
+                   level: 3,
+                   order: 26)
+ram27 = Ram.create(project: project1,
+                   node: node27,
+                   workpackage: wp28,
+                   allocatable: true,
+                   level: 3,
+                   order: 27)
+
+
 
 r2.rams << ram1
 r2.rams << ram2
