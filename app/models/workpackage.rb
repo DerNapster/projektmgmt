@@ -54,7 +54,7 @@ class Workpackage < ActiveRecord::Base
         errors.add(:parent, "Parent level must be one smaller than child level")
       end
       unless (parent.project.id == project.id)
-        errors.add(:parent, "Parent WBSTable must be the same as child WBSTable")
+        errors.add(:parent, "Parent Project must be the same as child Project")
       end
     end
   end

@@ -29,4 +29,9 @@ module ApplicationHelper
     allParentIds = Workpackage.where(project_id: projectid).map { |wp| wp.parent_id }
     allParentIds.uniq
   end
+
+  def getnodeparentids (projectid)
+    allParentIds = Node.where(project_id: projectid).map { |wp| wp.parent_id }
+    allParentIds.uniq
+  end
 end
