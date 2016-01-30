@@ -46,8 +46,12 @@ class RamsController < ApplicationController
 
       if ramObject
         if ramObject.allocatable == true
-          workpackageid = ramObject.workpackage_id
-          workpackagename = ramObject.workpackage.name
+          if ramObject.workpackage
+            workpackageid = ramObject.workpackage_id
+            workpackagename = ramObject.workpackage.name
+            ramHash["workpackage_id"] = workpackageid
+            ramHash["workpackagename"] = workpackagename
+          end
           roles = Array.new
           ramObject.roles.each do |role|
             roleHash = Hash.new
@@ -60,8 +64,7 @@ class RamsController < ApplicationController
           roleHash["roleid"] = ''
           roleHash["rolename"] = ''
           roles << roleHash
-          ramHash["workpackage_id"] = workpackageid
-          ramHash["workpackagename"] = workpackagename
+
           ramHash["roleArray"] = roles
         end
       else
