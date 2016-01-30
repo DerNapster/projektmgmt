@@ -38,7 +38,8 @@
 
 
     $scope.refresh = function () {
-      return $roles.getRoles();
+      $log.debug ( 'refresh!' );
+      return $roles.getRoles({ project_id:project_id });
     };
 
 
@@ -68,7 +69,7 @@
           }
 
           // refresh roles
-          $scope.roles = $roles.refresh();
+          $scope.roles = $scope.refresh();
         }
       );
     };
@@ -83,7 +84,7 @@
       role.$updateRole ( function ( data ) {
         $log.debug ( data );
         // refresh roles
-        $scope.roles = $roles.refresh();
+        $scope.roles = $scope.refresh();
       });
     };
 
@@ -95,7 +96,7 @@
       $roles.deleteRole ( { role_id:id }, function ( data ) {
         $log.debug ( data );
         // refresh roles
-        $scope.roles = $roles.refresh();
+        $scope.roles = $scope.refresh();
       });
     };
 
@@ -107,7 +108,7 @@
       $roles.remove ( function ( data ) {
         $log.debug ( data );
         // refresh roles
-        $scope.roles = $roles.refresh();
+        $scope.roles = $scope.refresh();
       });
     };
 
@@ -135,9 +136,9 @@
         $log.debug(answer);
 
         if (answer.parent_id) {
-            $scope.newRole ( answer.name, answer.description, answer.qualification, answer.experience, answer.quantity, project_id, answer.parent  )
+            $scope.newRole ( answer.name, answer.description, answer.qualification, answer.experience, answer.quantity, answer.parent, project_id  )
         } else {
-            $scope.newRole ( answer.name, answer.description, answer.qualification, answer.experience, answer.quantity, project_id, $scope.parent  )
+            $scope.newRole ( answer.name, answer.description, answer.qualification, answer.experience, answer.quantity, $scope.parent, project_id )
             $scope.parent = "";
         }
 
