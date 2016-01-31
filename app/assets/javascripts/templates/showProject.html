@@ -78,6 +78,12 @@
     </md-card>
   </div>
 
+  <md-content>
+        <pre ng-if="showDebug">{{chartData}}</pre>
+
+    <div gantt-Projectschart></div>
+  </md-content>
+
   <div layout-fill layout="column">
     <pre ng-if="showDebug">{{users}}</pre>
     <md-card>
@@ -106,10 +112,4 @@
       </md-list>
     </md-card>
   </div>
-</md-content>
-
-<md-content>
-      <pre ng-if="showDebug">{{chartData}}</pre>
-
-  <div gantt-Projectschart></div>
 </md-content>
