@@ -1,11 +1,11 @@
 
 <md-toolbar layout layout-align="center start">
-<h1>Delphi</h1>
+  <h1>Delphi</h1>
 </md-toolbar>
 
 <div class="container" >
- <pre ng-if="$root.showDebug">{{nodes}}</pre>
- <pre ng-if="$root.showDebug"> {{chartData}} </pre>
+  <pre ng-if="$root.showDebug">{{nodes}}</pre>
+  <pre ng-if="$root.showDebug"> {{chartData}} </pre>
 </div>
 
 <md-card>
@@ -24,36 +24,28 @@
   </div>
 </md-card>
 
-<md-tabs md-dynamic-height md-border-bottom ng-if="delphi.username">
-  <md-tab label="Delphi">
-    <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th class="col-xs-1">Dauer</th>
-          <th class="col-xs-11">Arbeitspaket</th>
-        </tr>
-      </thead>
-      <tbody >
-        <tr ng-repeat="delphi in delphis" id="{{delphi.id}}">
-          <td></td>
-          <td class="col-xs-1">
-            <md-input-container class="tableinput md-block" flex-gt-xs>
-              <input ng-model="delphi.value" aria-label="Dauer des Knoten" ng-blur="updateDelphi(delphi)"></input>
-            </md-input-container>
-          </td>
-          <td class="col-xs-11">
-            <md-input-container class="tableinput md-block" flex-gt-xs>
-              <input ng-model="delphi.workpackagename" disabled aria-label="Name des Knoten"></input>
-            </md-input-container>
-          </td>
-        </tr>
-      </tbody>
-      </table>
-  </md-tab>
-
-  <md-tab label="Open">
-
-  </md-tab>
-</md-tabs>
+<div class="table-responsive" ng-if="delphi.username">
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="col-xs-1">Dauer</th>
+        <th class="col-xs-11">Arbeitspaket</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr ng-repeat="delphi in delphis" id="{{delphi.id}}">
+        <td></td>
+        <td class="col-xs-1">
+          <md-input-container class="tableinput md-block" flex-gt-xs>
+            <input ng-model="delphi.value" aria-label="Dauer des Knoten" ng-blur="updateDelphi(delphi)"></input>
+          </md-input-container>
+        </td>
+        <td class="col-xs-11">
+          <md-input-container class="tableinput md-block" flex-gt-xs>
+            <input ng-model="delphi.workpackagename" disabled aria-label="Name des Knoten"></input>
+          </md-input-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
