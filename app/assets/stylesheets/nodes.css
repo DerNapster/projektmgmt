@@ -36,3 +36,7 @@ md-fab-speed-dial {
   bottom: 5%;
   right: 5%;
 }
+
+input:disabled {
+  color: black !important;
+}

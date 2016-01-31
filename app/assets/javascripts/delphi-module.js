@@ -19,7 +19,7 @@
        * Refreshes the object list
        */
       $scope.refresh = function () {
-        return $delphis.getDelphis( { project_id:project_id, delphi_username:name } );
+        return $delphis.getDelphis( { project_id:project_id, delphi_username:$scope.username } );
       };
 
       /*
@@ -37,6 +37,7 @@
       * @return Delphis List
       */
       $scope.getDelphis = function ( name ) {
+        $scope.username = name;
         $scope.delphis = $delphis.getDelphis( { project_id:project_id, delphi_username:name } ) ;
       }
 
