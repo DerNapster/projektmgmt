@@ -21,10 +21,12 @@ ActiveRecord::Schema.define(version: 20160122210510) do
     t.integer  "workpackage_id"
     t.integer  "value"
     t.string   "workpackagename"
+    t.integer  "project_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
+  add_index "delphis", ["project_id"], name: "index_delphis_on_project_id", using: :btree
   add_index "delphis", ["workpackage_id"], name: "index_delphis_on_workpackage_id", using: :btree
 
   create_table "nodes", force: :cascade do |t|
@@ -117,6 +119,7 @@ ActiveRecord::Schema.define(version: 20160122210510) do
   add_index "workpackages", ["parent_id"], name: "index_workpackages_on_parent_id", using: :btree
   add_index "workpackages", ["project_id"], name: "index_workpackages_on_project_id", using: :btree
 
+  add_foreign_key "delphis", "projects"
   add_foreign_key "delphis", "workpackages"
   add_foreign_key "nodes", "projects"
   add_foreign_key "ram_roles", "rams"

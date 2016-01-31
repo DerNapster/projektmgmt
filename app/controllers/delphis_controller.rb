@@ -45,7 +45,8 @@ class DelphisController < ApplicationController
   # GET /:project_id/delphi/:name.json
   def workpackagesforuser
     username = params[:name]
-    allDelphis = Delphi.where(username: username)
+    projectid = params[:project_id]
+    allDelphis = Delphi.where(username: username, project_id: projectid)
     saved = true
     @delphis = nil
     if allDelphis.size == 0
@@ -57,7 +58,7 @@ class DelphisController < ApplicationController
         workpackageid = item["id".to_sym]
         if allParentIds.include?(workpackageid) == false
           workpackagename = item["name".to_sym]
-          delphi = Delphi.new(:username => username, :workpackagename => workpackagename, :workpackage_id => workpackageid, :value => 0)
+          delphi = Delphi.new(:username => username, :workpackagename => workpackagename, :workpackage_id => workpackageid, :value => 0, :project_id => projectid)
           if delphi.save
             saved = saved & true
           else

@@ -7,5 +7,7 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :roles
   has_many :rams, :dependent => :destroy
   accepts_nested_attributes_for :rams
+  has_many :delphis, :dependent => :destroy
+  accepts_nested_attributes_for :delphis
   validates :name, presence: true
 end

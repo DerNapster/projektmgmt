@@ -5,7 +5,7 @@ class CreateDelphis < ActiveRecord::Migration
       t.references :workpackage, index: true, foreign_key: true
       t.integer :value
       t.string :workpackagename
-
+      t.references :project, index: true, foreign_key: true
       t.timestamps null: false
     end
   end
