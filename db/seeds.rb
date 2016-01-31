@@ -21,6 +21,33 @@ node100 = Node.create(name: 'Brücke',
                     enddate: Date.new(2016,7,25),
                     milestone: true,
                     project: project2)
+node101 = Node.create(name: 'Fundamente',
+                      description: '',
+                      level: 1,
+                      duration: 200,
+                      startdate: Date.new(2016,1,7),
+                      enddate: Date.new(2016,7,25),
+                      milestone: true,
+                      project: project2,
+                      parent: node100)
+node102 = Node.create(name: 'Träger',
+                      description: '',
+                      level: 1,
+                      duration: 200,
+                      startdate: Date.new(2016,1,7),
+                      enddate: Date.new(2016,7,25),
+                      milestone: true,
+                      project: project2,
+                      parent: node100)
+node103 = Node.create(name: 'Fahrbahn',
+                      description: '',
+                      level: 1,
+                      duration: 200,
+                      startdate: Date.new(2016,1,7),
+                      enddate: Date.new(2016,7,25),
+                      milestone: true,
+                      project: project2,
+                      parent: node100)
 node1 = Node.create(name: 'WebShop',
                     description: 'Dies ist ein Webshop',
                     level: 0,
@@ -436,6 +463,171 @@ wp28 = Workpackage.create(name: 'Lasttest',
                           duration: 10,
                           project: project1,
                           parent: wp26)
+
+Delphi.create(project: project1,
+              workpackage: wp4,
+              value: 6,
+              workpackagename: "Wirtschaftlichkeitsrechnung erstellen",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp4,
+              value: 4,
+              workpackagename: "Wirtschaftlichkeitsrechnung erstellen",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp5,
+              value: 15,
+              workpackagename: "Lastenheft erstellen",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp5,
+              value: 5,
+              workpackagename: "Lastenheft erstellen",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp7,
+              value: 12,
+              workpackagename: "Ablauf- und Terminplanung",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp7,
+              value: 8,
+              workpackagename: "Ablauf- und Terminplanung",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp8,
+              value: 12,
+              workpackagename: "Einsatzmittel- und Kostenplanung",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp8,
+              value: 18,
+              workpackagename: "Einsatzmittel- und Kostenplanung",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp10,
+              value: 2,
+              workpackagename: "Projektcontrolling",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp10,
+              value: 2,
+              workpackagename: "Projektcontrolling",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp11,
+              value: 2,
+              workpackagename: "Inhalte-, Änderungs- Risikomanagement",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp11,
+              value: 4,
+              workpackagename: "Inhalte-, Änderungs- Risikomanagement",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp14,
+              value: 2,
+              workpackagename: "Funktionen- und GUI-Modellierung",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp14,
+              value: 8,
+              workpackagename: "Funktionen- und GUI-Modellierung",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp15,
+              value: 2,
+              workpackagename: "Prozess- und Datenmodellierung",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp15,
+              value: 8,
+              workpackagename: "Prozess- und Datenmodellierung",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp17,
+              value: 7,
+              workpackagename: "Komponenten auswählen und Bearbeiten",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp17,
+              value: 5,
+              workpackagename: "Komponenten auswählen und Bearbeiten",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp18,
+              value: 7,
+              workpackagename: "Software-Systemarchitektur festlegen",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp18,
+              value: 3,
+              workpackagename: "Software-Systemarchitektur festlegen",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp21,
+              value: 15,
+              workpackagename: "Datenbankdesign",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp21,
+              value: 5,
+              workpackagename: "Datenbankdesign",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp22,
+              value: 11,
+              workpackagename: "Datenbanimplmentierung",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp22,
+              value: 9,
+              workpackagename: "Datenbanimplmentierung",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp24,
+              value: 20,
+              workpackagename: "Komponentenentwicklung",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp24,
+              value: 20,
+              workpackagename: "Komponentenentwicklung",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp25,
+              value: 20,
+              workpackagename: "Komponententest und -integration",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp25,
+              value: 20,
+              workpackagename: "Komponententest und -integration",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp27,
+              value: 8,
+              workpackagename: "Integrationstest",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp27,
+              value: 12,
+              workpackagename: "Integrationstest",
+              username: "Mark")
+Delphi.create(project: project1,
+              workpackage: wp28,
+              value: 9,
+              workpackagename: "Lasttest",
+              username: "Marco")
+Delphi.create(project: project1,
+              workpackage: wp28,
+              value: 11,
+              workpackagename: "Lasttest",
+              username: "Mark")
+
+
+
+
 
 r100 = Role.create(name: "Brücke",
                  description: "",

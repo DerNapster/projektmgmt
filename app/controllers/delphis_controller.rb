@@ -109,26 +109,27 @@ class DelphisController < ApplicationController
     @names = Array.new
 
 
-    workpackage = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
+    workpackages = Workpackage.where(project_id: params[:project_id]).order(:name).map {|wp| {id: wp.id, name: wp.name, duration: wp.duration}}
 
-    workpackage.each do |item|
+    workpackages.each do |item|
       workpackageid = item["id".to_sym]
       workpackagename = item["name".to_sym]
       workpackageduration = item["duration".to_sym]
 
       allDelphisForPackage = Delphi.where(workpackage_id: workpackageid)
 
-      usernamesOfWorkpackage = Array.new # Namen der User, die ddas workpackage unzureichend beantwortet haben
+      usernamesOfWorkpackage = Array.new # Namen der User, die das workpackage unzureichend beantwortet haben
       allDelphisForPackage.each do |delphi|
         if (delphi.value >= (workpackageduration*1.2)) || (delphi.value <= (workpackageduration*0.8))
           usernamesOfWorkpackage << delphi.username
         end
       end
-
-      workpackage = Hash.new
-      workpackage["workpackagename"] = workpackagename
-      workpackage["usernamesarray"] = usernamesOfWorkpackage
-      @names << workpackage
+      if usernamesOfWorkpackage.size > 0
+        workpackage = Hash.new
+        workpackage["workpackagename"] = workpackagename
+        workpackage["usernamesarray"] = usernamesOfWorkpackage
+        @names << workpackage
+      end
     end
 
     respond_to do |format|
